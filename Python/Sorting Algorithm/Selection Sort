@@ -1,0 +1,27 @@
+def selection_sort(l):
+    def swap(i, j):
+        t = l[i]
+        l[i] = l[j]
+        l[j] = t
+    
+    n = len(l)
+    
+    final_sorted_index = -1
+    for i in range(n-1, 0, -1):
+        # i = n-1, n-2, ..., 1
+        # final_sorted_index = -1, 0, ..., n-3
+
+        local_minimum = l[final_sorted_index + 1]
+        for j in range(final_sorted_index + 2, n, 1):
+            # sorted array: 0, ..., final_sorted_index
+            # j = final_sorted_index + 2, ..., n-1
+            if(l[j] < local_minimum):
+                local_minimum = l[j]
+                swap(final_sorted_index + 1, j)
+        
+        final_sorted_index += 1
+            
+    return l
+
+selection_sort([3, 2, 7, 6, 5, 9, 8])
+# [2, 3, 5, 6, 7, 8, 9]
