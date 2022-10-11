@@ -1,0 +1,174 @@
+class TreeNode():
+    def __init__(self, x:int, k:int)->None:
+        self.val = x
+        self.arity = k
+        self.child = [None]*k
+        
+class TreeNode():
+    def __init__(self,x):
+        self.val = x
+        self.left = None
+        self.right = None
+
+        ### K-ary Trees ###
+        # self.arity = k
+        # self.child = [None]*k
+
+class BST():
+    def __init__(self):
+        self.root = None
+
+    def search(self, x:int)->TreeNode:
+        return self.__searchHelp(self.root, x)
+
+    def __searchHelp(self, curNode: TreeNode, x)->TreeNode:
+        if not curNode:
+            return None
+        if x == curNode.val:
+            return curNode
+        elif x < curNode.val:
+            return self.__searchHelp(curNode.left, x)
+        else:
+            return self.__searchHelp(curNode.right, x)
+    
+    def insert(self, x:int)->None:
+        self.root = self.__insertHelp(self.root, x)
+
+    def __insertHelp(self, curNode:TreeNode, x:int)->TreeNode:
+        if not curNode:
+            return TreeNode(x)
+        if x < curNode.val:
+            curNode.left = self.__insertHelp(curNode.left, x)
+        elif x > curNode.val:
+            curNode.right = self.__insertHelp(curNode.right, x)
+        else:
+            print("Value already exists.")
+        return curNode
+    
+    def delete(self, x:int)->None:
+        self.root = self.__deleteHelp(self.root, x)
+    
+    def __deleteHelp(self, curNode: TreeNode, x:int)->TreeNode:
+        if not curNode:
+            return curNode
+
+        elif x > curNode.val :
+            return self.__deleteHelp(curNode.right, x)
+        
+        elif x < curNode.val:
+            return self.__deleteHelp(curNode.left, x)
+        
+        elif not curNode.left:
+            return curNode.right
+        
+        rightMostNode = curNode.left
+        while rightMostNode.right != None:
+            rightMostNode = rightMostNode.right
+        
+        leftMostNode = rightMostNode
+        while leftMostNode.left != None:
+            leftMostNode = leftMostNode.left
+        
+        if rightMostNode == leftMostNode:
+            rightMostNode.right = curNode.right
+            return rightMostNode
+            
+        else:
+            leftMostNode.left = curNode.left
+            rightMostNode.right = curNode.right
+            return rightMostNode
+
+# preorder traversal
+class Tree():
+    def visit(self, node: TreeNode)->None:
+        print(node.val)
+    
+    def DFT_preorder(self):
+        self.__DFT__preorderHelp(self.root)
+    
+    def __DFT__preorderHelp(self, curNode: TreeNode)->None:
+        if curNode == None:
+            return
+        self.visit(curNode)
+        self.__DFT__preorderHelp(curNode.left)
+        self.__DFT__preorderHelp(curNode.right)
+
+# inorder traversal
+class Tree():
+    def visit(self, node: TreeNode)->None:
+        print(node.val)
+    
+    def DFT_inorder(self):
+        self.__DFT__inorderHelp(self.root)
+    
+    def __DFT__inorderHelp(self, curNode: TreeNode)->None:
+        if curNode == None:
+            return
+        self.__DFT__inorderHelp(curNode.left)
+        self.visit(curNode)
+        self.__DFT__inorderHelp(curNode.right)
+
+# postorder traversal
+class Tree():
+    def visit(self, node: TreeNode)->None:
+        print(node.val)
+    
+    def DFT_postorder(self):
+        self.__DFT__postorderHelp(self.root)
+    
+    def __DFT__postorderHelp(self, curNode: TreeNode)->None:
+        if curNode == None:
+            return
+        self.__DFT__postorderHelp(curNode.left)
+        self.__DFT__postorderHelp(curNode.right)
+        self.visit(curNode)
+
+class Tree():
+    def visit(self, node: TreeNode, x:float)->float:
+        return node.val
+    
+    def __DFT_postorderHelp(curNode: TreeNode)->float:
+        ans = 0
+        if curNode:
+            for i in range(len(curNode.child)):
+                ans += self.__DFT_postorderHelp(curNode.child[i])
+            ans += self.visit(curNode)
+        return ans
+    
+    def DFT_postorder(self)->float:
+        return self.__DFT_postorderHelp(self.root)
+
+# preorder traversal of k-ary tree
+class Tree():
+    def visit(self, node: TreeNode)->None:
+        print(node.val)
+    
+    def DFT_inorder(self):
+        self.__DFT__preorderHelp(self.root)
+    
+    def __DFT__inorderHelp(self, curNode: TreeNode)->None:
+        if curNode == None:
+            return
+        if len(curNode.child) != 0:
+            for i in range(len(curNode.child)):
+                if i == 1:
+                    self.visit(curNode)
+                self.__DFT__inorderHelp(curNode.child[i]
+        else:
+            self.visit(curNode)
+            
+# level-order (breadth-first) traversal
+class Tree():
+    def visit(self, node: TreeNode)->None:
+        print(node.val)
+    
+    def BFT(self):
+        if self.root == None:
+            return
+        q = [self.root]
+        while q:
+            curNode = q.pop(0)
+            self.visit(curNode)
+            for childNode in curNode.child:
+                if childNode:
+                    q.append(childNode)
