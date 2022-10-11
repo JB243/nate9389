@@ -53,3 +53,40 @@ write.csv(umap$data, "C:/Users/sun/Desktop/RESULT.csv")
 write.csv(tsne$data, "C:/Users/sun/Desktop/result.csv")
 write.csv(pbmc.markers_umap, "C:/Users/sun/Desktop/markers_umap.csv")
 write.csv(pbmc.markers_tsne, "C:/Users/sun/Desktop/markers_tsne.csv")
+
+
+# ---- if the input is .rds file ---- #
+
+library(dplyr)
+library(Seurat)
+
+### read & write ###
+data <- readRDS("C:/Users/sun/Desktop/GSM4557327_555_1_cell.counts.matrices.rds", refhook = NULL)
+names(data)
+# [1] "exon"     "intron"   "spanning"
+saveRDS(data, "C:/Users/sun/Desktop/Copy.rds", ascii = FALSE, version = NULL,  compress = TRUE, refhook = NULL)
+
+### barcodes ###
+head(colnames(data$exon))
+# [1] "TTGCTAAGCAGT" "AACGACGGGTCT" "AACGGGGGCGAG" "CAGCAGAGGGTC"
+# [5] "CAAGAACACTAT" "CCCCTTATGTCG"
+
+### genes ###
+head(rownames(data$exon))
+# [1] "KLK11"         "CCDC159"       "C7orf50"       "RP11-1437A8.4"
+# [5] "EMP2"          "IFI27L2"      
+
+pbmc.data <- data$exon
+pbmc <- CreateSeuratObject(counts = pbmc.data, project = "pbmc3k", min.cells = 3, min.features = 200)
+pbmc[["percent.mt"]] <- PercentageFeatureSet(object = pbmc, pattern = "^MT-")
+pbmc <- NormalizeData(object = pbmc, normalization.method = "LogNormalize", scale.factor = 10000)
+pbmc <- FindVariableFeatures(object = pbmc, selection.method = "vst", nfeatures = 2000)
+all.genes <- rownames(x = pbmc)
+pbmc <- ScaleData(object = pbmc, features = all.genes)
+pbmc <- RunPCA(object = pbmc, features = VariableFeatures(object = pbmc))
+pbmc <- JackStraw(object = pbmc, num.replicate = 100)
+pbmc <- ScoreJackStraw(object = pbmc, dims = 1:20)
+pbmc <- FindNeighbors(object = pbmc, dims = 1:10) 
+pbmc <- FindClusters(object = pbmc, resolution = 0.5)
+pbmc <- RunUMAP(object = pbmc, dims = 1:10)
+DimPlot(object = pbmc, reduction = "umap")
