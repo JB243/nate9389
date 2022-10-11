@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <stdlib.h>
+/* This is an algorithm to solve the Hanoi Tower problem */
+// Step 1. transfer (n-1)-th floor pyramid to other blank(A or B)
+// Step 2. transfer the largest disk to C
+// Step 3. repeat step 1 and step 2 (n is getting smaller)
+
+void Hanoi(int n, char A, char B, char C){
+	if(n == 1) printf("%c → %c\n", A, C);
+	else{
+		Hanoi(n-1, A, C, B);
+		printf("%c → %c\n", A, C);
+		Hanoi(n-1, B, A, C);
+	}
+}
+
+int main(int argc, char *argv[]) {
+	int n;
+	scanf("%d", &n);
+	Hanoi(n, 'A', 'B', 'C');
+	return 0;
+}
