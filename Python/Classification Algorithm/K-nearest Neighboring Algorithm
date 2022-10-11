@@ -1,0 +1,34 @@
+import numpy as np
+from pydatset.cifar10 import get_CIFAR10_data
+
+class NearestNeighbor():
+    ...
+
+Xtr, Ytr, Xte, Yte = load_CIFAR10('data/cifar10/') # Still I'm struggling with it
+Xtr_rows = Xtr.reshape(Xtr.shape[0], 32 * 32 * 3)
+Xte_rows = Xte.reshape(Xte.shape[0], 32 * 32 * 3)
+
+nn = NearestNeighbor()
+nn.train(Xtr_rows, Ytr)
+Yte_predict = nn.predict(Xte_rows)
+print ('accuracy: %f' + str(np.mean(Yte_predict == Yte)) )
+# 38.6% for L1 and 35.4% for L2
+
+class NearestNeighbor(object):
+    def __init__(self):
+        pass
+
+    def train(self, X, Y):
+        self.Xtr = X
+        self.Ytr = Y
+
+    def predict(self, X):
+        num_test = X.shape[0]
+        Ypred = np.zeros(num_test, dtype = self.Ytr.dtype)
+        
+        for i in range(num_test):
+            distances = np.sum(np.abs(self.Xtr - X[i, :]), axis = 1) ## L1 distance
+            # distances = np.sum(np.abs(self.Xtr - X[i, :]), axis = 1) ## L2 distance
+            min_index = np.argmin(distances)
+            Ypred[i] = self.ytr[min_index]
+        return Ypred
