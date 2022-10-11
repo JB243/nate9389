@@ -1,0 +1,26 @@
+import pandas as pd
+import numpy as np
+
+data = np.arange(1,13)
+data = data.reshape(3,4)
+print(data)
+# [[ 1  2  3  4]
+#  [ 5  6  7  8]
+#  [ 9 10 11 12]]
+
+columns = ['a','b','c','d']
+index = ['A','B','C']
+
+df = pd.DataFrame(data = data, index = index, columns = columns)
+print(df)
+#    a   b   c   d
+# A  1   2   3   4
+# B  5   6   7   8
+# C  9  10  11  12
+
+### store the data using HDFStore ###
+store = pd.HDFStore('myData.hdf5')
+store.put('dataset_01', df)
+metadata = {'scale':0.1,'offset':15}
+store.get_storer('dataset_01').attrs.metadata = metadata
+store.close()
