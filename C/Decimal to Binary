@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define Max 100
+/* This source is for converting a decimal number into a binary number */
+
+int main(int argc, char *argv[]) {
+	long long int Deci_Number;
+	int i = 0, Size;
+	char Converted_Number[Max];
+
+	scanf("%lld", &Deci_Number);
+	while(1){
+		Converted_Number[i] = Deci_Number % 2;
+		Deci_Number /= 2;
+		i ++;
+		if(Deci_Number == 0) break;
+	}
+	Size = i;
+	for(i = 0; i < Size; i ++) printf("%d", Converted_Number[Size - 1 - i]);
+	return 0;
+}
