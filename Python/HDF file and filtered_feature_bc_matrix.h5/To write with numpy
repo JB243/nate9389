@@ -1,0 +1,45 @@
+import numpy as np
+import h5py
+
+A = np.random.randint(100, size=(4,4))
+print(A)
+# [[93 70 70 57]
+#  [99 74 27 40]
+#  [37  4 71 30]
+#  [58 89 86 73]]
+
+B = np.random.randint(100, size=(5,3,3))
+print(B)
+# [[[49  3 33]
+#  [ 4  8 32]
+#  [18  8 36]]
+# 
+# [[90 84 26]
+#  [ 6 91 98]
+#  [63 55 16]]
+# 
+# [[37 75 57]
+#  [17 68 95]
+#  [39 63 96]]
+#
+# [[19 77 25]
+#  [ 4 27 28]
+#  [47 34 92]]
+#
+# [[49  5 33]
+#  [85 89 76]
+#  [17  5 41]]]
+
+### create a hdf file ###
+f1 = h5py.File("myData.hdf5", "w")
+
+### save data in the hdf file ###
+dset1 = f1.create_dataset("dataset_01", (4,4), dtype='i', data=A)
+dset2 = f1.create_dataset("dataset_02", (5,3,3), dtype = 'i', data=B)
+
+### add metadata ###
+dset1.attrs['scale'] = 0.01 # add metadata
+dset1.attrs['offset'] = 15 # add metadata
+
+### close the file ###
+f1.close
