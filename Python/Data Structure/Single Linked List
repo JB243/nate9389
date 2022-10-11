@@ -1,0 +1,30 @@
+class LinkedNode():
+    def __init__(self,x):
+        self.val = x
+        self.next = None
+
+class SLList():
+    def __init__(self)->None:
+        self.sentinel = LinkedNode(0)
+        self.size = 0
+    
+    def addFirst(self, x:int)->None:
+        newFirst = LinkedNode(x)
+        newFirst.next = self.sentinel.next
+        self.sentinel.next = newFirst
+        self.size += 1
+    
+    def getFirst(self)->int:
+        if self.sentinel.next:
+            return self.sentinel.next.val
+        return None
+
+    def getSize(self)->int:
+        return self.size
+
+    def append(self, x:int)->None:
+        self.size += 1
+        curNode = self.sentinel
+        while curNode.next != None:
+            curNode = curNode.next
+        curNode.next = LinkedNode(x)
