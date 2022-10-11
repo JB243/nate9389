@@ -1,0 +1,37 @@
+class LinkedNode():
+    def __init__(self,x):
+        self.val = x
+        self.next = None
+
+class Queue():
+    def __init__(self)->None:
+        self.sentinel = LinkedNode(0)
+        self.size = 0
+    
+    def enqueue(self, x:int)->None:
+        self.size += 1
+        curNode = self.sentinel
+        while curNode.next != None:
+            curNode = curNode.next
+        curNode.next = LinkedNode(x)
+        
+    def dequeue(self)->int:
+        self.size -= 1
+        if not self.sentinel.next:
+            return None
+        val = self.sentinel.next.val
+        self.sentinel.next = self.sentinel.next.next
+        return val
+        
+    def top(self)->int:
+        if not self.sentinel.next:
+            return None
+        return self.sentinel.next.val
+
+    def getSize(self)->int:
+        return self.size
+    
+    def isEmpty(self)->bool:
+        if self.sentinel.next:
+            return False
+        return True
