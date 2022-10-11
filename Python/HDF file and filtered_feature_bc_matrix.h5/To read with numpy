@@ -1,0 +1,17 @@
+f2 = h5py.File("myData.hdf5", 'r')
+print(list(f2.keys()))
+# ['dataset_01', 'dataset_02']
+
+dset1 = f2['dataset_01']
+data = dset1[:]
+print(data)
+# [[93 70 70 57]
+#  [99 74 27 40]
+#  [37  4 71 30]
+#  [58 89 86 73]]
+
+print(list(dset1.attrs.keys()))
+# ['offset', 'scale']
+
+print(dset1.attrs['scale'])
+# 0.01
