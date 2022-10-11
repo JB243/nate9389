@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define Converted_Number_Max_size 32
+/* This source is for converting a decimal number in n-base system*/
+
+int main(int argc, char *argv[]) {
+	char data[36];
+	data[0] = '0';
+	data[1] = '1';
+	data[2] = '2';
+	data[3] = '3';
+	data[4] = '4';
+	data[5] = '5';
+	data[6] = '6';
+	data[7] = '7';
+	data[8] = '8';
+	data[9] = '9';
+	data[10] = 'A';
+	data[11] = 'B';
+	data[12] = 'C';
+	data[13] = 'D';
+	data[14] = 'E';
+	data[15] = 'F';
+	data[16] = 'G';
+	data[17] = 'H';
+	data[18] = 'I';
+	data[19] = 'J';
+	data[20] = 'K';
+	data[21] = 'L';
+	data[22] = 'M';
+	data[23] = 'N';
+	data[24] = 'O';
+	data[25] = 'P';
+	data[26] = 'Q';
+	data[27] = 'R';
+	data[28] = 'S';
+	data[29] = 'T';
+	data[30] = 'U';
+	data[31] = 'V';
+	data[32] = 'W';
+	data[33] = 'X';
+	data[34] = 'Y';
+	data[35] = 'Z';
+
+	long long int Deci_Number;
+	char Converted_Number_I[Converted_Number_Max_size]; // write a number backward
+	char Converted_Number_II[Converted_Number_Max_size]; // write a number forward
+	int i, j;
+	int n;
+	scanf("%lld %d", &Deci_Number, &n);
+
+	for(i=0; ;i++){
+		if(Deci_Number == 0) break; // n^i > Deci_Number(!=0) >= n^(i-1)
+		Converted_Number_I[i] = data[Deci_Number % n];
+		Deci_Number = Deci_Number / n; // quota (by n) would remain
+	}
+	for(j=0; j<i; j++){
+		Converted_Number_II[j] = Converted_Number_I[i - 1 - j]; // reversing
+	}
+	for(j=0; j<i; j++) printf("%c", Converted_Number_II[j]);
+	
+    return 0;
+}
