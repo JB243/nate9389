@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <stdlib.h>
+/* This source apply integer factorization to get the number of divisor of a certain number */
+
+int main(int argc, char *argv[]) {
+	long long int n;
+	scanf("%lld", &n);
+	int Count_Divisor = 1;
+	int i = 3;
+	int count = 0;
+    
+	while(1){
+		if(n % 2 == 1) break;
+		n = n / 2;
+	}
+    
+	while(1){
+		if(n == 1){
+			Count_Divisor = Count_Divisor * (count + 1);
+			break;
+		}
+		if(n % i == 0){
+                        count ++;
+                        n = n / i;
+                        i -= 2;
+		}
+		else{
+			Count_Divisor = Count_Divisor * (count + 1);
+			count = 0;
+		}
+		i += 2;
+	}
+	printf("%d", Count_Divisor);
+	return 0;
+}
