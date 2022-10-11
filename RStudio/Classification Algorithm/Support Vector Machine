@@ -1,0 +1,63 @@
+### iris 데이터 살펴보기 ###
+colnames(iris)
+# [1] "Sepal.Length" "Sepal.Width" "Petal.Length" "Petal.Width"
+# [5] "Species"
+
+levels(iris$Species)
+# [1] "setosa" "versicolor" "virginica"
+
+### svm 모델 학습시키기 ###
+library(e1071)
+train <- sample(1:150, 100)
+sv <- svm(Species ~., data= iris, subset = train, type = "C-classification")
+summary(sv)
+
+# Call:
+# svm(formula = Species ~ ., data = iris, type = "C-classification",
+#   subset = train)
+
+# Parameters:
+#   SVM-Type: C-classification
+# SVM-Kernel: radial
+#    cost: 1
+
+# Number of Support Vectors: 46
+
+# ( 9 19 18 )
+
+
+# Number of Classes: 3
+
+# Levels:
+# setosa versicolor virginica
+
+
+
+### 학습된 svm 모델로 Test set 예측하기 ###
+predict(sv, iris[-train, ])
+#    1     4      5      8      9      10     11
+# setosa setosa setosa setosa setosa setosa setosa
+#   13    19     21     22     27      30     31
+# setosa setosa setosa setosa setosa setosa setosa
+#   35    42     43     45     46      47       58
+# setosa setosa setosa setosa setosa setosa versicolor
+#     62         65         72         81         82        86         88
+# versicolor versicolor versicolor versicolor versicolor versicolor versicolor
+#     89         91         94         95        105       108        113
+# versicolor versicolor versicolor versicolor virginica virginica virginica
+#    117       122       124       125       126       129       134
+# virginica virginica virginica virginica virginica virginica versicolor
+#    135        136       138       140       141        142      143
+# versicolor virginica virginica virginica virginica virginica virginica
+#    144
+# virginica
+# Levels: setosa versicolor virginica
+
+### 정오분류표(confusion matrix) 작성 ###
+tt <- table(iris$Species[-train], predict(sv, iris[-train, ] ))
+tt
+
+#           setosa versicolor virginica
+# setosa      20        0          0
+# versicolor   0       12          0
+# virginica    0        2         16
