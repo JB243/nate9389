@@ -1,0 +1,51 @@
+# Non-in-place Partition
+def partition(l, low, high):
+    p = l[low]
+    small = []
+    large = []
+    
+    for i in l[low+1:high+1]:
+        if(i < p):
+            small.append(i)
+        else:
+            large.append(i)
+    small.append(p)
+    
+    idx = low
+    for i in small:
+        l[idx] = i
+        idx += 1
+    for i in large:
+        l[idx] = i
+        idx += 1
+    
+    return (low + len(small) - 1)
+    
+# In-place Partition
+def partition(l, low, high):
+    def swap(i, j):
+        t = l[i]
+        l[i] = l[j]
+        l[j] = t
+        return
+    
+    p = l[low]
+    m = low
+
+    for j in range(low + 1, high + 1):
+        if(l[j] < p):
+            m += 1
+            swap(j, m)
+    swap(low, m)
+    return m
+    
+# Quick Sort
+def quick_sort(l):
+    def qs(l, low, high):
+        if(low < high):
+            pivot_idx = partition(l, low, high)
+            qs(l, low, pivot_idx - 1)
+            qs(l, pivot_idx+1, high)
+        return l
+    qs(l, 0, len(l) - 1)
+    return l
