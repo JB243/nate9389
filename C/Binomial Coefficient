@@ -1,0 +1,102 @@
+# 1. O(n)
+
+#include <stdio.h>  
+#include <stdlib.h>  
+double x = 1;  
+int i = 0;  
+int n, r; 
+
+void a(){      
+	if(i < r){          
+    	    x *= (double) (n - i) / (double) (r - i);    
+            i ++;   
+            a();  
+	}
+}  
+
+int main(int argc, char *argv[]) {      
+    scanf("%d %d", &n, &r);      
+    a();      
+    printf("%.lf", x);       
+    return 0; 
+}
+
+
+# 2. O(n^2)
+
+#include <stdio.h>
+#include <stdlib.h>
+#define Max 1000    // maximum value of 'r'
+// Note that n C r = n-1 C r-1 + n-1 C r 
+
+long long int min(long long int a, long long int b){
+    if(a < b)   return a;     
+    else    return b;  
+}  
+
+int main(int argc, char *argv[]) {     
+    long long int n, r, i, j;      
+    scanf("%lld %lld", &n, &r);    
+    r = min(r, n - r);  // for optimization  
+    long long int C[Max + 1][2] = {{0, }, };      
+    C[0][0] = 1;     
+    for(i = 1; i <= n; i ++){          
+    	C[0][1] = 1;         
+        for(j = 1; j <= min(i, r); j ++)        C[j][1] = C[j-1][0] + C[j][0];        
+        // C[j][0] = i-1 C j  and  C[j][1] = i C j        
+        for(j = 0; j <= min(i, r); j ++)        C[j][0] = C[j][1];     
+    }    
+    printf("%d", C[r][0]);   
+    return 0; 
+}
+
+
+#3. O(n)
+
+#include <stdio.h>
+#include <stdlib.h>
+#define p 1999  // 'p' is 'p'rime 
+#define g(p) 3  // g( ): primitive root  
+
+int main(int argc, char *argv[]) {      
+	int notepad = 1, exponent_set[p], remainder_set[p];     // 0 ~ p-1 (mod p)    
+    long long int n, r, i, j;    
+    int exponent_I = 0; // n!  ÷ (n - r)! ≡ (g(p)) exponent_I (mod p)    
+    int exponent_II = 0;     // r! ≡(g(p)) exponent_II (mod p)    
+    
+    for(i = 0; i < p - 1; i ++){    // (g(p)) p - 1 ≡1 (mod p) (Fermat's little Theorem) (①)
+    	exponent_set[notepad] = i;  // remainder → exponent of g(p)       
+        remainder_set[i] = notepad;     // exponent of g(p) → remainder 
+        notepad *= g(p);    notepad %= p;   
+    }    
+    scanf("%lld %lld", &n, &r);   
+    notepad = 0;    
+    for(i = n; i > n - r; i --){    
+    	j = i;      
+        while(1){   
+        	if(j % p != 0)  break;   
+            notepad ++; 
+            j /= p;      
+        }        
+        exponent_I += exponent_set[j % p];   
+        exponent_I %= p - 1;  // (①)        
+    }    
+    for(i = r; i > 0; i --){        
+    	j = i;     
+        while(1){   
+        	if(j % p != 0)  break;      
+            notepad --;    
+            j /= p;            
+        }          
+        exponent_II += exponent_set[j % p];    
+        exponent_II %= p - 1;    // (①)          
+    }           
+    
+    // n C r ≡ (g(p)) exponent_I - exponent_II (mod p)          
+    if(notepad > 0) printf("0");    // notepad is always over -1      
+    else    {          
+    	if(exponent_I < exponent_II)    exponent_II -= p - 1;   // (①)          
+        printf("%d", remainder_set[exponent_I - exponent_II]);      
+    }      
+    return 0;
+}
