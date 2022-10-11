@@ -1,0 +1,141 @@
+class Node():
+    def __init__(self, i, j): 
+        self.i = i
+        self.j = j
+    
+class undirected_graph():     
+    def __init__(self, V:list, E:list)->None:
+        self.V = V[:]
+        self.neighbor = {}
+        for v in V:
+            self.neighbor[v] = []
+        for (v,w) in E:
+            self.neighbor[v].append(w)
+
+two_d_list = []
+line = []
+line.append(1)
+line.append(2)
+line.append(3)
+line.append(4)
+line.append(5)
+two_d_list.append(line)
+line = []
+line.append(6)
+line.append(7)
+line.append(8)
+line.append(9)
+line.append(10)
+two_d_list.append(line)
+line = []
+line.append(11)
+line.append(12)
+line.append(13)
+line.append(14)
+line.append(15)
+two_d_list.append(line)
+line = []
+line.append(16)
+line.append(17)
+line.append(18)
+line.append(19)
+line.append(20)
+two_d_list.append(line)
+
+V = []
+E = []
+    
+for i in range(len(two_d_list)):
+    for j in range(len(two_d_list[0])):
+        if True:
+            V.append(Node(i, j))
+
+for v in V:
+    for w in V:
+        if True:
+            E.append((v,w))
+    
+g = undirected_graph(V, E)
+
+
+# preorder traversal
+class undirected_graph():
+    def __init__(self, V:list, E:list)->None:
+        self.V = V[:]
+        self.neighbor = {}
+        for v in V:
+            self.neighbor[v] = []
+        for (v,w) in E:
+            self.neighbor[v].append(w)
+            self.neighbor[w].append(v)
+
+    def DFT_preorder(self)->None:
+        if self.V:
+            visited = {}
+            for v in self.V:
+                visited[v]=False
+            for v in self.V:
+                if not visited[v]: # gatekeeper
+                    self.__DFT__preorderHelp(visited, v)
+    
+    def __DFT__preorderHelp(self, visited: list, v: int)->None:
+        if not visited[v]:
+            visited[v] = True
+            print(v)
+            for w in self.neighbor[v]:
+                self.__DFT__preorderHelp(visited, w)
+
+# postorder traversal
+class undirected_graph():
+    def __init__(self, V:list, E:list)->None:
+        self.V = V[:]
+        self.neighbor = {}
+        for v in V:
+            self.neighbor[v] = []
+        for (v,w) in E:
+            self.neighbor[v].append(w)
+            self.neighbor[w].append(v)
+
+    def DFT_postorder(self)->None:
+        if self.V:
+            visited = {}
+            for v in self.V:
+                visited[v]=False
+            for v in self.V:
+                if not visited[v]: # gatekeeper
+                    self.__DFT__postorderHelp(visited, v)
+    
+    def __DFT__postorderHelp(self, visited: list, v: int)->None:
+        if not visited[v]:
+            visited[v] = True
+            for w in self.neighbor[v]:
+                self.__DFT__postorderHelp(visited, w)
+            print(v)
+
+# breadth-first traversal
+class undirected_graph():
+    def __init__(self, V:list, E:list)->None:
+        self.V = V[:]
+        self.neighbor = {}
+        for v in V:
+            self.neighbor[v] = []
+        for (v,w) in E:
+            self.neighbor[v].append(w)
+            self.neighbor[w].append(v)
+
+    def BFT(self)->None:
+        if self.V:
+            visited={}
+            # initialize
+            for v in self.V:
+                visited[v]=False
+            q = deque([])
+            
+            for v in self.V:
+                q.append(v)
+                while q:
+                    v = q.popleft()
+                    if not visited[v]:
+                        visited[v] = True
+                        for w in self.neighbor[v]:
+                            q.append[w]
