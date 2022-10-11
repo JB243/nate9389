@@ -1,0 +1,34 @@
+class LinkedNode():
+    def __init__(self,x):
+        self.val = x
+        self.next = None
+
+class Stack():
+    def __init__(self)->None:
+        self.sentinel = LinkedNode(0)
+        self.size = 0
+    
+    def push(self, x:int)->None:
+        self.size += 1
+        curNode = self.sentinel.next
+        self.sentinel.next = LinkedNode(x)
+        self.sentinel.next.next = curNode
+        
+    def pop(self)->int:
+        self.size -= 1
+        if not self.sentinel.next:
+            return None
+        curNode = self.sentinel.next
+        self.sentinel.next = curNode.next
+        return curNode.val
+        
+    def top(self)->int:
+        if not self.sentinel.next:
+            return None
+        return self.sentinel.next.val
+
+    def getSize(self)->int:
+        return self.size
+    
+    def isEmpty(self)->bool:
+        return self.size==0
