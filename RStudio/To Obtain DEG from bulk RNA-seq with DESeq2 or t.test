@@ -1,0 +1,96 @@
+# http://compgenomr.github.io/book/gene-expression-analysis-using-high-throughput-sequencing-technologies.html#quantification
+
+### step 1. 데이터 로딩 ###
+
+library(dplyr)
+# install.packages("Seurat")
+library(Seurat)
+
+# 출처 : https://github.com/compgenomr/compGenomRData
+devtools::install_github("compgenomr/compGenomRData")
+library(compGenomRData)
+counts_file  <- system.file ("extdata/rna-seq/SRP029880.raw_counts.tsv", package = "compGenomRData")
+coldata_file  <- system.file ("extdata/rna-seq/SRP029880.colData.tsv", package = "compGenomRData")
+counts <- as.matrix(read.table(counts_file, header = T, sep = '\t'))
+
+
+### step 2. TPM 정규화 ###
+library(pheatmap)
+library(stats)
+library(ggplot2)
+
+cpm <- apply(subset(counts, select = c(-width)), 2, 
+             function(x) x/sum(as.numeric(x)) * 10^6)
+geneLengths <- as.vector(subset(counts, select = c(width)))
+rpkm <- apply(X = subset(counts, select = c(-width)),
+              MARGIN = 2, 
+              FUN = function(x) {
+                10^9 * x / geneLengths / sum(as.numeric(x))
+               })
+rpk <- apply( subset(counts, select = c(-width)), 2, 
+              function(x) x/(geneLengths/1000))
+tpm <- apply(rpk, 2, function(x) x / sum(as.numeric(x)) * 10^6)
+V <- apply(tpm, 1, var)
+selectedGenes <- names(V[order(V, decreasing = T)][1:100])
+colData <- read.table(coldata_file, header = T, sep = '\t', 
+                      stringsAsFactors = TRUE)
+M <- t(tpm[selectedGenes,])
+M <- log2(M + 1)
+pcaResults <- prcomp(M)
+correlationMatrix <- cor(tpm)
+
+
+### step 3. DESeq2 DEG 획득 ###
+library(DESeq2)
+library(stats)
+countData <- as.matrix(subset(counts, select = c(-width)))
+colData <- read.table(coldata_file, header = T, sep = '\t', 
+                      stringsAsFactors = TRUE)
+designFormula <- "~ group"
+dds <- DESeqDataSetFromMatrix(countData = countData, 
+                              colData = colData, 
+                              design = as.formula(designFormula))
+dds <- dds[ rowSums(DESeq2::counts(dds)) > 1, ]
+dds <- DESeq(dds)
+DEresults = results(dds, contrast = c("group", 'CASE', 'CTRL'))
+DEresults <- DEresults[order(DEresults$pvalue),]
+write.csv(DEresults, "~/Downloads/DEresults.csv")
+
+DEresults_trim <- 0
+flag = 0
+for(i in 1: dim(DEresults)[1]){
+  a = sum(DEresults[1:i, ]$padj < 0.05)
+  b = sum(DEresults[1:i, ]$pvalue < 0.05)
+
+  if(flag == 0 && a / b < 0.99){
+    flag = 1
+    DEresults_trim <- DEresults[1:i-1, ]
+    write.csv(DEresults[1:i-1, ], "~/Downloads/DEresults(FDR = 1%).csv")
+  }
+}
+
+
+### step 4. t.test DEG 획득 ###
+pbmc <- CreateSeuratObject(counts = tpm, project = "pbmc3k", min.cells = 3, min.features = 200)
+pbmc <- FindVariableFeatures(object = pbmc, selection.method = "vst", nfeatures = 2000)
+all.genes <- rownames(x = pbmc)
+markers_t.test <- FindMarkers(object = pbmc, test.use ='t', only.pos = TRUE, min.pct = 0.1, logfc.threshold = 0.25, group.by = 'orig.ident', ident.1 = 'CASE')
+write.csv(markers_t.test, "~/Downloads/t.test.csv")
+
+markers_t.test_trim <- 0
+flag = 0
+for(i in 1: dim(markers_t.test)[1]){
+  a = sum(markers_t.test[1:i, ]$p_val_adj < 0.05)
+  b = sum(markers_t.test[1:i, ]$p_val < 0.05)
+
+  if(flag == 0 && a / b < 0.99){
+    flag = 1
+    markers_t.test_trim <- markers_t.test[1:i-1, ]
+    write.csv(markers_t.test[1:i-1, ], "~/Downloads/t.test(FDR = 1%).csv")
+  }
+}
+
+
+### step 5. 유전자 교집합 ###
+inter <- intersect(rownames(DEresults_trim), rownames(markers_t.test_trim))
+write.csv(inter, "~/Downloads/inter.csv")
