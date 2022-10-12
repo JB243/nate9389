@@ -1,0 +1,61 @@
+# ---
+$ g++ -o main main.cpp 
+$ ./main
+Hello World!
+
+# ---
+cmake_minimum_required(VERSION 3.10)
+project(problems)
+
+set(CMAKE_CXX_STANDARD 17)
+
+add_executable(test TEST.cpp app.cpp app.h supplementary.cpp supplementary.h)
+add_executable(main main.cpp app.cpp app.h supplementary.cpp supplementary.h)
+
+# ---
+int sum1(int a){ return 1; } // possible
+int sum2(int){ return 2; } // possible in C++, impossible in java
+
+# ---
+int const x1 = 3;
+const int x2 = 3;
+
+# ---
+const int MyClass::showName(string id){ ... }
+int MyClass::showName(string id) const { ... }
+
+# --- 
+const Object* obj; // can't change data (value)
+Object* const obj; // can't change pointer (address)
+const Object* const obj;  // can't change data or pointer
+
+# --- 
+std::srand(std::time(nullptr))
+// std::time(nullptr) -> current time;
+// std::srand(seed) -> set seed of the std::rand() function
+
+# ---
+#include <iostream>
+#include <fstream>
+using namespace std;
+int main() {
+  string str;
+  ifstream my_file("filename.txt");
+  while (getline(my_file, str)) {
+    cout << str << endl;
+  }
+  my_file.close();
+}
+
+# ---
+#include <iostream>
+#include <fstream>
+using namespace std;
+int main() {
+  // Create and open a text file
+  ofstream my_file("filename.txt");
+  // Write to the file
+  my_file << "Files are fun!" << endl;
+  my_file.close(); // Close the file
+}
+
