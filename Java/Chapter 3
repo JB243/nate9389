@@ -1,0 +1,6 @@
+# ---
+class OuterClass {  // An external class
+  private class InnerClass {
+    // An inner class 
+  }
+}
