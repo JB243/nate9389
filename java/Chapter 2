@@ -1,0 +1,76 @@
+# ---
+public class Main{
+    public static void main(String[] args){
+        int x = 1;
+        Foo foo1 = new Foo(3);
+        
+        alterInt(x);    // call by value
+        System.out.println(x); // 1
+
+        alterFoo(foo1); // call by reference(1)
+        System.out.println(foo1.value); // 3
+        
+        alterFooTwo(foo1);  // call by reference(2)
+        System.out.println(foo1.value); // 6
+    }
+
+    public static void alterInt(int x){
+        x ++;
+    }
+    public static void alterFoo(Foo foo){
+        foo = new Foo(10);  // foo's pointer is updated, no longer indicating foo1 
+    }
+    public static void alterFooTwo(Foo foo){
+        foo.value = 6;
+    }
+}
+
+class Foo{
+    int value;
+    Foo(int x){
+        value = x;
+    }
+}
+
+# ---
+public class Main{
+    public static void main(String[] args){
+        A a = new A();
+        System.out.println(a.a);    // 0
+        System.out.println(A.a);    // 0
+        A.f1();
+        System.out.println(a.a);    // 1
+        System.out.println(A.a);    // 1
+        a.f2();
+        System.out.println(a.a);    // 2
+        System.out.println(A.a);    // 2
+        // A.f3();  // error
+    }
+}
+
+class A{
+    static int a;
+    static void f1(){
+        a = 1;
+    }
+    static void f2(){
+        a = 2;
+    }
+    void f3(){
+        a = 3;
+    }
+}
+
+# ---
+class A{
+    int x;
+    public A(int input){
+        x = input;
+    }
+    public A(){
+        this(0);
+    }   
+}
+
+# ---
+void METHOD(int x, int y){    ...this.x = x...    }
