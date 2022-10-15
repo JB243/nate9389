@@ -1,0 +1,120 @@
+# --- 아래에서 정의한 함수는 다음과 같이 사용할 수 있음  
+def SUM(a, b):
+    return a+b
+
+SUM(1,2)
+# 3
+
+# --- 타입 체크
+type(x)
+
+# --- 배열 길이
+len(x)
+
+# --- 주어진 문자열(given_str)에서 특정 문자열(partial_str)을 포함하는지 여부
+a = "ABCD"
+
+a.startswith('AB')
+# TRUE
+
+''' if a is not string object
+a.str.startswith('AB')
+# TRUE
+'''
+
+# --- 주어진 문자열(str)에서 앞 몇 개의 문자를 제거한 뒤 반환하는 함수
+def str_omit_forward(_str, n):
+    s = ''
+    count = 0
+    for char in _str:
+        count = count + 1
+        if count > n:
+            s = s + char
+    return s
+    
+# --- 주어진 문자열(str)에서 뒤 몇 개의 문자를 제거한 뒤 반환하는 함수
+def str_omit_backward(_str, n):
+    s = ''
+    count = 0
+    for char in _str:
+        count = count + 1
+        if count <= len(_str) - n:
+            s = s + char
+    return s
+
+# --- 주어진 원소(e)가 리스트(l)에 포함되는지 여부
+def is_element_in_list(e, l):
+    for i in range(len(l)):
+        if e == l[i]:
+            return True
+    return False
+    
+# --- 주어진 원소(e)가 리스트(l) 내 몇 번째 원소인지를 출력하는 함수
+def where_element_in_list(e, l):
+    for i in range(len(l)):
+        if e == l[i]:
+            return i
+    return -1
+    
+# --- 텍스트 파일 읽기
+import csv
+import sys
+
+def read_txt(txt_dir):
+    l = []
+    f = open(txt_dir, 'r', encoding = 'utf-8')
+ 
+    for line in csv.reader(f):
+        ### if you want elements of list ###
+        l.append(line) 
+		
+        ### if you want elements of str ###
+        # l.append(''.join(line)) 
+    
+    f.close()
+    return l
+
+# --- 이미지 간 상관관계 
+import cv2
+import matplotlib.pyplot as plt
+from skimage.util import view_as_windows
+import numpy as np
+import scipy.stats
+
+def two_image_correlation(img1_dir, img2_dir):
+	
+    # img1 and img2 should be same in size
+    img1 = cv2.imread(img1_dir) # RGB image
+    img1 = cv2.cvtColor(img1, cv2.COLOR_BGR2RGB)
+    img2 = cv2.imread(img2_dir) # RGB image
+    img2 = cv2.cvtColor(img2, cv2.COLOR_BGR2RGB)
+		
+    l_img1 = []
+    l_img2 = []
+		
+    for i in range(img1.shape[0]):
+        for j in range(img1.shape[1]):
+            l_img1.append((
+                0.2989*img1[i:i+1, j:j+1, 0:1] + 
+                0.5870*img1[i:i+1, j:j+1, 1:2] + 
+                0.1140*img1[i:i+1, j:j+1, 2:3]
+            ).item())
+		        
+            l_img2.append((
+                0.2989*img2[i:i+1, j:j+1, 0:1] + 
+                0.5870*img2[i:i+1, j:j+1, 1:2] + 
+                0.1140*img2[i:i+1, j:j+1, 2:3]
+            ).item())
+		
+    print("brightness of img1")
+    print(np.mean(l_img1))
+    print("brightness of img2")
+    print(np.mean(l_img2))
+		
+    print("img1-img2 correlation")
+    print(scipy.stats.pearsonr(l_img1, l_img2) )
+		
+    plt.scatter(l_img1, l_img2, alpha = 0.05)
+    plt.xlabel('brightness of img1')
+    plt.ylabel('brightness of img2')
+    # sns.regplot(l_b_CD31, l_b_Lipo, alpha = 0.05)
