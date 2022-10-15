@@ -1,0 +1,14 @@
+# ---
+# 최종 데이터를 저장 
+save.image(file="temp.RData") 
+# 그간 연산한 데이터를 삭제 
+rm(list=ls()) 
+# 최종 데이터를 로드 
+load(file="temp.RData")
+
+
+# ---
+memory.size(max = TRUE) # OS로부터 R이 사용 가능한 메모리 
+memory.size(max = FALSE) # 현재 사용중인 메모리 크기 
+memory.limit(size = NA) # 컴퓨터의 최대 메모리 한계치 
+memory.limit(size = 50000) # 컴퓨터의 최대 메모리 한계치 약 49GB로 높이기
