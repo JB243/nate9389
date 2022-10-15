@@ -1,0 +1,129 @@
+# ---
+dunif(x = 5, min = 0, max = 10)
+punif(q = 5, min = 0, max = 10)
+quinf(p = 0.5, min = 0, max = 10)
+runif(n = 10000, min = 0, max = 10)
+
+
+# ---
+dbinom(x = 2, size = 5, prob = 0.2)
+pbinom(q = 2, size = 5, prob = 0.2)
+qbinom(p = 0.5, size = 5, prob = 0.2)
+rbinom(n = 10000, size = 5, prob = 0.2)
+BINOM <- dbinom(0:100, 100, prob = 0.2)
+sum(BINOM)
+plot(BINOM)
+binom.test(14, n = 100, p = 0.25, alternative = "two.sided", conf.level = 0.95)
+
+
+# ---
+dnorm(x = 1, mean = 0, sd = 1)
+pnorm(q = 1, mean = 0, sd = 1)
+qnorm(p = 0.5, mean = 0, sd = 1)
+rnorm(n = 10000, mean = 0, sd = 1)
+z.test(c(-1, -2, 0, 3, 2), sigma.x = 1, mu = 0)   # OUTPUT : z-value, p-value, confidence interval,
+
+
+# ---
+qt(0.025, df = 8)    # Pr(t < -2.306004, df = 8) = 0.025
+# [1] -2.306004
+qt(0.975, df = 8)    # Pr(t < 0.975, df = 8) = 0.975
+# [1] 2.306004
+t.test(c(-1, 2, 0, 3, 2), mu = 0)    # sample standard error is used instead of sigma.x
+#       ,  One Sample t-test
+# data: c(-1, 2, 0, 3, 2)
+# t = 1.633, df = 4, p-value = 0.1778
+# alternative hypothesis: true mean is not equal to 0
+# 95 percent confidence interval:
+#  -0.8402621 3.2402621
+# sample estimates:
+# mean of x
+#      1.2
+
+
+t.test(c(13.5, 14.6, 12.7, 15.5), c(13.6, 14.6, 12.6, 15.7), paired = TRUE)
+#         Paired t-test
+# data: c(13.5, 14.6, 12.7, 15.5) and c(13.6, 14.6, 12.6, 15.7)
+# t = -0.7746, df = 3, p-value = 0.495
+# alternative hypothesis: true difference in means is not equal to 0
+# 95 percent confidence interval:
+#  -0.255426 0.155426
+# sample estimates:
+# mean of the differences
+#                   -0.05
+
+
+? mtcars
+# starting httpd help server ... done
+
+
+t.test(mpg ~ am, data = mtcars, alternative = "less")
+#         Welch Two Sample t-test
+# data: mpg by am
+# t = -3.7671, df = 18.332, p-value = 0.0006868
+# alternative hypothesis: true difference in means is less than 0
+# 95 percent confidence interval:
+#      -Inf -3.913256
+# sample estimates:
+# mean in group 0 mean in group 1
+#       17.14737       24.39231
+
+
+t.test(mpg ~ am, data = mtcars, alternative = "less", var.equal = T)
+#         Two Sample t-test
+# data: mpg by am
+# t = -4.1061, df = 30, p-value = 0.0001425
+# alternative hypothesis: true difference in means is less than 0
+# 95 percent confidence interval:
+#       -Inf -4.250255
+# sample estimates:
+# mean in group 0 mean in group 1
+#        17.14737        24.39231
+
+
+# ---
+qchisq(0.95, 1)
+# [1] 3.841459
+qchisq(0.99, 1)
+# [1] 6.634897
+chi_square <- seq(0, 10) dchisq(chi_square, 1)    # density function
+# [1] Inf 0.2419707245 0.1037768744 0.0513934433 0.0269954833
+# [6] 0.0146449826 0.0081086956 0.0045533429 0.0025833732 0.0014772828
+# [11] 0.0008500367
+df <- matrix(c(38, 14, 11, 51), ncol = 2, dimnames = list(hair = c("Fair", "Dark"), eye = c("Blue", "Brown"))) df_chisq <- chisq.test(df)
+attach(df_chisq)
+p.value
+# [1] 8.700134e-09
+
+
+# ---
+n = 100
+x = rnorm(n, sd = sqrt(2))
+y = rnorm(n, mean = 1, sd =sqrt(2))
+var.test(x, y)
+#         F test to compare two variances
+# data: x and y
+# F = 1.2229, num df = 99, denom df = 99, p-value = 0.3184
+# alternative hypothesis: true ratio of variances is not equal to 1
+# 95 percent confidence interval:
+#  0.8228112 1.8175001
+# sample estimates:
+# ratio of variances
+#            1.22289
+
+
+1-pf(0.12899, 2, 12)      # 2는 분자의 자유도, 12는 분모의 자유도
+# [1] 0.8801851
+# 1에서 빼줌으로써 p value를 구할 수 있음
+
+
+# ---
+x = 0
+m = 50
+n = 20
+k = 30
+
+dhyper(x, m, n, k, log.FALSE)
+phyper(q, m, n, k, lower.tail = TRUE, log.p = FALSE)
+qhyper(p, m, n, k, lower.tail = TRUE, log.p = FALSE)
+rhyper(nn, m, n, k)
