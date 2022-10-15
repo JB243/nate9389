@@ -1,0 +1,33 @@
+# ---
+curl -fsSL https://deb.nodesource.com/setup_17.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# ---
+sudo apt update
+sudo apt install python3-ipywidgets
+
+# ---
+pip install -U bokeh
+
+# ---
+jupyter labextension install @jupyter-widgets/jupyterlab-manager
+jupyter labextension install @bokeh/jupyter_bokeh # failed
+
+# ---
+jupyter labextension uninstall @bokeh/jupyter_bokeh
+pip install jupyter_bokeh
+
+# ---
+from bokeh.plotting import figure, output_file, show
+
+# output to static HTML file
+output_file("line.html")
+
+# 'tooltips' shows the value when the cursor is placed
+p = figure(width=400, height=400, tooltips=[("x", "$x"), ("y", "$y")])
+
+# add a circle renderer with a size, color, and alpha
+p.circle([1, 2, 3, 4, 5], [6, 7, 2, 4, 5], size=20, color="navy", alpha=0.5)
+
+# show the results
+show(p)
