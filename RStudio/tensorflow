@@ -1,0 +1,30 @@
+# ---
+install.packages("tensorflow")
+library(tensorflow)
+install_tensorflow()
+
+
+# ---
+activate [MY_ENVIRONMENT]
+conda install -c conda-forge r-essentials=4.0 # the latest version
+
+
+# ---
+conda activate [MY_ENV]
+conda info --envs
+
+
+# ---
+install.packages("reticulate")
+library(reticulate)
+use_condaenv(condaenv = 'lipo', required = TRUE)
+py_config()
+
+
+# ---
+Error in use_condaenv(condaenv = "lipo_", required = TRUE) :
+  Unable to locate conda environment 'lipo_'.
+
+
+# ---
+system("python PYTHON_CODE.py")
