@@ -1,20 +1,11 @@
-<!-- reference
-## https://ko.code-paper.com/javascript/examples-img-src-change-javascript
-## https://song-yoshiii.tistory.com/m/9
-## https://hianna.tistory.com/m/411 
--->
-
 <html>
 <head>
 </head>
 <body>
 <script language="javascript">
 function printName(){
-  var result = './SpatialFeaturePlot/' + document.getElementById('name').value + '.jpeg';
+  var result = 'https://github.com/JB243/nate9389/blob/main/Javascript/' + document.getElementById('name').value + '.png?raw=true';
   document.getElementById("imgId").src = result
-
-  var result2 = './VlnPlot/' + document.getElementById('name').value + '.jpeg';
-  document.getElementById("imgId2").src = result2
 }
 </script>
 
@@ -26,8 +17,6 @@ function printName(){
 </div>
 </form>
 <img id="imgId" src="">
-<br/>
-<img id="imgId2" src="">
 
 </body>
 </html>
