@@ -1,3 +1,367 @@
+<p style="line-height: 2;" data-ke-size="size16"><span style="color: #000000;"><span style="font-size: 14pt; color: #000000;"><b>히포크라테스 기질테스트 프로그램과 12기질 장단점</b></span></span></p>
+<p style="line-height: 0.5;" data-ke-size="size16">&nbsp;</p>
+<p style="line-height: 2;" data-ke-size="size16"><span style="color: #000000;"><span style="font-size: 11pt; color: #ff0000;"><span style="color: #000000;">추천글<b> : </b>【Javascript】 <a href="https://nate9389.tistory.com/1310" target="_blank" rel="noopener">Javascript 목차</a></span></span></span></p>
+<hr contenteditable="false" data-ke-type="horizontalRule" data-ke-style="style5" />
+<p style="line-height: 2;" data-ke-size="size16"><span style="color: #000000;"><span style="font-size: 11pt; color: #ff0000;"><span style="color: #000000;"><b>a.</b> <a href="https://github.com/JB243/nate9389/blob/main/Javascript/Hippocrates%20Substance%20Test%20Program" target="_blank" rel="noopener">GitHub</a>&nbsp;</span></span></span></p>
+<hr contenteditable="false" data-ke-type="horizontalRule" data-ke-style="style5" />
+<p style="line-height: 2;" data-ke-size="size16"><span style="color: #000000;"><span style="font-size: 11pt; color: #ff0000;"><span style="color: #000000;">※ 더블클릭하시면 해당 셀을 선택할 수 있습니다.</span></span></span></p>
+<p style="line-height: 2;" data-ke-size="size16"><span style="color: #000000;"><span style="font-size: 11pt; color: #ff0000;"><span style="color: #000000;"><span style="color: #000000;">※<span>&nbsp;</span></span>현재 잠깐 작동하지 않고 있음&nbsp;</span></span></span></p>
+<p style="line-height: 2;" data-ke-size="size16">&nbsp;</p>
+<p style="line-height: 2;" data-ke-size="size16"><span style="color: #000000;"><b><span style="font-size: 11pt; color: #ff0000;">■</span><span style="font-size: 11pt; color: #ff0000;">&nbsp;장점 테스트</span></b></span></p>
+<p data-ke-size="size16"><span style="color: #000000;">&nbsp;</span></p>
+<table border="1" align="center" data-ke-align="alignLeft">
+<tbody>
+<tr>
+<td colspan="9"><span style="color: #000000; font-size: 9pt;"> </span><input id="result" type="number" /><span style="color: #000000; font-size: 9pt;"> </span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 47px;" colspan="1"><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">1</span></b></span></td>
+<td style="width: 191px; height: 47px;"  onclick="dual1('1', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">생동감 있다</span></span></td>
+<td style="width: 197px; height: 47px;"  onclick="dual1('2', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">모험적이다</span></span></td>
+<td style="width: 178px; height: 47px;"  onclick="dual1('3', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">분석적이다</span></span></td>
+<td style="width: 164px; height: 47px;"  onclick="dual1('4', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">융통성&nbsp;</span><span style="font-size: 9pt; color: #000000;">있다</span></span></td>
+</tr>
+<tr>
+<td style="height: 46px; width: 20px;" colspan="1"><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">2</span></b></span></td>
+<td style="height: 46px; width: 191px;"  onclick="dual1('1', this)" colspan="2"><span style="color: #000000; font-size: 9pt;">쾌활하다</span></td>
+<td style="height: 46px; width: 197px;"  onclick="dual1('2', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">설득력이&nbsp;</span><span style="font-size: 9pt; color: #000000;">있다</span></span></td>
+<td style="height: 46px; width: 178px;"  onclick="dual1('3', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">끈기 있다</span></span></td>
+<td style="height: 46px; width: 164px;"   onclick="dual1('4', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">평온하다</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 44px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">3</span></b></span></span></td>
+<td style="width: 191px; height: 44px;"   onclick="dual1('1', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">사교적이다</span></span></td>
+<td style="width: 197px; height: 44px;"   onclick="dual1('2', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">의지가&nbsp;</span><span style="font-size: 9pt; color: #000000;">강하다</span></span></td>
+<td style="width: 178px; height: 44px;"   onclick="dual1('3', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">희생적이다</span></span></td>
+<td style="width: 164px; height: 44px;"   onclick="dual1('4', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">순응하다</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 49px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">4</span></b></span></span></td>
+<td style="width: 191px; height: 49px;"   onclick="dual1('1', this)" colspan="2"><span style="color: #000000; font-size: 9pt;">매력 있다</span></td>
+<td style="width: 197px; height: 49px;"   onclick="dual1('2', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">경쟁심이&nbsp;</span><span style="font-size: 9pt; color: #000000;">있다</span></span></td>
+<td style="width: 178px; height: 49px;"   onclick="dual1('3', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">이해심이 많다</span></span></td>
+<td style="width: 164px; height: 49px;"   onclick="dual1('4', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">감정을&nbsp;</span><span style="font-size: 9pt; color: #000000;">억제하다</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 45px;" colspan="1"><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">5</span></b></span></td>
+<td style="width: 191px; height: 45px;"   onclick="dual1('1', this)" colspan="2"><span style="color: #000000; font-size: 9pt;">참신하다</span></td>
+<td style="width: 197px; height: 45px;"   onclick="dual1('2', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">능력이&nbsp;</span><span style="font-size: 9pt; color: #000000;">비상하다</span></span></td>
+<td style="width: 178px; height: 45px;"   onclick="dual1('3', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">존중하다</span></span></td>
+<td style="width: 164px; height: 45px;"   onclick="dual1('4', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">삼가다</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 46px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">6</span></b></span></span></td>
+<td style="width: 191px; height: 46px;"   onclick="dual1('1', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">신나하는 편</span></span></td>
+<td style="width: 197px; height: 46px;"   onclick="dual1('2', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">독자적인 편</span></span></td>
+<td style="width: 178px; height: 46px;"   onclick="dual1('3', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">민감한 편</span></span></td>
+<td style="width: 164px; height: 46px;"   onclick="dual1('4', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">수용적인 편</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 50px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">7</span></b></span></span></td>
+<td style="width: 191px; height: 50px;"   onclick="dual1('1', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">장려하다</span></span></td>
+<td style="width: 197px; height: 50px;"   onclick="dual1('2', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">긍정적이다</span></span></td>
+<td style="width: 178px; height: 50px;"   onclick="dual1('3', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">계획하다</span></span></td>
+<td style="width: 164px; height: 50px;"   onclick="dual1('4', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">참을성이 있다</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 48px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">8</span></b></span></span></td>
+<td style="width: 191px; height: 48px;"   onclick="dual1('1', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">충동적인&nbsp;</span><span style="font-size: 9pt; color: #000000;">편</span></span></td>
+<td style="width: 197px; height: 48px;"   onclick="dual1('2', this)" colspan="2"><span style="color: #000000; font-size: 9pt;">확신하는 형</span></td>
+<td style="width: 178px; height: 48px;"   onclick="dual1('3', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">계획을&nbsp;</span><span style="font-size: 9pt; color: #000000;">따르는 편</span></span></td>
+<td style="width: 164px; height: 48px;"   onclick="dual1('4', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">과묵하다</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 42px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">9</span></b></span></span></td>
+<td style="width: 191px; height: 42px;"   onclick="dual1('1', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">낙천적이다</span></span></td>
+<td style="width: 197px; height: 42px;"   onclick="dual1('2', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">솔직하다</span></span></td>
+<td style="width: 178px; height: 42px;"   onclick="dual1('3', this)" colspan="2"><span style="color: #000000; font-size: 9pt;">질서 있다</span></td>
+<td style="width: 164px; height: 42px;"   onclick="dual1('4', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">포용력&nbsp;</span><span style="font-size: 9pt; color: #000000;">있다</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 41px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">10</span></b></span></span></td>
+<td style="width: 191px; height: 41px;"   onclick="dual1('1', this)" colspan="2"><span style="color: #000000; font-size: 9pt;">재담이 있다</span></td>
+<td style="width: 197px; height: 41px;"   onclick="dual1('2', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">주관이&nbsp;</span><span style="font-size: 9pt; color: #000000;">뚜렷하다</span></span></td>
+<td style="width: 178px; height: 41px;"   onclick="dual1('3', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">신실하다</span></span></td>
+<td style="width: 164px; height: 41px;"   onclick="dual1('4', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">응답적이다</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 45px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">11</span></b></span></span></td>
+<td style="width: 191px; height: 45px;"   onclick="dual1('1', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">즐겁다</span></span></td>
+<td style="width: 197px; height: 45px;"   onclick="dual1('2', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">겁이 없다</span></span></td>
+<td style="width: 178px; height: 45px;"   onclick="dual1('3', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">섬세하다</span></span></td>
+<td style="width: 164px; height: 45px;"   onclick="dual1('4', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">외교적이다</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 51px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">12</span></b></span></span></td>
+<td style="width: 191px; height: 51px;"  onclick="dual1('1', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">명랑하다</span></span></td>
+<td style="width: 197px; height: 51px;"  onclick="dual1('2', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">자신감 있다</span></span></td>
+<td style="width: 178px; height: 51px;"  onclick="dual1('3', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">문화적이다</span></span></td>
+<td style="width: 164px; height: 51px;"  onclick="dual1('4', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">안정되다</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 53px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">13</span></b></span></span></td>
+<td style="width: 191px; height: 53px;"  onclick="dual1('1', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">고무하는 편</span></span></td>
+<td style="width: 197px; height: 53px;"  onclick="dual1('2', this)" colspan="2"><span style="color: #000000; font-size: 9pt;">독립적이다</span></td>
+<td style="width: 178px; height: 53px;"  onclick="dual1('3', this)" colspan="2"><span style="color: #000000; font-size: 9pt;">이상적이다</span></td>
+<td style="width: 164px; height: 53px;"  onclick="dual1('4', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">거슬리지&nbsp;</span><span style="font-size: 9pt; color: #000000;">않는다</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 51px;" colspan="1"><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">14</span></b></span></td>
+<td style="width: 191px; height: 51px;"  onclick="dual1('1', this)" colspan="2"><span style="color: #000000; font-size: 9pt;">표현하는 편</span></td>
+<td style="width: 197px; height: 51px;"  onclick="dual1('2', this)" colspan="2"><span style="color: #000000; font-size: 9pt;">단호하다</span></td>
+<td style="width: 178px; height: 51px;"  onclick="dual1('3', this)" colspan="2"><span style="color: #000000; font-size: 9pt;">몰두하는 편</span></td>
+<td style="width: 164px; height: 51px;"  onclick="dual1('4', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">정색하고&nbsp;</span><span style="font-size: 9pt; color: #000000;">농담하다</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 46px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">15</span></b></span></span></td>
+<td style="width: 191px; height: 46px;"  onclick="dual1('1', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">쉽게 어울린다</span></span></td>
+<td style="width: 197px; height: 46px;"  onclick="dual1('2', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">행동가 형</span></span></td>
+<td style="width: 178px; height: 46px;"  onclick="dual1('3', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">음악을&nbsp;</span><span style="font-size: 9pt; color: #000000;">좋아하다</span></span></td>
+<td style="width: 164px; height: 46px;"  onclick="dual1('4', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">중재하는&nbsp;</span><span style="font-size: 9pt; color: #000000;">형</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 45px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">16</span></b></span></span></td>
+<td style="width: 191px; height: 45px;"  onclick="dual1('1', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">말하기&nbsp;</span><span style="font-size: 9pt; color: #000000;">좋아하다</span></span></td>
+<td style="width: 197px; height: 45px;"  onclick="dual1('2', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">성취 지향적</span></span></td>
+<td style="width: 178px; height: 45px;"  onclick="dual1('3', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">사려&nbsp;</span><span style="font-size: 9pt; color: #000000;">깊은 편</span></span></td>
+<td style="width: 164px; height: 45px;"  onclick="dual1('4', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">관대하다</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 45px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">17</span></b></span></span></td>
+<td style="width: 191px; height: 45px;"  onclick="dual1('1', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">열정적이다</span></span></td>
+<td style="width: 197px; height: 45px;"  onclick="dual1('2', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">책임감 있다</span></span></td>
+<td style="width: 178px; height: 45px;"  onclick="dual1('3', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">충성스러운 편</span></span></td>
+<td style="width: 164px; height: 45px;"  onclick="dual1('4', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">잘 듣는다</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 50px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">18</span></b></span></span></td>
+<td style="width: 191px; height: 50px;"  onclick="dual1('1', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">무대형이다</span></span></td>
+<td style="width: 197px; height: 50px;"  onclick="dual1('2', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">지도력이&nbsp;</span><span style="font-size: 9pt; color: #000000;">있다</span></span></td>
+<td style="width: 178px; height: 50px;"  onclick="dual1('3', this)" colspan="2"><span style="color: #000000; font-size: 9pt;">조직적이다</span></td>
+<td style="width: 164px; height: 50px;"  onclick="dual1('4', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">만족하는&nbsp;</span><span style="font-size: 9pt; color: #000000;">편</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 44px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">19</span></b></span></span></td>
+<td style="width: 191px; height: 44px;"  onclick="dual1('1', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">인기 있다</span></span></td>
+<td style="width: 197px; height: 44px;"  onclick="dual1('2', this)" colspan="2"><span style="color: #000000; font-size: 9pt;">생산적이다</span></td>
+<td style="width: 178px; height: 44px;"  onclick="dual1('3', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">완벽을&nbsp;</span><span style="font-size: 9pt; color: #000000;">추구하다</span></span></td>
+<td style="width: 164px; height: 44px;"  onclick="dual1('4', this)" colspan="2"><span style="color: #000000; font-size: 9pt;">편안하다</span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 46px;" colspan="1"><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">20</span></b></span></td>
+<td style="width: 191px; height: 46px;"  onclick="dual1('1', this)" colspan="2"><span style="color: #000000; font-size: 9pt;">활기 있다</span></td>
+<td style="width: 197px; height: 46px;"  onclick="dual1('2', this)" colspan="2"><span style="color: #000000; font-size: 9pt;">담대하다</span></td>
+<td style="width: 178px; height: 46px;"  onclick="dual1('3', this)" colspan="2"><span style="color: #000000; font-size: 9pt;">예의바르다</span></td>
+<td style="width: 164px; height: 46px;"  onclick="dual1('4', this)" colspan="2"><span style="color: #000000; font-size: 9pt;">중도적이다</span></td>
+</tr>
+<tr>
+<td style="width: 20px;" colspan="1"><span style="color: #000000; font-size: 9pt;">합</span></td>
+<td colspan="2"><input id="resulta" type="number" /></td>
+<td colspan="2"><input id="resultb" type="number" /></td>
+<td colspan="2"><input id="resultc" type="number" /></td>
+<td colspan="2"><input id="resultd" type="number" /></td>
+</tr>
+</tbody>
+</table>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">
+<script> 
+  function dual1(char, obj){
+    if(obj.style.background == 'white'){
+      obj.style.background = 'yellow';
+      document.getElementById('result').value ++;
+      if(char == '1'){
+        document.getElementById('resulta').value ++;
+      }
+      if(char == '2'){
+        document.getElementById('resultb').value ++;
+      }
+      if(char == '3'){
+        document.getElementById('resultc').value ++;
+      }
+      if(char == '4'){
+        document.getElementById('resultd').value ++;
+      }
+    }  else if(obj.style.background == 'yellow'){
+      obj.style.background = 'white';
+      document.getElementById('resultt').value --;
+      if(char == '1'){  
+        document.getElementById('resulta').value --;
+      }
+      if(char == '2'){
+        document.getElementById('resulta').value --;
+      }
+      if(char == '3'){
+        document.getElementById('resulta').value --;   
+      }
+      if(char == '4'){
+        document.getElementById('resulta').value --;   
+      }
+    } else{
+      obj.style.background = 'white';          
+    }
+  }
+</script>
+</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16"><b><span style="font-size: 11pt; color: #0900ff;">■ 단점 테스트</span></b></p>
+<p data-ke-size="size16">&nbsp;</p>
+<table border="1" align="center" data-ke-align="alignLeft">
+<tbody>
+<tr>
+<td colspan="9"><span style="color: #000000; font-size: 9pt;"> </span><input id="resultt" type="number" /><span style="color: #000000; font-size: 9pt;"> </span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 45px;" colspan="1"><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">1</span></b></span></td>
+<td style="width: 191px; height: 45px;"  onclick="dual2('1', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">허세를&nbsp;</span><span style="font-size: 9pt; color: #000000;">부린다</span></span></td>
+<td style="width: 197px; height: 45px;" onclick="dual2('2', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">권세를&nbsp;</span><span style="font-size: 9pt; color: #000000;">부린다</span></span></td>
+<td style="width: 178px; height: 45px;"onclick="dual2('3', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;"><span style="color: #000000;">숫기가 없</span><span style="color: #000000;">다</span></span></span></td>
+<td style="width: 164px; height: 45px;"onclick="dual2('4', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">무표정하</span><span style="font-size: 9pt; color: #000000;">다</span></span></td>
+</tr>
+<tr>
+<td style="height: 46px; width: 20px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">2</span></b></span></span></td>
+<td style="height: 46px; width: 191px;"onclick="dual2('1', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;"><span style="color: #000000;">규율이 없</span><span style="color: #000000;">다</span></span></span></td>
+<td style="height: 46px; width: 197px;"onclick="dual2('2', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">동정심이&nbsp;</span><span style="font-size: 9pt; color: #000000;">없</span><span style="font-size: 9pt; color: #000000;">다</span></span></td>
+<td style="height: 46px; width: 178px;"onclick="dual2('3', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;"><span style="color: #000000;">용서하지 않</span><span style="color: #000000;">다</span></span></span></td>
+<td style="height: 46px; width: 164px;"onclick="dual2('4', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">열정이 없다</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 49px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">3</span></b></span></span></td>
+<td style="width: 191px; height: 49px;"onclick="dual2('1', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">중언부언하다</span></span></td>
+<td style="width: 197px; height: 49px;"onclick="dual2('2', this)"  colspan="2"><span><span style="font-size: 9pt;"><span style="color: #000000;">거스른</span><span style="color: #000000;">다</span></span></span></td>
+<td style="width: 178px; height: 49px;"onclick="dual2('3', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;"><span style="color: #000000;">분을 품</span><span style="color: #000000;">다</span></span></span></td>
+<td style="width: 164px; height: 49px;"onclick="dual2('4', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;"><span style="color: #000000;">상관이 없</span><span style="color: #000000;">다</span></span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 47px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">4</span></b></span></span></td>
+<td style="width: 191px; height: 47px;"onclick="dual2('1', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">건망증이&nbsp;</span><span style="font-size: 9pt; color: #000000;">있다</span></span></td>
+<td style="width: 197px; height: 47px;" onclick="dual2('2', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">노골적이</span><span style="font-size: 9pt; color: #000000;">다</span></span></td>
+<td style="width: 178px; height: 47px;" onclick="dual2('3', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">까다롭다</span></span></td>
+<td style="width: 164px; height: 47px;" onclick="dual2('4', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">두려워하</span><span style="font-size: 9pt; color: #000000;">다</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 46px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">5</span></b></span></span></td>
+<td style="width: 191px; height: 46px;" onclick="dual2('1', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">중간에&nbsp;</span><span style="font-size: 9pt; color: #000000;">끼어든</span><span style="font-size: 9pt; color: #000000;">다</span></span></td>
+<td style="width: 197px; height: 46px;"onclick="dual2('2', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">성급</span><span style="font-size: 9pt; color: #000000;">하다</span></span></td>
+<td style="width: 178px; height: 46px;" onclick="dual2('3', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">자신감이&nbsp;</span><span style="font-size: 9pt; color: #000000;">없다</span></span></td>
+<td style="width: 164px; height: 46px;"onclick="dual2('4', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">결단력이&nbsp;</span><span style="font-size: 9pt; color: #000000;">없다</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 46px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">6</span></b></span></span></td>
+<td style="width: 191px; height: 46px;"onclick="dual2('1', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">예측할 수&nbsp;</span><span style="font-size: 9pt; color: #000000;">없다</span></span></td>
+<td style="width: 197px; height: 46px;" onclick="dual2('2', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;"><span style="color: #000000;">애정</span><span style="color: #000000;">표현이 없다</span></span></span></td>
+<td style="width: 178px; height: 46px;"onclick="dual2('3', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;"><span style="color: #000000;">인기</span><span style="color: #000000;"> 없다</span></span></span></td>
+<td style="width: 164px; height: 46px;" onclick="dual2('4', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">관계하지&nbsp;</span><span style="font-size: 9pt; color: #000000;">않다</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 50px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">7</span></b></span></span></td>
+<td style="width: 191px; height: 50px;"onclick="dual2('1', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">되는대로&nbsp;</span><span style="font-size: 9pt; color: #000000;">하</span><span style="font-size: 9pt; color: #000000;">다</span></span></td>
+<td style="width: 197px; height: 50px;"onclick="dual2('2', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;"><span style="color: #000000;">완</span><span style="color: #000000;">고하</span><span style="color: #000000;">다</span></span></span></td>
+<td style="width: 178px; height: 50px;" onclick="dual2('3', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;"><span style="color: #000000;">불</span><span style="color: #000000;">만이&nbsp;</span></span><span style="font-size: 9pt; color: #000000;">많은 편</span></span></td>
+<td style="width: 164px; height: 50px;" onclick="dual2('4', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">망설이는&nbsp;편</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 46px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">8</span></b></span></span></td>
+<td style="width: 191px; height: 46px;"onclick="dual2('1', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">방임하다</span></span></td>
+<td style="width: 197px; height: 46px;"onclick="dual2('2', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">교만하다</span></span></td>
+<td style="width: 178px; height: 46px;" onclick="dual2('3', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">염세적이다</span></span></td>
+<td style="width: 164px; height: 46px;"onclick="dual2('4', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">단조롭다</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 42px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">9</span></b></span></span></td>
+<td style="width: 191px; height: 42px;" onclick="dual2('1', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;"><span style="color: #000000;">쉽게 분노하</span><span style="color: #000000;">다</span></span></span></td>
+<td style="width: 197px; height: 42px;"onclick="dual2('2', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;"><span style="color: #000000;">논쟁을 좋아하</span><span style="color: #000000;">다</span></span></span></td>
+<td style="width: 178px; height: 42px;"onclick="dual2('3', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;"><span style="color: #000000;">자신을 격리하</span><span style="color: #000000;">다</span></span></span></td>
+<td style="width: 164px; height: 42px;" onclick="dual2('4', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">목표가 없</span><span style="font-size: 9pt; color: #000000;">다</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 42px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">10</span></b></span></span></td>
+<td style="width: 191px; height: 42px;" onclick="dual2('1', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;"><span style="color: #000000;">피상적이</span><span style="color: #000000;">다</span></span></span></td>
+<td style="width: 197px; height: 42px;"onclick="dual2('2', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">자만하</span><span style="font-size: 9pt; color: #000000;">다</span></span></td>
+<td style="width: 178px; height: 42px;" onclick="dual2('3', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;"><span style="color: #000000;">부정</span><span style="color: #000000;">적이다</span></span></span></td>
+<td style="width: 164px; height: 42px;" onclick="dual2('4', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;"><span style="color: #000000;">안일</span><span style="color: #000000;">하</span><span style="color: #000000;">다</span></span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 45px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">11</span></b></span></span></td>
+<td style="width: 191px; height: 45px;"onclick="dual2('1', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;"><span style="color: #000000;">칭찬을 바란</span><span style="color: #000000;">다</span></span></span></td>
+<td style="width: 197px; height: 45px;"onclick="dual2('2', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">일벌레 형</span></span></td>
+<td style="width: 178px; height: 45px;"onclick="dual2('3', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">뒤로 물러서는 편</span></span></td>
+<td style="width: 164px; height: 45px;"onclick="dual2('4', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;"><span style="color: #000000;">염려하</span><span style="color: #000000;">다</span></span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 51px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">12</span></b></span></span></td>
+<td style="width: 191px; height: 51px;"onclick="dual2('1', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">말이 많다</span></span></td>
+<td style="width: 197px; height: 51px;" onclick="dual2('2', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">무례하다</span></span></td>
+<td style="width: 178px; height: 51px;"onclick="dual2('3', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">과민하다</span></span></td>
+<td style="width: 164px; height: 51px;" onclick="dual2('4', this)" colspan="2"><span><span style="color: #000000; font-size: 9pt;">소심하다</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 46px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">13</span></b></span></span></td>
+<td style="width: 191px; height: 46px;"onclick="dual2('1', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">무질서하다</span></span></td>
+<td style="width: 197px; height: 46px;"onclick="dual2('2', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">지배하다</span></span></td>
+<td style="width: 178px; height: 46px;"onclick="dual2('3', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">낙담하다</span></span></td>
+<td style="width: 164px; height: 46px;"onclick="dual2('4', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">확신이 없</span><span style="font-size: 9pt; color: #000000;">다</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 42px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">14</span></b></span></span></td>
+<td style="width: 191px; height: 42px;"onclick="dual2('1', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">일관성이 없다</span></span></td>
+<td style="width: 197px; height: 42px;"onclick="dual2('2', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">관대하지 못하다</span></span></td>
+<td style="width: 178px; height: 42px;"onclick="dual2('3', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">내성적이다</span></span></td>
+<td style="width: 164px; height: 42px;"onclick="dual2('4', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">무관심하</span><span style="font-size: 9pt; color: #000000;">다</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 42px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">15</span></b></span></span></td>
+<td style="width: 191px; height: 42px;"onclick="dual2('1', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">어지르는 편</span></span></td>
+<td style="width: 197px; height: 42px;"onclick="dual2('2', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">조종하다</span></span></td>
+<td style="width: 178px; height: 42px;"onclick="dual2('3', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">우울한 편</span></span></td>
+<td style="width: 164px; height: 42px;"onclick="dual2('4', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">중얼거리다</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 45px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">16</span></b></span></span></td>
+<td style="width: 191px; height: 45px;"onclick="dual2('1', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">과시하</span><span style="font-size: 9pt; color: #000000;">다</span></span></td>
+<td style="width: 197px; height: 45px;"onclick="dual2('2', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">고집이 세다</span></span></td>
+<td style="width: 178px; height: 45px;"onclick="dual2('3', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">회의적이다</span></span></td>
+<td style="width: 164px; height: 45px;"onclick="dual2('4', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">느리다</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 45px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">17</span></b></span></span></td>
+<td style="width: 191px; height: 45px;"onclick="dual2('1', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">시끄러운 편</span></span></td>
+<td style="width: 197px; height: 45px;"onclick="dual2('2', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">주장하다</span></span></td>
+<td style="width: 178px; height: 45px;"onclick="dual2('3', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">외로운 편</span></span></td>
+<td style="width: 164px; height: 45px;"onclick="dual2('4', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">게으른 편</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 50px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">18</span></b></span></span></td>
+<td style="width: 191px; height: 50px;"onclick="dual2('1', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">산만한 편</span></span></td>
+<td style="width: 197px; height: 50px;"onclick="dual2('2', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">성미가 급하</span><span style="font-size: 9pt; color: #000000;">다</span></span></td>
+<td style="width: 178px; height: 50px;"onclick="dual2('3', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">의심 많은 편</span></span></td>
+<td style="width: 164px; height: 50px;"onclick="dual2('4', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">나태하다</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 44px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">19</span></b></span></span></td>
+<td style="width: 191px; height: 44px;"onclick="dual2('1', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">침착하지 못한 편</span></span></td>
+<td style="width: 197px; height: 44px;"onclick="dual2('2', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">경솔하다</span></span></td>
+<td style="width: 178px; height: 44px;"onclick="dual2('3', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">양심이 많은&nbsp;</span><span style="font-size: 9pt; color: #000000;">편</span></span></td>
+<td style="width: 164px; height: 44px;"onclick="dual2('4', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">마지못해 하다</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px; height: 46px;" colspan="1"><span><span style="color: #000000;"><b><span style="font-size: 9pt; color: #000000;">20</span></b></span></span></td>
+<td style="width: 191px; height: 46px;"onclick="dual2('1', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">변덕스럽다</span></span></td>
+<td style="width: 197px; height: 46px;"onclick="dual2('2', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">약삭빠르다</span></span></td>
+<td style="width: 178px; height: 46px;"onclick="dual2('3', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">비판적이다</span></span></td>
+<td style="width: 164px; height: 46px;"onclick="dual2('4', this)"  colspan="2"><span><span style="color: #000000; font-size: 9pt;">타협하는 형</span></span></td>
+</tr>
+<tr>
+<td style="width: 20px;" colspan="1"><span style="color: #000000; font-size: 9pt;">합</span></td>
+<td colspan="2"><input id="resultta" type="number" /></td>
+<td colspan="2"><input id="resulttb" type="number" /></td>
+<td colspan="2"><input id="resulttc" type="number" /></td>
+<td colspan="2"><input id="resulttd" type="number" /></td>
+</tr>
+</tbody>
+</table>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">
 <script> 
   function dual2(char, obj){
     if(obj.style.background == 'white'){
@@ -35,3 +399,104 @@
     }
   }
 </script>
+</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p style="line-height: 2; text-align: justify;" data-ke-size="size16"><b><span style="color: #000000; font-size: 11pt;">■ 히포크라테스 기질 테스트</span></b></p>
+<p style="line-height: 2; text-align: justify;" data-ke-size="size16"><span style="color: #000000; font-size: 11pt;">BC 400년경 히포크라테스가 인간의 기질을 4가지로 정의.&nbsp;</span><span style="font-size: 11pt; color: #000000;">사람의 강점, 약점으로 나뉜 총 40개의 설문으로&nbsp;</span><span style="font-size: 11pt; color: #000000;">다혈질, 담즙질, 우울질, 점액질 등 자신이 어떤&nbsp;</span><span style="font-size: 11pt;"><span style="color: #000000;">유형의 기질을 가지고 있는지 알아보는 테스트</span></span></p>
+<p data-ke-size="size16">&nbsp;</p>
+<p data-ke-size="size16">&nbsp;</p>
+<p style="line-height: 2; text-align: justify;" data-ke-size="size16"><span style="color: #000000; font-size: 11pt;"><span style="color: #000000; font-size: 11pt;"><span style="color: #000000;">■ </span></span><b><span style="color: #000000; font-size: 11pt;">히포크라테스 기질 테스트 결과</span></b></span></p>
+<p style="line-height: 2; text-align: justify;" data-ke-size="size16"><span style="font-size: 11pt; color: #000000;">강점과 약점의 체크된 수를 파악하여 합계를 표시.&nbsp;</span><span style="font-size: 11pt; color: #000000;">가장 많은 수를 얻은 항목이 당신의 주기질,&nbsp;</span><span style="font-size: 11pt; color: #000000;">그 다음 많은 부분이 부기질로.&nbsp;</span><span style="font-size: 11pt; color: #000000;">많이 나온 두 기질을 혼합하면 당신의 기질을 알 수 있다.&nbsp;</span><span style="font-size: 11pt; color: #000000;">왼쪽부터 순서대로 다혈질,&nbsp;</span><span style="font-size: 11pt; color: #000000;">담즙질, 우울질, 점액질이다.</span></p>
+<p style="line-height: 2; text-align: justify;" data-ke-size="size16"><span style="font-size: 11pt; color: #000000;">&nbsp;</span></p>
+<p style="line-height: 2; text-align: justify;" data-ke-size="size16">&nbsp;</p>
+<p style="line-height: 2; text-align: justify;" data-ke-size="size16"><span style="font-size: 11pt; color: #000000;"><span style="color: #000000;">■ </span><b><span style="color: #000000;">12기질</span></b></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 2em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">01. 다혈담즙질</span></b></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 4em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">▷</span></b><span style="color: #000000;"> 장점 : 지도자 성향, 외향적, 사람과 함께하는 일이 잘 맞음, 다양한 활동과 재미를 원함</span></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 4em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">▷</span></b><span style="color: #000000;"> 단점 : 많이 벌고 쓰는 스타일, 으스대기 쉬움, 고집, 말이 많음, 쉽게 분노</span></span></p>
+<p style="line-height: 2; text-align: justify;" data-ke-size="size16"><span style="font-size: 14.6667px;">&nbsp;</span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 2em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">02. 다혈우울질</span></b></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 4em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">▷</span></b><span style="color: #000000;"> 장점 : 천재성, 친절함, 대중 앞에 서기를 잘함, 섬세함, 예술적, 체계적, 재미있게 말을 함</span></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 4em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">▷</span></b><span style="color: #000000;"> 단점 : 감정 기복 심함, 내적갈등 심화, 가면을 쓰기 쉬움</span></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 2em;" data-ke-size="size16"><span style="font-size: 14.6667px;">&nbsp;</span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 2em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">03. 다혈점액질</span></b></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 4em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">▷</span></b><span style="color: #000000;"> 장점 : 편안하고 재미있게 살려고 노력함, 인간 관계의 일에 탁월</span></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 4em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">▷</span></b><span style="color: #000000;"> 단점 : 성취 의욕이 없음</span></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 2em;" data-ke-size="size16"><span style="font-size: 14.6667px;">&nbsp;</span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 2em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">04. 담즙다혈질</span></b></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 4em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">▷</span></b><span style="color: #000000;"> 장점 : 두려워하지 않음, 생산적, 주목을 받음, 동기부여나 인생의 보람을 느낌, 의지가 강함, 냉정함</span></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 4em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">▷</span></b><span style="color: #000000;"> 단점 : 추상적인 개념에는 흥미를 느끼지 못함, 적개심이 심함</span></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 2em;" data-ke-size="size16"><span style="font-size: 14.6667px;">&nbsp;</span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 2em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">05. 담즙우울질</span></b></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 4em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">▷</span></b><span style="color: #000000;"> 장점 : 부지런함, 성적이 뛰어남, 논쟁에 강함, 입담이 좋음</span></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 4em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">▷</span></b><span style="color: #000000;"> 단점 : 고집스러움, 논쟁을 좋아함, 반대를 위한 반대를 좋아함</span></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 2em;" data-ke-size="size16"><span style="font-size: 14.6667px;">&nbsp;</span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 2em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">06. 담즙점액질</span></b></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 4em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">▷</span></b><span style="color: #000000;"> 장점 : 가장 유순함, 외향적이지만 신중, 장기적 계획 달성에 뛰어남, 타인의 기분을 살핌</span></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 4em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">▷</span></b><span style="color: #000000;"> 단점 : 자신에 대해선 완벽주의, 잘못을 인정하지 않음</span></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 2em;" data-ke-size="size16"><span style="font-size: 14.6667px;">&nbsp;</span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 2em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">07. 우울다혈질</span></b></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 4em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">▷</span></b><span style="color: #000000;"> 장점 : 천재성, 예술가적 특성, 섬세함</span></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 4em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">▷</span></b><span style="color: #000000;"> 단점 : 감정기복이 심함, 자존감이 낮음, 거부당함에 쉽게 상처받고 자기연민에 빠짐</span></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 2em;" data-ke-size="size16"><span style="font-size: 14.6667px;">&nbsp;</span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 2em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">08. 우울담즙질</span></b></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 4em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">▷</span></b><span style="color: #000000;"> 장점 : 철저하고 매우 유능, 준비성이 철저</span></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 4em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">▷</span></b><span style="color: #000000;"> 단점 : 타인을 즐겁게 하는 것을 어려워 함, 타인의 비판을 수용하지 않음</span></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 2em;" data-ke-size="size16"><span style="font-size: 14.6667px;">&nbsp;</span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 2em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">09. 우울점액질</span></b></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 4em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">▷</span></b><span style="color: #000000;"> 장점 : 가장 친화력이 좋음, 사람들과 잘 어울림, 과묵하고 실천력이 뛰어남</span></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 4em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">▷</span></b><span style="color: #000000;"> 단점 : 홀로 있기를 좋아함, 쉽게 낙심함, 복수기질이 있음, 상처받기 쉬움</span></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 2em;" data-ke-size="size16"><span style="font-size: 14.6667px;">&nbsp;</span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 2em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">10. 점액다혈질</span></b></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 4em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">▷</span></b><span style="color: #000000;"> 장점 : 가장 평범하고 편함, 협력적, 사려 깊음, 외교력이 좋음, 유머감각이 있음</span></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 4em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">▷</span></b><span style="color: #000000;"> 단점 : 잠재력이 발휘되지 않음, 의욕이 없음</span></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 2em;" data-ke-size="size16"><span style="font-size: 14.6667px;">&nbsp;</span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 2em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">11. 점액담즙질</span></b></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 4em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">▷</span></b><span style="color: #000000;"> 장점 : 부드러움, 담당한 역할을 잘 수행함, 자신의 생각보다 많은 것을 해냄</span></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 4em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">▷</span></b><span style="color: #000000;"> 단점 : 고집스러움, 조용히 분노를 드러냄, 피동적이 되기 쉬움</span></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 2em;" data-ke-size="size16"><span style="font-size: 14.6667px;">&nbsp;</span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 2em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">12. 점액우울질</span></b></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 4em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">▷</span></b><span style="color: #000000;"> 장점 : 가장 친절하고 섬세, 믿을 만함, 사람들을 당황시키기 않음, 인내심이 좋음</span></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 4em;" data-ke-size="size16"><span style="font-size: 14.6667px;"><b><span style="color: #000000;">▷</span></b><span style="color: #000000;"> 단점 : 참여를 꺼림, 비협력적, 의욕이 없음</span></span></p>
+<p style="line-height: 2; text-align: justify; margin-left: 4em;" data-ke-size="size16">&nbsp;</p>
+<p style="line-height: 2; text-align: justify; margin-left: 4em;" data-ke-size="size16">&nbsp;</p>
+<p style="line-height: 2; text-align: justify;" data-ke-size="size16"><b><span style="color: #000000; font-size: 11pt;">■ 관련 Javascript 코드</span></b><b><span style="color: #000000; font-size: 11pt;"></span></b></p>
+<p style="line-height: 2; text-align: justify;" data-ke-size="size16">&nbsp;</p>
+<pre id="code_1666326024034" class="javascript" data-ke-language="javascript" data-ke-type="codeblock"><code>&lt;script&gt; 
+  function dual2(char, obj){
+    if(obj.style.background == 'white'){
+      obj.style.background = 'yellow';
+      document.getElementById('resultt').value ++;
+      if(char == '1'){
+        document.getElementById('resultta').value ++;
+      }
+      if(char == '2'){
+        document.getElementById('resulttb').value ++;
+      }
+      if(char == '3'){
+        document.getElementById('resulttc').value ++;
+      }
+      if(char == '4'){
+        document.getElementById('resulttd').value ++;
+      }
+    }  else if(obj.style.background == 'yellow'){
+      obj.style.background = 'white';
+      document.getElementById('resultt').value --;
+      if(char == '1'){  
+        document.getElementById('resultta').value --;
+      }
+      if(char == '2'){
+        document.getElementById('resultta').value --;
+      }
+      if(char == '3'){
+        document.getElementById('resultta').value --;   
+      }
+      if(char == '4'){
+        document.getElementById('resultta').value --;   
+      }
+    } else{
+      obj.style.background = 'white';          
+    }
+  }
+&lt;/script&gt;</code></pre>
+<p style="line-height: 2; text-align: right;" data-ke-size="size16">&nbsp;</p>
+<p style="line-height: 2; text-align: right;" data-ke-size="size16"><span style="font-size: 11pt; color: #000000;"><span style="font-size: 9pt; color: #353535;">입력 : 2018.10.11 02:36</span></span></p>
