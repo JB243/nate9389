@@ -60,7 +60,7 @@ def where_element_in_list(e, l):
 def my_intersection(l1, l2):
     l = []
     flag = 0
-    for i in len(l1):
+    for i in range(len(l1)):
         if is_element_in_list(l1[i], l2):
             l[flag] = l1[i]
             flag = flag + 1
