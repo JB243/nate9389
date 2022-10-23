@@ -1,5 +1,3 @@
-### visit https://nate9389.tistory.com/2155
-
 # ---
 conda create --name [MY_ENV] python=3.6
 activate [MY_ENV]
