@@ -31,7 +31,7 @@ for i in range(len(top)):
 UnicodeDecodeError: 'cp949' codec can't decode bytes in position : illegal multibyte sequence
     
 
-# --- 
+# ---  
 TypeError: can only concatenate str (not "int") to str
 
 
