@@ -1,0 +1,58 @@
+### visit https://nate9389.tistory.com/2201
+
+
+# --- 
+rpy2.rinterface_lib.embedded.RRuntimeError: Error in library(ggplot2) : there is no package called 'ggplot2'
+
+
+# ---
+ERROR: pip's dependecy resolver does not currently take into account all the packages that are installed. This behavior is the source of the following dependency conflicts. stlearn 0.4.5 requires scikit-image>=0.19.2, but you have scikit-image 0.18.3 which is incompatible.
+
+
+# ---
+ImportError: cannot import name '_tsne_fix' from 'scanpy.tools'
+ 
+ 
+# --- 
+ValueError: m has more than 2 dimensions
+
+
+# ---
+TypeError: Descriptors cannot not be created directly. If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0. If you cannot immediately regenerate your protos, some other possible workarounds are: 1. Downgrade the protobuf package to 3.20.x or lower. 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+
+# ---
+TypeError: only length-1 arrays can be converted to Python scalars
+
+
+# ---
+for i in range(len(top)):
+    top[i] = -math.log10(top[i])
+    
+    
+# ---
+UnicodeDecodeError: 'cp949' codec can't decode bytes in position : illegal multibyte sequence
+    
+
+# ---
+TypeError: can only concatenate str (not "int") to str
+
+
+# ---
+_csv.Error: field larger than field limit (131072)
+
+
+# ---
+import sys
+import csv
+
+csv.field_size_limit(sys.maxsize)
+
+
+# ---
+AttributeError: type object 'scipy.spatial.transform.rotation.Rotation' has no attribute 'from_dcm'
+
+
+# ---
+ERROR: Could not install packages due to an OSError: [WinError 225] Operation did not complete successfully because the file contains a virus or potentially unwanted software ... ERROR: Could not install packages due to an OSError: [WinError 225] Operation did not complete successfully because the file contains a virus or potentially unwanted software
+
