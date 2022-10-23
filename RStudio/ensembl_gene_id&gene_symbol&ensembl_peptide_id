@@ -1,0 +1,91 @@
+# --- convert from ensembl.gene to gene.symbol  
+library(EnsDb.Hsapiens.v79)
+ensembl.genes <- c("ENSG00000150676", "ENSG00000099308", "ENSG00000142676", "ENSG00000180776", "ENSG00000108848", "ENSG00000277370", "ENSG00000103811", "ENSG00000101473")
+geneIDs1 <- ensembldb::select(EnsDb.Hsapiens.v79, keys= ensembl.genes, keytype = "GENEID", columns = c("SYMBOL","GENEID"))
+
+
+# --- convert from gene.symbol to ensembl.gene  
+library(EnsDb.Hsapiens.v79)
+geneSymbols <-  c('DDX26B','CCDC83',  'MAST3', 'RPL11', 'ZDHHC20',  'LUC7L3',  'SNORD49A',  'CTSH', 'ACOT8')
+geneIDs2 <- ensembldb::select(EnsDb.Hsapiens.v79, keys= geneSymbols, keytype = "SYMBOL", columns = c("SYMBOL","GENEID"))
+
+
+# --- convert Affymetrix probe ID to ensembl_gene_id, gene_name 
+#Convert Affymetrix probe ID to ensembl_gene_id, gene_name
+## https://www.biostars.org/p/328065/#328328
+## https://www.biostars.org/p/332461/#332474
+BiocManager::install("biomaRt")
+library(biomaRt)
+
+dat<-c('1007_s_at', '1053_at', '117_at', '121_at', '1255_g_at', '1294_at')
+require("biomaRt")
+mart <- useMart("ENSEMBL_MART_ENSEMBL")
+mart <- useDataset("hsapiens_gene_ensembl", mart)
+annotLookup <- getBM(
+  mart = mart,
+  attributes = c(
+    "affy_hg_u133_plus_2",
+    "ensembl_gene_id",
+    "gene_biotype",
+    "external_gene_name"),
+  filter = "affy_hg_u133_plus_2",
+  values = dat,
+  uniqueRows=TRUE)
+  
+
+# --- gene homology between human and mouse ver 1 (not working)
+install.packages("BiocManager")
+BiocManager::install("biomaRt")
+library(biomaRt)
+
+genes <- c("Xkr4", "Gm1992", "Gm37381")
+
+human <- useMart("ensembl", dataset = "hsapiens_gene_ensembl")
+mouse <- useMart("ensembl", dataset = "mmusculus_gene_ensembl")
+hh <- getLDS(attributes = c("mgi_symbol", "ensembl_gene_id", "entrezgene_id"), filters = "mgi_symbol", values = genes, mart = mouse, attributesL =
+c("hgnc_symbol", "ensembl_gene_id", "entrezgene_id"), martL = human, uniqueRows = T)
+
+
+# --- 
+#1. Error in getLDS(attributes = c("mgi_symbol", "ensembl_gene_id", "entrezgene_id"), : Query ERROR: caught BioMart::Exception::Database: Could not connect to mysql database ensembl_mart_106: DBI connect ('database =ensembl_mart_106;host=127.0.0.1;port=5316','ensro',...) failed: Can't connect to MySQL server on '127.0.0.1' (111) at /nfs/public/ro/ensweb/live/mart/www_106/biomart-perl/lib/BioMart/Configuration/DBLocation.pm line 98.
+#2. Error in textConnection(attrfilt) : invalid 'text' argument
+#3. Ensembl site unresponsive, trying useast mirror. Ensembl site unresponsive, trying asia mirror
+#4. Error: biomaRt has encountered an unexpected server error. Consider trying one of the Ensembl mirrors (for more details look at ?useEnsembl)
+
+
+# --- gene homology between human and mouse ver 1 (working)
+human_to_mouse <- function(human_gene){
+  hom <- read.csv("~/Downloads/HOM_MouseHumanSequence.csv")
+
+  mouse_gene = array()
+  flag = 0
+
+  for(i in 1 : length(human_gene)){
+    index = match(human_gene[i], hom[hom$Common.Organism.Name == 'human', 'Symbol'])
+    key = hom[hom$Common.Organism.Name == 'human', 'DB.Class.Key'][index]
+    flag = flag + 1
+    mouse_gene[flag] = hom[hom$DB.Class.Key == key 
+                           & hom$Common.Organism.Name == 'mouse, laboratory'
+                           , 'Symbol'][1] # duplicate mouse genes can be found
+  }
+
+  return(mouse_gene)
+}
+
+mouse_to_human <- function(mouse_gene){
+  hom <- read.csv("~/Downloads/HOM_MouseHumanSequence.csv")
+
+  human_gene = array()
+  flag = 0
+
+  for(i in 1 : length(mouse_gene)){
+    index = match(mouse_gene[i], hom[hom$Common.Organism.Name == 'mouse, laboratory', 'Symbol'])
+    key = hom[hom$Common.Organism.Name == 'mouse, laboratory', 'DB.Class.Key'][index]
+    flag = flag + 1
+    human_gene[flag] = hom[hom$DB.Class.Key ==  key
+                           & hom$Common.Organism.Name == 'human'
+                           , 'Symbol'][1] # duplicate human genes can be found
+  }
+
+  return(human_gene)
+}
