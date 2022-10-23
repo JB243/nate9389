@@ -1,0 +1,40 @@
+### Visit https://nate9389.tistory.com/2157 ###
+
+# ---
+> remotes::install_github('satijalab/seurat-wrappers')
+Downloading GitHub repo satijalab/seurat-wrappers@HEAD
+✔  checking for file ‘/private/var/folders/rt/qbr8l3sj73zd871cg_jmqrcm0000gn/T/Rtmp57GIIL/remotes77ad583c6cda/satijalab-seurat-wrappers-9652bdd/DESCRIPTION’ ...
+─  preparing ‘SeuratWrappers’:
+✔  checking DESCRIPTION meta-information ...
+─  checking for LF line-endings in source and make files and shell scripts
+─  checking for empty or unneeded directories
+   Omitted ‘LazyData’ from DESCRIPTION
+─  building ‘SeuratWrappers_0.3.0.tar.gz’
+   
+* installing *source* package ‘SeuratWrappers’ ...
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+  there is no package called ‘R.utils’
+Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
+Execution halted
+ERROR: lazy loading failed for package ‘SeuratWrappers’
+* removing ‘/Library/Frameworks/R.framework/Versions/4.1/Resources/library/SeuratWrappers’
+Warning message:
+In i.p(...) :
+  installation of package ‘/var/folders/rt/qbr8l3sj73zd871cg_jmqrcm0000gn/T//Rtmp57GIIL/file77ad110008a3/SeuratWrappers_0.3.0.tar.gz’ had non-zero exit status
+
+
+# ---
+# before
+gene.df <- bitr(MY_GENE_LIST, 
+                fromType = "SYMBOL",
+                toType = c("ENSEMBL", "SYMBOL","ENTREZID"),
+                OrgDb = org.Hs.eg.db) 
+                
+# after
+gene.df <- bitr(MY_GENE_LIST, 
+                fromType = "SYMBOL",
+                toType = c("ENSEMBL", "SYMBOL","ENTREZID"),
+                OrgDb = org.Mm.eg.db)
