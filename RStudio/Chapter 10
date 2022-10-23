@@ -1,10 +1,15 @@
 # ---
 # 최종 데이터를 저장 
 save.image(file="temp.RData") 
+
 # 그간 연산한 데이터를 삭제 
 rm(list=ls()) 
+
 # 최종 데이터를 로드 
 load(file="temp.RData")
+
+# R 다시 시작
+.rs.restartR()
 
 
 # ---
