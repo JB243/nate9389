@@ -1,0 +1,59 @@
+### visit https://nate9389.tistory.com/2155
+
+# ---
+conda create --name [MY_ENV] python=3.6
+activate [MY_ENV]
+pip install tensorflow==1.14.0
+pip install keras==2.2.4
+
+
+# ---
+conda install h5py
+pip install scanpy
+
+
+# ---
+pip uninstall scikit-image
+pip install scikit-image==0.18.3
+
+
+# ---
+### 수정 전 ###
+model.compile(loss=squared_error, optimizer=Adam(lr=lr))
+
+### 수정 후 ###
+from keras.optimizers import adam
+opt = adam(lr = lr)
+model.compile(loss=squared_error, optimizer=opt)
+
+
+# ---
+%%bash
+conda install --channel defaults conda python=3.6 --yes
+conda update --channel defaults --all --yes
+and in the next cell
+!conda --version
+
+
+# ---
+conda config --remove channels conda-forge
+
+
+# ---
+sudo apt update
+sudo apt install python3-ipywidgets
+
+
+# ---
+pip uninstall jupyterlab
+pip install jupyterlab
+
+
+# ---
+if __name__ == '__main__':
+    app.server.run()
+    
+    
+# ---
+if __name__ == '__main__':
+    app.server.run(host='0.0.0.0')
