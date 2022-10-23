@@ -55,6 +55,17 @@ def where_element_in_list(e, l):
         if e == l[i]:
             return i
     return -1
+
+# --- 두 리스트의 교집합을 출력하는 함수    
+def my_intersection(l1, l2):
+    l = []
+    flag = 0
+    for i in len(l1):
+        if is_element_in_list(l1[i], l2):
+            l[flag] = l1[i]
+            flag = flag + 1
+
+    return l
     
 # --- 텍스트 파일 읽기
 import csv
