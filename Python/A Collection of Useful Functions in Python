@@ -2,25 +2,36 @@
 def SUM(a, b):
     return a+b
 
+
 SUM(1,2)
 # 3
+
 
 # --- 타입 체크
 type(x)
 
-# --- 배열 길이
+
+# --- 배열 길이 및 차원
+### length ###
 len(x)
 
+
+### dimensionality ###
+x.shape # numpy.ndarray; cv2.imread 
+x.size # PIL.PngImagePlugin.PngImageFile; PIL.Image.open
 # --- 주어진 문자열(given_str)에서 특정 문자열(partial_str)을 포함하는지 여부
 a = "ABCD"
 
+
 a.startswith('AB')
 # TRUE
+
 
 ''' if a is not string object
 a.str.startswith('AB')
 # TRUE
 '''
+
 
 # --- 주어진 문자열(str)에서 앞 몇 개의 문자를 제거한 뒤 반환하는 함수
 def str_omit_forward(_str, n):
@@ -32,6 +43,7 @@ def str_omit_forward(_str, n):
             s = s + char
     return s
     
+    
 # --- 주어진 문자열(str)에서 뒤 몇 개의 문자를 제거한 뒤 반환하는 함수
 def str_omit_backward(_str, n):
     s = ''
@@ -42,6 +54,7 @@ def str_omit_backward(_str, n):
             s = s + char
     return s
 
+
 # --- 주어진 원소(e)가 리스트(l)에 포함되는지 여부
 def is_element_in_list(e, l):
     for i in range(len(l)):
@@ -49,12 +62,14 @@ def is_element_in_list(e, l):
             return True
     return False
     
+    
 # --- 주어진 원소(e)가 리스트(l) 내 몇 번째 원소인지를 출력하는 함수
 def where_element_in_list(e, l):
     for i in range(len(l)):
         if e == l[i]:
             return i
     return -1
+
 
 # --- 두 리스트의 교집합을 출력하는 함수    
 def my_intersection(l1, l2):
@@ -66,7 +81,8 @@ def my_intersection(l1, l2):
             flag = flag + 1
 
     return l
-    
+
+
 # --- 텍스트 파일 읽기
 import csv
 import sys
@@ -84,6 +100,7 @@ def read_txt(txt_dir):
     
     f.close()
     return l
+
 
 # --- 이미지 간 상관관계 
 import cv2
