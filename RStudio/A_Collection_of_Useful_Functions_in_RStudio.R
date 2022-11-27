@@ -1,3 +1,4 @@
+### sum(1,2) = 3
 sum <- function(a, b){
     return (a + b)
 }
