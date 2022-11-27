@@ -1,174 +1,450 @@
-library(Seurat)
-library(dplyr)
+sum <- function(a, b){
+    return (a + b)
+}
+
+has_string_arr <- function(str, arr){
+    flag <- 0
+    ar <- array()
+    for(i in 1:length(arr)){
+        if( grepl(str, arr[i], fixed=TRUE) ){
+            flag <- flag + 1
+            ar[flag] <- i
+        }
+    }
+    return(ar)
+}
+
+tri_intersect <- function(A, B, C){
+    a <- intersect(A, B)
+    b <- intersect(a, C)
+    return(b)
+}
+
+trim_na <- function(vector){
+  for(i in 1: length(vector)){
+    if(is.na(vector[i])){
+      vector[i] = 0
+    }
+  }
+  return (vector)
+}
+
+ignore_na <- function(vector){
+  flag = 0
+  ar = array()
+  for(i in 1: length(vector)){
+    if(! is.na(vector[i])){
+      flag = flag + 1
+      ar[flag] = vector[i]
+    }
+  }
+  return (ar)
+}
+
+corner <- function(x, num = 10){
+  return(x[1:min(  num, dim(x)[1]  ), 
+           1:min(  num, dim(x)[2]  )])
+}
+
+my.cbind <- function(data1, data2){
+  a <- intersect(rownames(data1), rownames(data2))
+  return (cbind(data1[a, ], data2[a, ]))
+}
+
+my.rbind <- function(data1, data2){
+  a <- intersect(colnames(data1), colnames(data2))
+  return (rbind(data1[, a], data2[, a]))
+}
+
+eliminate_hyphene <- function(str){
+    return(gsub("-", "", str))
+}
+
+eliminate_symbol <- function(str){
+    return(gsub("(", "", str, fixed = TRUE))
+}
+
+eliminate_backward <- function(str){
+    return(gsub('x.*$', '', str))
+}
+
+eliminate_backward <- function(str){
+    return(gsub('\\;.*$', '', str))
+}
+
+eliminate_forward <- function(str){
+    return(gsub('.*x', '', str))
+}
+
+log10_factorial <- function(n){
+  if(n == 0){
+    return(0)
+  }
+
+  out <- 0
+  for(i in 1 : n){
+    out <- out + log(i) / log(10)
+  }
+  return(out)
+}
+
+my.combination <- function(n, k){
+  # return nCk = n! / ((n-k)! k!)
+  
+  if (n == k || n == 0 || k == 0){
+    return(1)
+  }
+
+  A = log10_factorial(n)
+  B = log10_factorial(n-k)
+  C = log10_factorial(k)
+  
+  log10_nCk = A - B - C
+  return(10^(log10_nCk))
+}
+
+one_way_2_factor_anova <- function(v1, v2){
+  dat <- matrix(0, nrow = ( length(v1) + length(v2) ), ncol = 2 )
+  for(i in 1 : length(v1) ){
+    dat[i, 1] <- v1[i]
+    dat[i, 2] <- 'v1'
+  }
+  for(i in 1 : length(v2) ){
+    dat[i + length(v1), 1] <- v2[i]
+    dat[i + length(v1), 2] <- 'v2'
+  }
+  dat <- as.data.frame(dat)
+  
+  colnames(dat) <- c('val', 'factor')
+
+  anova_IS <- aov(val ~ factor, data = dat)
+  print(summary(anova_IS))
+
+  anova_residuals <- anova_IS$residuals
+  print(summary(anova_residuals))
+}
+
+one_way_3_factor_anova <- function(v1, v2, v3){
+  dat <- matrix(0, nrow = ( length(v1) + length(v2) + length(v3) ), ncol = 2 )
+  for(i in 1 : length(v1) ){
+    dat[i, 1] <- v1[i]
+    dat[i, 2] <- 'v1'
+  }
+  for(i in 1 : length(v2) ){
+    dat[i + length(v1), 1] <- v2[i]
+    dat[i + length(v1), 2] <- 'v2'
+  }
+  for(i in 1 : length(v3) ){
+    dat[i + length(v1) + length(v2), 1] <- v3[i]
+    dat[i + length(v1) + length(v2), 2] <- 'v3'
+  }
+  dat <- as.data.frame(dat)
+  
+  colnames(dat) <- c('val', 'factor')
+
+  anova_IS <- aov(val ~ factor, data = dat)
+  print(summary(anova_IS))
+
+  anova_residuals <- anova_IS$residuals
+  print(summary(anova_residuals))
+}
+
+one_way_4_factor_anova <- function(v1, v2, v3, v4){
+  dat <- matrix(0, nrow = ( length(v1) + length(v2) + length(v3) + length(v4) ), ncol = 2 )
+  for(i in 1 : length(v1) ){
+    dat[i, 1] <- v1[i]
+    dat[i, 2] <- 'v1'
+  }
+  for(i in 1 : length(v2) ){
+    dat[i + length(v1), 1] <- v2[i]
+    dat[i + length(v1), 2] <- 'v2'
+  }
+  for(i in 1 : length(v3) ){
+    dat[i + length(v1) + length(v2), 1] <- v3[i]
+    dat[i + length(v1) + length(v2), 2] <- 'v3'
+  }
+  for(i in 1 : length(v4) ){
+    dat[i + length(v1) + length(v2) + length(v3), 1] <- v4[i]
+    dat[i + length(v1) + length(v2) + length(v3), 2] <- 'v4'
+  }
+  dat <- as.data.frame(dat)
+  
+  colnames(dat) <- c('val', 'factor')
+
+  anova_IS <- aov(val ~ factor, data = dat)
+  print(summary(anova_IS))
+
+  anova_residuals <- anova_IS$residuals
+  print(summary(anova_residuals))
+}
+
+one_way_5_factor_anova <- function(v1, v2, v3, v4, v5){
+  dat <- matrix(0, nrow = ( length(v1) + length(v2) + length(v3) + length(v4) + length(v4) ), ncol = 2 )
+  for(i in 1 : length(v1) ){
+    dat[i, 1] <- v1[i]
+    dat[i, 2] <- 'v1'
+  }
+  for(i in 1 : length(v2) ){
+    dat[i + length(v1), 1] <- v2[i]
+    dat[i + length(v1), 2] <- 'v2'
+  }
+  for(i in 1 : length(v3) ){
+    dat[i + length(v1) + length(v2), 1] <- v3[i]
+    dat[i + length(v1) + length(v2), 2] <- 'v3'
+  }
+  for(i in 1 : length(v4) ){
+    dat[i + length(v1) + length(v2) + length(v3), 1] <- v4[i]
+    dat[i + length(v1) + length(v2) + length(v3), 2] <- 'v4'
+  }
+  for(i in 1 : length(v5) ){
+    dat[i + length(v1) + length(v2) + length(v3) + length(v4), 1] <- v5[i]
+    dat[i + length(v1) + length(v2) + length(v3) + length(v4), 2] <- 'v5'
+  }
+  dat <- as.data.frame(dat)
+  
+  colnames(dat) <- c('val', 'factor')
+
+  anova_IS <- aov(val ~ factor, data = dat)
+  print(summary(anova_IS))
+
+  anova_residuals <- anova_IS$residuals
+  print(summary(anova_residuals))
+}
+
+comparison_of_two_vectors <- function(v1, v2, paired = FALSE){
+  p.val = t.test(v1, v2, paired = paired)
+  print(p.val)
+  
+  log2FC = log( mean(v1 + 0.000000000001)/mean(v2 + 0.000000000001) ) / log(2)
+  print(log2FC)
+}
+
+total.gene <- 32285
+ST <- 31
+scRNAseq <- 14
+cross <- 5
+
+a <- cross
+b <- scRNAseq - a
+c <- ST - a
+d <- total.gene - a - b - c
+A <- a + b
+B <- c + d
+C <- a + c
+D <- b + d
+
+group<-c("A","A","B","B")
+cancer<-c("1.Yes","2.No","1.Yes","2.No")
+count<-c(a,b,c,d)
+dat<-data.frame(group,cancer,count)
+tab<-xtabs(count~group+cancer,data=dat)
+tab
+
+chisq.test(tab)$observed
+chisq.test(tab)$expected
+fisher.test(tab)
+-log(fisher.test(tab)$p.value, 10)
+
+if(cross > ST * scRNAseq / total.gene){
+  print("Enrichment")
+} else if(cross < ST * scRNAseq / total.gene){
+  print("Depletion")
+}
+  
+  my.Fisher.exact.test <- function(total, A, B, cross){
+  a1 <- log10_factorial(A)
+  a2 <- log10_factorial(total - A)
+  a3 <- log10_factorial(B)
+  a4 <- log10_factorial(total - B)
+
+  b1 <- log10_factorial(cross)
+  b2 <- log10_factorial(A - cross)
+  b3 <- log10_factorial(B - cross)
+  b4 <- log10_factorial(total - cross - (A - cross) - (B - cross))
+  b5 <- log10_factorial(total)
+
+  out = a1 + a2 + a3 + a4 - b1 - b2 - b3 - b4 - b5
+  return(10^out)
+}
+
+human_to_mouse <- function(human_gene){
+  hom <- read.csv("https://blog.kakaocdn.net/dn/OCkAZ/btrL4AnnDXH/YJ0CrvSIchlGTnqvKphemK/HOM_MouseHumanSequence.csv?attach=1&knm=tfile.csv")
+
+  mouse_gene = array()
+  flag = 0
+
+  for(i in 1 : length(human_gene)){
+    index = match(human_gene[i], hom[hom$Common.Organism.Name == 'human', 'Symbol'])
+    key = hom[hom$Common.Organism.Name == 'human', 'DB.Class.Key'][index]
+    flag = flag + 1
+    mouse_gene[flag] = hom[hom$DB.Class.Key == key 
+                           & hom$Common.Organism.Name == 'mouse, laboratory'
+                           , 'Symbol'][1] # duplicate mouse genes can be found
+  }
+
+  return(mouse_gene)
+}
+
+mouse_to_human <- function(mouse_gene){
+  hom <- read.csv("https://blog.kakaocdn.net/dn/OCkAZ/btrL4AnnDXH/YJ0CrvSIchlGTnqvKphemK/HOM_MouseHumanSequence.csv?attach=1&knm=tfile.csv")
+
+  human_gene = array()
+  flag = 0
+
+  for(i in 1 : length(mouse_gene)){
+    index = match(mouse_gene[i], hom[hom$Common.Organism.Name == 'mouse, laboratory', 'Symbol'])
+    key = hom[hom$Common.Organism.Name == 'mouse, laboratory', 'DB.Class.Key'][index]
+    flag = flag + 1
+    human_gene[flag] = hom[hom$DB.Class.Key ==  key
+                           & hom$Common.Organism.Name == 'human'
+                           , 'Symbol'][1] # duplicate human genes can be found
+  }
+
+  return(human_gene)
+}
+
+
+# RenameGenesSeurat  ------------------------------------------------------------------------------------
+RenameGenesSeurat <- function(obj = ls.Seurat[[i]], newnames = HGNC.updated[[i]]$Suggested.Symbol) { # Replace gene names in different slots of a Seurat object. Run this before integration. Run this before integration. It only changes obj@assays$RNA@counts, @data and @scale.data.
+  print("Run this before integration. It only changes obj@assays$RNA@counts, @data and @scale.data.")
+  RNA <- obj@assays$RNA
+
+  if (nrow(RNA) == length(newnames)) {
+    if (length(RNA@counts)) RNA@counts@Dimnames[[1]]            <- newnames
+    if (length(RNA@data)) RNA@data@Dimnames[[1]]                <- newnames
+    if (length(RNA@scale.data)) RNA@scale.data@Dimnames[[1]]    <- newnames
+  } else {"Unequal gene sets: nrow(RNA) != nrow(newnames)"}
+  obj@assays$RNA <- RNA
+  return(obj)
+}
+# RenameGenesSeurat(obj = SeuratObj, newnames = HGNC.updated.genes)
+ 
+update_cluster_in_seurat_obj <- function(seurat_obj, barcode, cluster){
+
+  # dim(seurat_obj)[1] = length(barcode) = length(cluster)
+  mat <- matrix(0, nrow = length(barcode), ncol = 2)
+  mat[, 1] = barcode
+  mat[, 2] = cluster
+  mat = as.data.frame(mat)
+  rownames(mat) = barcode
+
+  seurat_obj@meta.data$orig.ident = mat[rownames(seurat_obj@meta.data), 2]
+  # you may need to modify the above code
+  seurat_obj@active.ident = as.factor(seurat_obj@meta.data$orig.ident)
+  
+  return (seurat_obj)
+}
+
 library(ggplot2)
 
-load('cancer_lung.rdata')
-library(Matrix)
-cancer_lung_sp= as(as.matrix(cancer_lung), "sparseMatrix")
+scatter_plot <- function(x, y, xlab = "x", ylab = "y", point_size = 2, lab_size = 4, png=TRUE){
+  # the lenth(x) must be same with the length(y)
+  mat <- matrix(0, nrow = length(x), ncol = 2)
+  mat[, 1] = x
+  mat[, 2] = y
+  colnames(mat) = c(xlab, ylab)
+  mat <- as.data.frame(mat)
 
-writeMM(cancer_lung_sp,file='cancer_lung_sp.mtx')
-#readMM(file='cancer_lung_sp.mtx')
-load('cancer_lung_id.rdata')
+  if(png){
+    png("./scatter_plot.png",width=2000,height=2000,res=500)
+    ggplot(mat, aes(x=x, y=y)) + geom_point(shape=19, size=point_size, color="blue") + theme(plot.background = element_blank(),   panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(size =1)) +   stat_smooth(method = lm, level=.95, color="grey") + labs(x=xlab, y=ylab, size=lab_size)
+    dev.off()
+  } else{
+    ggplot(mat, aes(x=x, y=y)) + geom_point(shape=19, size=point_size, color="blue") + theme(plot.background = element_blank(),   panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(size =1)) +   stat_smooth(method = lm, level=.95, color="grey") + labs(x=xlab, y=ylab, size=lab_size)
+  }
+}
 
+my.plot <- function(x, y, col){
+	# assume that length(x) = length(y) = length(col)
 
-#Seurat
-cancer_seurat <- CreateSeuratObject(counts = cancer_lung_sp,
-                             min.cells = 3,
-                             project = "cancer_lung")
-cancer_seurat[["percent.mt"]] <- PercentageFeatureSet(cancer_seurat, pattern = "^MT")
-FeatureScatter(cancer_seurat, feature1 = "nCount_RNA", feature2 = "percent.mt")
-FeatureScatter(cancer_seurat, feature1 = "nCount_RNA", feature2 = "nFeature_RNA")
-
-cancer_seurat <- NormalizeData(object = cancer_seurat,
-                        normalization.method = "LogNormalize",
-                        scale.factor = 1e4)
-
-cancer_seurat <- FindVariableFeatures(object = cancer_seurat,
-                               selection.method = "vst", nfeatures = 2000)
-VariableFeaturePlot(object = cancer_seurat)
-
-
-cancer_seurat <- ScaleData(object=cancer_seurat)
-cancer_seurat <- RunPCA(object = cancer_seurat, features = VariableFeatures(object = cancer_seurat))
-DimPlot(cancer_seurat, reduction = "pca")
-
-cancer_seurat <- FindNeighbors(object = cancer_seurat, dims = 1:5)
-cancer_seurat <- FindClusters(object = cancer_seurat, 
-                       resolution = 0.1)
-
-cancer_seurat <- RunTSNE(object = cancer_seurat, dims = 1:10, do.fast= TRUE, check_duplicates = FALSE)
-cancer_seurat <- RunUMAP(cancer_seurat, dims = 1:10)
-DimPlot(cancer_seurat, reduction = "umap")
-DimPlot(cancer_seurat, reduction = "tsne")
-
-save(cancer_seurat, file = 'cancer_seurat.rdata')
-
-load('cancer_seurat.rdata')
-cancer.markers <- FindAllMarkers(object = cancer_seurat,
-                                 only.pos = TRUE,
-                                 min.pct = 0.25,
-                                 thresh.use = 0.25)
-save(cancer.markers, file = 'cancer.markers.rdata')
-
-load('cancer_lung_cell.rdata')
-
-cancer_seurat <- CreateSeuratObject(counts = cancer_lung_cell,
-                                    min.cells = 3,
-                                    project = "cancer_lung")
-cancer_seurat[["percent.mt"]] <- PercentageFeatureSet(cancer_seurat, pattern = "^MT")
-FeatureScatter(cancer_seurat, feature1 = "nCount_RNA", feature2 = "percent.mt")
-FeatureScatter(cancer_seurat, feature1 = "nCount_RNA", feature2 = "nFeature_RNA")
-
-cancer_seurat <- NormalizeData(object = cancer_seurat,
-                               normalization.method = "LogNormalize",
-                               scale.factor = 1e4)
-
-cancer_seurat <- FindVariableFeatures(object = cancer_seurat,
-                                      selection.method = "vst", nfeatures = 2000)
-VariableFeaturePlot(object = cancer_seurat)
+  plot(x_array, y_array, t="n")
+  colfunc <- colorRampPalette(c("#000000", "#EB4600", "#FFF800"))
+  
+  coll = array(dim = length(col))
+  for(i in 1 : length(col)){
+    coll[i] <- colfunc(100) [as.integer( col[i] / max(col) * 99 + 1)] 
+  }
+  
+  text(x, y, labels = "●", col = coll, cex = 1)
+}
 
 
-cancer_seurat <- ScaleData(object=cancer_seurat)
-cancer_seurat <- RunPCA(object = cancer_seurat, features = VariableFeatures(object = cancer_seurat))
-DimPlot(cancer_seurat, reduction = "pca")
+conv_spatial_feature_plot <- function(tissue_dir, Tgenes, quality.control = FALSE){
+  library(Seurat)
+  library(SeuratData)
+  library(ggplot2)
+  library(cowplot)
+  library(dplyr)
 
-cancer_seurat <- FindNeighbors(object = cancer_seurat, dims = 1:5)
-cancer_seurat <- FindClusters(object = cancer_seurat, 
-                              resolution = 0.2)
+  # reference : https://nbisweden.github.io/workshop-scRNAseq/labs/compiled/seurat/seurat_07_spatial.html
+  
+  br.sp = Load10X_Spatial(tissue_dir, slice= 'slice1')
+  br.sp <- SCTransform(br.sp, assay = "Spatial", verbose = FALSE, variable.features.n = 1000)
 
-cancer_seurat <- RunTSNE(object = cancer_seurat, dims = 1:10, do.fast= TRUE, check_duplicates = FALSE)
-cancer_seurat <- RunUMAP(cancer_seurat, dims = 1:10)
-DimPlot(cancer_seurat, reduction = "umap")
-DimPlot(cancer_seurat, reduction = "tsne")
+  if(quality.control){
+    br.sp <- PercentageFeatureSet(br.sp, "^mt-", col.name = "percent_mito")
+    br.sp <- PercentageFeatureSet(br.sp, "^Hb.*-", col.name = "percent_hb")
+    br.sp <- br.sp[, br.sp$nFeature_Spatial > 500 & br.sp$percent_mito < 25 & br.sp$percent_hb < 20]
+  }
 
-cancer_epi_seurat = cancer_seurat
-save(cancer_epi_seurat, file = 'cancer_epi_seurat.rdata')
+  SpatialFeaturePlot(br.sp, features = Tgenes)
+}
 
-load('cancer_epi_seurat.rdata')
-cancer.epi.markers <- FindAllMarkers(object = cancer_epi_seurat,
-                                 only.pos = TRUE,
-                                 min.pct = 0.25,
-                                 thresh.use = 0.25)
-save(cancer.epi.markers, file = 'cancer_epi_markers.rdata')
+my.EnhancedVolcano <- function(gene.name, logFC, adj.P.Val, 
+                               pCutoff = 0.05, FCcutoff = 0.3,
+                               xlim = c(-0.5, 0.5), ylim = c(-0.5, 0.5)){
+  library(EnhancedVolcano)
 
+  tested <- matrix(0, nrow = length(gene.name), ncol = 2)
+  tested <- as.data.frame(tested)
+  for(i in 1:length(gene.name)){
+    tested[i, 1] <- logFC[i]
+    tested[i, 2] <- adj.P.Val[i]
+  }
+  rownames(tested) <- gene.name
+  colnames(tested) <- c('logFC', 'adj.P.Val')
 
-###
-load('normal_lung.rdata')
+  EnhancedVolcano(tested, lab = rownames(tested), 
+                  x='logFC', y='adj.P.Val', xlim = xlim, ylim = ylim, 
+                  pCutoff = pCutoff, FCcutoff = FCcutoff) 
+}
 
-normal_seurat <- CreateSeuratObject(counts = normal_lung,
-                                    min.cells = 3,
-                                    project = "normal_lung")
-normal_seurat[["percent.mt"]] <- PercentageFeatureSet(normal_seurat, pattern = "^MT")
-FeatureScatter(normal_seurat, feature1 = "nCount_RNA", feature2 = "percent.mt")
-FeatureScatter(normal_seurat, feature1 = "nCount_RNA", feature2 = "nFeature_RNA")
+GO <- function(gene){
+  library(EnhancedVolcano)
+  library(clusterProfiler)
+  library(org.Hs.eg.db)
+  library(org.Mm.eg.db)
+  library(enrichplot)
 
-normal_seurat <- NormalizeData(object = normal_seurat,
-                               normalization.method = "LogNormalize",
-                               scale.factor = 1e4)
+  
+    # ont = "ALL", "BP", "CC", "MF"
+    # showCategory is not mandatory
 
-normal_seurat <- FindVariableFeatures(object = normal_seurat,
-                                      selection.method = "vst", nfeatures = 2000)
-VariableFeaturePlot(object = normal_seurat)
-
-
-normal_seurat <- ScaleData(object=normal_seurat)
-normal_seurat <- RunPCA(object = normal_seurat, features = VariableFeatures(object = normal_seurat))
-DimPlot(normal_seurat, reduction = "pca")
-
-normal_seurat <- FindNeighbors(object = normal_seurat, dims = 1:5)
-normal_seurat <- FindClusters(object = normal_seurat, 
-                              resolution = 0.1)
-
-normal_seurat <- RunTSNE(object = normal_seurat, dims = 1:10, do.fast= TRUE, check_duplicates = FALSE)
-normal_seurat <- RunUMAP(normal_seurat, dims = 1:10)
-DimPlot(normal_seurat, reduction = "umap")
-DimPlot(normal_seurat, reduction = "tsne")
-
-save(normal_seurat, file = 'normal_seurat.rdata')
-
-load('normal_seurat.rdata')
-normal.markers <- FindAllMarkers(object = normal_seurat,
-                                 only.pos = TRUE,
-                                 min.pct = 0.25,
-                                 thresh.use = 0.25)
-save(normal.markers, file = 'normal.markers.rdata')
-
-load('normal_lung_cell.rdata')
-
-normal_seurat <- CreateSeuratObject(counts = normal_lung_cell,
-                                    min.cells = 3,
-                                    project = "normal_lung")
-normal_seurat[["percent.mt"]] <- PercentageFeatureSet(normal_seurat, pattern = "^MT")
-FeatureScatter(normal_seurat, feature1 = "nCount_RNA", feature2 = "percent.mt")
-FeatureScatter(normal_seurat, feature1 = "nCount_RNA", feature2 = "nFeature_RNA")
-
-normal_seurat <- NormalizeData(object = normal_seurat,
-                               normalization.method = "LogNormalize",
-                               scale.factor = 1e4)
-
-normal_seurat <- FindVariableFeatures(object = normal_seurat,
-                                      selection.method = "vst", nfeatures = 2000)
-VariableFeaturePlot(object = normal_seurat)
+    gene <- gsub("GRCh38", "", gene) # human 데이터 가공시의 reference 이름 제거
+    gene <- gsub("mm10", "", gene) # mouse 데이터 가공시의 reference 이름 제거
+    for(i in 1:10){
+  	  gene <- gsub("-", "", gene) # 불필요한 앞부분의 - 제거
+    }
+    gene <- gsub('\\ .*$', '', gene) # 'KLK2 ENSG00000167751' 같은 것을 해결 
+    
+    if (gene == toupper(gene)){ ## Human gene
+        gene.df <- bitr(gene, fromType = "SYMBOL", toType = "ENTREZID", OrgDb = org.Hs.eg.db)
+        gene.df <- as.vector(gene.df[[2]])
+        GO <- enrichGO(gene.df, OrgDb = 'org.Hs.eg.db',keyType = "ENTREZID", ont = "ALL", pvalueCutoff = 0.05, pAdjustMethod = "BH")
+        dotplot(GO,split="ONTOLOGY", showCategory = 5)+facet_grid(ONTOLOGY~., scale="free")
+    } else{ ## Mouse gene?
+        gene.df <- bitr(gene, fromType = "SYMBOL", toType = "ENTREZID", OrgDb = org.Mm.eg.db)
+        gene.df <- as.vector(gene.df[[2]])
+        GO <- enrichGO(gene.df, OrgDb = 'org.Mm.eg.db',keyType = "ENTREZID", ont = "ALL", pvalueCutoff = 0.05, pAdjustMethod = "BH")
+        dotplot(GO,split="ONTOLOGY", showCategory = 5)+facet_grid(ONTOLOGY~., scale="free")
+    }
+}
 
 
-normal_seurat <- ScaleData(object=normal_seurat)
-normal_seurat <- RunPCA(object = normal_seurat, features = VariableFeatures(object = normal_seurat))
-DimPlot(normal_seurat, reduction = "pca")
-
-normal_seurat <- FindNeighbors(object = normal_seurat, dims = 1:5)
-normal_seurat <- FindClusters(object = normal_seurat, 
-                              resolution = 0.5)
-
-normal_seurat <- RunTSNE(object = normal_seurat, dims = 1:10, do.fast= TRUE, check_duplicates = FALSE)
-normal_seurat <- RunUMAP(normal_seurat, dims = 1:10)
-DimPlot(normal_seurat, reduction = "umap")
-DimPlot(normal_seurat, reduction = "tsne")
-
-normal_epi_seurat = normal_seurat
-save(normal_epi_seurat, file = 'normal_epi_seurat.rdata')
-
-normal.epi.markers <- FindAllMarkers(object = normal_seurat,
-                                 only.pos = TRUE,
-                                 min.pct = 0.25,
-                                 thresh.use = 0.25)
-save(normal.epi.markers, file = 'normal_epi_markers.rdata')
+VlnPlot(object = br.sp, features = c('Col1a1'),
+        group.by = 'orig.ident', pt.size = 0.1) + 
+    	facet_grid(.~tnbc.merge@active.ident)+
+    	fill_palette(palette='npg')+
+    	stat_compare_means(method = "anova", label='p')+
+    	theme(axis.text.x = element_text(angle = 90, hjust = 1),
+    	strip.text.x = element_text(size = rel(0.7)))
