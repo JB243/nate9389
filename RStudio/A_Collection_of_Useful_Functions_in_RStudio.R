@@ -422,11 +422,3 @@ GO <- function(gene){
         dotplot(GO,split="ONTOLOGY", showCategory = 5)+facet_grid(ONTOLOGY~., scale="free")
     }
 }
-
-VlnPlot(object = br.sp, features = c('Col1a1'),
-        group.by = 'orig.ident', pt.size = 0.1) + 
-    	facet_grid(.~tnbc.merge@active.ident)+
-    	fill_palette(palette='npg')+
-    	stat_compare_means(method = "anova", label='p')+
-    	theme(axis.text.x = element_text(angle = 90, hjust = 1),
-    	strip.text.x = element_text(size = rel(0.7)))
