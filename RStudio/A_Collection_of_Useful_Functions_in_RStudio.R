@@ -219,39 +219,7 @@ comparison_of_two_vectors <- function(v1, v2, paired = FALSE){
   print(log2FC)
 }
 
-total.gene <- 32285
-ST <- 31
-scRNAseq <- 14
-cross <- 5
-
-a <- cross
-b <- scRNAseq - a
-c <- ST - a
-d <- total.gene - a - b - c
-A <- a + b
-B <- c + d
-C <- a + c
-D <- b + d
-
-group<-c("A","A","B","B")
-cancer<-c("1.Yes","2.No","1.Yes","2.No")
-count<-c(a,b,c,d)
-dat<-data.frame(group,cancer,count)
-tab<-xtabs(count~group+cancer,data=dat)
-tab
-
-chisq.test(tab)$observed
-chisq.test(tab)$expected
-fisher.test(tab)
--log(fisher.test(tab)$p.value, 10)
-
-if(cross > ST * scRNAseq / total.gene){
-  print("Enrichment")
-} else if(cross < ST * scRNAseq / total.gene){
-  print("Depletion")
-}
-  
-  my.Fisher.exact.test <- function(total, A, B, cross){
+my.Fisher.exact.test <- function(total, A, B, cross){
   a1 <- log10_factorial(A)
   a2 <- log10_factorial(total - A)
   a3 <- log10_factorial(B)
@@ -265,6 +233,22 @@ if(cross > ST * scRNAseq / total.gene){
 
   out = a1 + a2 + a3 + a4 - b1 - b2 - b3 - b4 - b5
   return(10^out)
+}
+
+my.MIA.assay.enrichment <- function(total, A, B, cross){
+  out <- 0
+  for(i in cross:min(A, B)){
+    out = out + my.Fisher.exact.test(total, A, B, i)
+  }
+  return(out)
+}
+
+my.MIA.assay.depletion <- function(total, A, B, cross){
+  out <- 0
+  for(i in 0:cross-1){
+    out = out + my.Fisher.exact.test(total, A, B, i)
+  }
+  return(out)
 }
 
 human_to_mouse <- function(human_gene){
@@ -335,9 +319,9 @@ update_cluster_in_seurat_obj <- function(seurat_obj, barcode, cluster){
   return (seurat_obj)
 }
 
-library(ggplot2)
-
 scatter_plot <- function(x, y, xlab = "x", ylab = "y", point_size = 2, lab_size = 4, png=TRUE){
+  library(ggplot2)
+
   # the lenth(x) must be same with the length(y)
   mat <- matrix(0, nrow = length(x), ncol = 2)
   mat[, 1] = x
@@ -367,7 +351,6 @@ my.plot <- function(x, y, col){
   
   text(x, y, labels = "●", col = coll, cex = 1)
 }
-
 
 conv_spatial_feature_plot <- function(tissue_dir, Tgenes, quality.control = FALSE){
   library(Seurat)
@@ -439,7 +422,6 @@ GO <- function(gene){
         dotplot(GO,split="ONTOLOGY", showCategory = 5)+facet_grid(ONTOLOGY~., scale="free")
     }
 }
-
 
 VlnPlot(object = br.sp, features = c('Col1a1'),
         group.by = 'orig.ident', pt.size = 0.1) + 
