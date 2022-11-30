@@ -411,7 +411,7 @@ GO <- function(gene){
     }
     gene <- gsub('\\ .*$', '', gene) # 'KLK2 ENSG00000167751' 같은 것을 해결 
     
-    if (gene == toupper(gene)){ ## Human gene
+    if (gene[1] == toupper(gene[1])){ ## Human gene
         gene.df <- bitr(gene, fromType = "SYMBOL", toType = "ENTREZID", OrgDb = org.Hs.eg.db)
         gene.df <- as.vector(gene.df[[2]])
         GO <- enrichGO(gene.df, OrgDb = 'org.Hs.eg.db',keyType = "ENTREZID", ont = "ALL", pvalueCutoff = 0.05, pAdjustMethod = "BH")
