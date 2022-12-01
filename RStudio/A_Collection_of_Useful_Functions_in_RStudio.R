@@ -268,6 +268,25 @@ my.MIA.assay.depletion <- function(total, A, B, cross){
   return(out)
 }
 
+ensembl_to_gene <- function(ensembl_list){
+  ar = array(dim = length(ensembl_list))
+
+  human = read.csv("https://blog.kakaocdn.net/dn/BfhRT/btrSyrd9VIx/CDHawSJNTVQs04m292RQs0/human_genes_36601.tsv?attach=1&knm=tfile.tsv", sep = '\t', header = F)
+  mouse = read.csv("https://blog.kakaocdn.net/dn/bvsctt/btrSB3cmIyi/AymjWBaekuCgRqWtI4G9Fk/mouse_genes_32285.tsv?attach=1&knm=tfile.tsv", sep = '\t', header = F)
+
+  for(i in 1:length(ensembl_list)){
+    if(grepl('ENSG', ensembl_list[i], fixed = TRUE)){ # human gene
+      index = match(ensembl_list[i], human[, 1])
+      ar[i] = human[index, 2]
+    } 
+    else if(grepl('ENSMUSG', ensembl_list[i], fixed = TRUE)){ # mouse gene
+      index = match(ensembl_list[i], mouse[, 1])
+      ar[i] = mouse[index, 2]
+    } 
+  }
+  return(ar)
+}
+
 human_to_mouse <- function(human_gene){
   hom <- read.csv("https://blog.kakaocdn.net/dn/OCkAZ/btrL4AnnDXH/YJ0CrvSIchlGTnqvKphemK/HOM_MouseHumanSequence.csv?attach=1&knm=tfile.csv")
 
