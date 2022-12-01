@@ -42,6 +42,22 @@ ignore_na <- function(vector){
   return (ar)
 }
 
+
+replace_in_vector <- function(v, from_element, to_element){
+  ar <- array(dim = length(v))
+
+  for(i in 1 : length(v)){
+    if(v[i] == from_element){
+      ar[i] = to_element
+    } else{
+      ar[i] = v[i]
+    }
+  }
+
+  return(ar)
+}
+
+
 corner <- function(x, num = 10){
   return(x[1:min(  num, dim(x)[1]  ), 
            1:min(  num, dim(x)[2]  )])
