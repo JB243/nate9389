@@ -31,6 +31,27 @@ geneSymbols <-  c('DDX26B','CCDC83',  'MAST3', 'RPL11', 'ZDHHC20',  'LUC7L3',  '
 geneIDs2 <- ensembldb::select(EnsDb.Hsapiens.v79, keys= geneSymbols, keytype = "SYMBOL", columns = c("SYMBOL","GENEID"))
 
 
+# --- convert from gene.symbol to ensembl.gene (using converting table)
+gene_to_ensembl <- function(gene_list){
+  ar = array(dim = length(gene_list))
+
+  human = read.csv("https://blog.kakaocdn.net/dn/BfhRT/btrSyrd9VIx/CDHawSJNTVQs04m292RQs0/human_genes_36601.tsv?attach=1&knm=tfile.tsv", sep = '\t', header = F)
+  mouse = read.csv("https://blog.kakaocdn.net/dn/bvsctt/btrSB3cmIyi/AymjWBaekuCgRqWtI4G9Fk/mouse_genes_32285.tsv?attach=1&knm=tfile.tsv", sep = '\t', header = F)
+
+  for(i in 1:length(gene_list)){
+    if(gene_list[i] == toupper(gene_list[i])){ # human gene
+      index = match(gene_list[i], human[, 2])
+      ar[i] = human[index, 1]
+    } 
+    else{ # mouse gene
+      index = match(gene_list[i], mouse[, 2])
+      ar[i] = mouse[index, 1]
+    } 
+  }
+  return(ar)
+}
+
+
 # --- convert Affymetrix probe ID to ensembl_gene_id, gene_name 
 #Convert Affymetrix probe ID to ensembl_gene_id, gene_name
 ## https://www.biostars.org/p/328065/#328328
