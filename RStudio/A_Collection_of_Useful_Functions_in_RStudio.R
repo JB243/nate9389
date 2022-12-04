@@ -303,6 +303,10 @@ gene_to_ensembl <- function(gene_list){
       ar[i] = mouse[index, 1]
     } 
   }
+
+  # return(ignore_na(ar)) 
+  ## if possible, ignore_na should be used
+
   return(ar)
 }
 
@@ -320,7 +324,7 @@ human_to_mouse <- function(human_gene){
                            & hom$Common.Organism.Name == 'mouse, laboratory'
                            , 'Symbol'][1] # duplicate mouse genes can be found
   }
-
+	
   return(mouse_gene)
 }
 
