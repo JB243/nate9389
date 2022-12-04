@@ -429,6 +429,30 @@ my.EnhancedVolcano <- function(gene.name, logFC, adj.P.Val,
 }
 
 GO <- function(gene){
+    # ont = "ALL", "BP", "CC", "MF"
+    # showCategory is not mandatory
+
+    gene <- gsub("GRCh38", "", gene) # human 데이터 가공시의 reference 이름 제거
+    gene <- gsub("mm10", "", gene) # mouse 데이터 가공시의 reference 이름 제거
+    for(i in 1:10){
+  	  gene <- gsub("-", "", gene) # 불필요한 앞부분의 - 제거
+    }
+    gene <- gsub('\\ .*$', '', gene) # 'KLK2 ENSG00000167751' 같은 것을 해결 
+    
+    if (gene[1] == toupper(gene[1])){ ## Human gene
+        gene.df <- bitr(gene, fromType = "SYMBOL", toType = "ENTREZID", OrgDb = org.Hs.eg.db)
+        gene.df <- as.vector(gene.df[[2]])
+        GO <- enrichGO(gene.df, OrgDb = 'org.Hs.eg.db',keyType = "ENTREZID", ont = "ALL", pvalueCutoff = 0.05, pAdjustMethod = "BH")
+        return(GO)
+	} else{ ## Mouse gene?
+        gene.df <- bitr(gene, fromType = "SYMBOL", toType = "ENTREZID", OrgDb = org.Mm.eg.db)
+        gene.df <- as.vector(gene.df[[2]])
+        GO <- enrichGO(gene.df, OrgDb = 'org.Mm.eg.db',keyType = "ENTREZID", ont = "ALL", pvalueCutoff = 0.05, pAdjustMethod = "BH")
+        return(GO)
+    }
+}
+
+GO.plot <- function(gene){
   library(EnhancedVolcano)
   library(clusterProfiler)
   library(org.Hs.eg.db)
