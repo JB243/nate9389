@@ -287,6 +287,25 @@ ensembl_to_gene <- function(ensembl_list){
   return(ar)
 }
 
+gene_to_ensembl <- function(gene_list){
+  ar = array(dim = length(gene_list))
+
+  human = read.csv("https://blog.kakaocdn.net/dn/BfhRT/btrSyrd9VIx/CDHawSJNTVQs04m292RQs0/human_genes_36601.tsv?attach=1&knm=tfile.tsv", sep = '\t', header = F)
+  mouse = read.csv("https://blog.kakaocdn.net/dn/bvsctt/btrSB3cmIyi/AymjWBaekuCgRqWtI4G9Fk/mouse_genes_32285.tsv?attach=1&knm=tfile.tsv", sep = '\t', header = F)
+
+  for(i in 1:length(gene_list)){
+    if(gene_list[i] == toupper(gene_list[i])){ # human gene
+      index = match(gene_list[i], human[, 2])
+      ar[i] = human[index, 1]
+    } 
+    else{ # mouse gene
+      index = match(gene_list[i], mouse[, 2])
+      ar[i] = mouse[index, 1]
+    } 
+  }
+  return(ar)
+}
+
 human_to_mouse <- function(human_gene){
   hom <- read.csv("https://blog.kakaocdn.net/dn/OCkAZ/btrL4AnnDXH/YJ0CrvSIchlGTnqvKphemK/HOM_MouseHumanSequence.csv?attach=1&knm=tfile.csv")
 
