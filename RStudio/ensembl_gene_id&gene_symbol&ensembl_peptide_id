@@ -48,6 +48,10 @@ gene_to_ensembl <- function(gene_list){
       ar[i] = mouse[index, 1]
     } 
   }
+  
+  # return(ignore_na(ar)) 
+  ## if possible, ignore_na should be used
+  
   return(ar)
 }
 
