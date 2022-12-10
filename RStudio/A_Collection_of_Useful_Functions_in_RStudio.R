@@ -73,6 +73,24 @@ my.rbind <- function(data1, data2){
   return (rbind(data1[, a], data2[, a]))
 }
 
+switch_A_B_row <- function(mat0, A, B){
+  mat <- mat0
+  mat[A, ] = mat0[B, ]
+  mat[B, ] = mat0[A, ] 
+  rownames(mat)[A] = rownames(mat0)[B]
+  rownames(mat)[B] = rownames(mat0)[A]
+  return(mat)
+}
+
+switch_A_B_col <- function(mat0, A, B){
+  mat <- mat0
+  mat[, A] = mat0[, B]
+  mat[, B] = mat0[, A] 
+  colnames(mat)[A] = colnames(mat0)[B]
+  colnames(mat)[B] = colnames(mat0)[A]
+  return(mat)
+}
+
 eliminate_hyphene <- function(str){
     return(gsub("-", "", str))
 }
