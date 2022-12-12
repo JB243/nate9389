@@ -1,49 +1,114 @@
-from keras.layers import DepthwiseConv2D
-from keras.layers import Input
-from keras.models import Model
-from get_model import *
+def SUM(a, b):
+    return a+b
 
-def squared_error(y_true, y_pred):
-    return K.sum(K.square(y_pred - y_true))
+def str_omit_forward(_str, n):
+    s = ''
+    count = 0
+    for char in _str:
+        count = count + 1
+        if count > n:
+            s = s + char
+    return s
 
-def define_denoising_model(height, width, channel=1):
-    num_u = [32, 32, 32, 32, 32]#original [128, 128, 128, 128, 128]
-    num_d = [32, 32, 32, 32, 32] #[128, 128, 128, 128, 128]
-    kernel_u = [3, 3, 3, 3, 3]
-    kernel_d = [3, 3, 3, 3, 3]
-    num_s = [4, 4, 4, 4, 4]
-    kernel_s = [1, 1, 1, 1, 1]
-    lr = 0.01
-    inter = "bilinear"
+def str_omit_backward(_str, n):
+    s = ''
+    count = 0
+    for char in _str:
+        count = count + 1
+        if count <= len(_str) - n:
+            s = s + char
+    return s
 
-    model = define_model(num_u, num_d, kernel_u, kernel_d, num_s, kernel_s, height, width, inter, lr,
-                         input_channel=channel)
-    model.compile(loss=squared_error, optimizer=Adam(lr=lr))
+def is_element_in_list(e, l):
+    for i in range(len(l)):
+        if e == l[i]:
+            return True
+    return False
 
-    return model
+def is_element_in_list(e, l):
+    for i in range(len(l)):
+        if e == l[i]:
+            return True
+    return False
 
+def is_element_in_list(e, l):
+    for i in range(len(l)):
+        if e == l[i]:
+            return True
+    return False
 
-def denoising(image, init_image=None, num_iter = 500, verbose=0):
-    height, width = image.shape[:2]
-    if init_image.all()==None:
-        channels = 1
-        model = define_denoising_model(height, width, channel=channels)
-        input_noise = np.random.uniform(0, 0.1, (1, height, width, 1))
-    else:
-        channels = init_image.shape[2]
-        model = define_denoising_model(height, width, channel=channels)
-        input_noise = init_image[None, :, :, :]
-        
-    if verbose:
-        plt.ion()
-    for i in range(num_iter):
-        model.train_on_batch(input_noise + np.random.normal(0, 1/30.0, (height, width, channels)), image[None, :, :, :])
-        if verbose:
-            if i % 100==0:
-                outimg = model.predict(input_noise)[0]
-                plt.imshow(outimg[:,:,0])
-                plt.title(("Iteration:"+str(i+1)))
-                plt.show()
-    return model.predict(input_noise)[0]
+def read_txt(txt_dir):
+
+    import csv
+    import sys
     
-    #return np.clip(model.predict(input_noise)[0], 0, 255).astype(np.uint8)
+    l = []
+    f = open(txt_dir, 'r', encoding = 'utf-8')
+ 
+    for line in csv.reader(f):
+        ### if you want elements of list ###
+        l.append(line) 
+		
+        ### if you want elements of str ###
+        # l.append(''.join(line)) 
+    
+    f.close()
+    return l
+
+def two_image_correlation(img1_dir, img2_dir):
+
+    import cv2
+    import matplotlib.pyplot as plt
+    from skimage.util import view_as_windows
+    import numpy as np
+    import scipy.stats
+    
+    # img1 and img2 should be same in size
+    img1 = cv2.imread(img1_dir) # RGB image
+    img1 = cv2.cvtColor(img1, cv2.COLOR_BGR2RGB)
+    img2 = cv2.imread(img2_dir) # RGB image
+    img2 = cv2.cvtColor(img2, cv2.COLOR_BGR2RGB)
+		
+    l_img1 = []
+    l_img2 = []
+		
+    for i in range(img1.shape[0]):
+        for j in range(img1.shape[1]):
+            l_img1.append((
+                0.2989*img1[i:i+1, j:j+1, 0:1] + 
+                0.5870*img1[i:i+1, j:j+1, 1:2] + 
+                0.1140*img1[i:i+1, j:j+1, 2:3]
+            ).item())
+		        
+            l_img2.append((
+                0.2989*img2[i:i+1, j:j+1, 0:1] + 
+                0.5870*img2[i:i+1, j:j+1, 1:2] + 
+                0.1140*img2[i:i+1, j:j+1, 2:3]
+            ).item())
+		
+    print("brightness of img1")
+    print(np.mean(l_img1))
+    print("brightness of img2")
+    print(np.mean(l_img2))
+		
+    print("img1-img2 correlation")
+    print(scipy.stats.pearsonr(l_img1, l_img2) )
+		
+    plt.scatter(l_img1, l_img2, alpha = 0.05)
+    plt.xlabel('brightness of img1')
+    plt.ylabel('brightness of img2')
+    # sns.regplot(l_b_CD31, l_b_Lipo, alpha = 0.05)
+    
+def RGBtoGray(img):
+    import numpy as np
+
+    out = np.empty((img.shape[0], img.shape[1]))
+
+    for i in range(img.shape[0]):
+        for j in range(img.shape[1]):
+            out[i:i+1, j:j+1] = ( 0.2989*img[i:i+1, j:j+1, 0:1] + 
+                                  0.5870*img[i:i+1, j:j+1, 1:2] + 
+                                  0.1140*img[i:i+1, j:j+1, 2:3]
+                                ).item()
+      
+    return out
