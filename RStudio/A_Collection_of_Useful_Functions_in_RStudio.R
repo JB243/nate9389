@@ -103,10 +103,6 @@ eliminate_backward <- function(str){
     return(gsub('x.*$', '', str))
 }
 
-eliminate_backward <- function(str){
-    return(gsub('\\;.*$', '', str))
-}
-
 eliminate_forward <- function(str){
     return(gsub('.*x', '', str))
 }
