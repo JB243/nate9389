@@ -1,6 +1,6 @@
 def SUM(a, b):
     return a+b
-
+'''
 def str_omit_forward(_str, n):
     s = ''
     count = 0
@@ -112,3 +112,5 @@ def RGBtoGray(img):
                                 ).item()
       
     return out
+    
+'''
