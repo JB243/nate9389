@@ -113,3 +113,9 @@ def RGBtoGray(img):
       
     return out
     
+def recolor(img, pre, post): 
+    for i in range(img.shape[0]):
+        for j in range(img.shape[1]):
+            if img[i:i+1, j:j+1] == pre:
+                img[i:i+1, j:j+1] = post
+    return(img)
