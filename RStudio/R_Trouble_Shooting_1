@@ -76,3 +76,9 @@ gene.df <- bitr(MY_GENE_LIST,
                 fromType = "SYMBOL",
                 toType = c("ENSEMBL", "SYMBOL","ENTREZID"),
                 OrgDb = org.Mm.eg.db)
+                
+# ---
+Error in AddMetaData.Seurat(br.sp, pathways) : 'col.name' must be provided for atomic metadata types (eg. vectors)
+
+pathways <- as.data.frame(pathways)
+br.sp <- AddMetaData(br.sp, pathways)
