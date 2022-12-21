@@ -83,3 +83,12 @@ Error in AddMetaData.Seurat(br.sp, pathways) : 'col.name' must be provided for a
 
 pathways <- as.data.frame(pathways)
 br.sp <- AddMetaData(br.sp, pathways)
+
+
+# ---
+Error in dimnames(x) <- dn : 'dimnames' applied to non-array
+
+object$orig.ident <- c('C', 'A', 'B')
+
+# reordering
+object$orig.ident <- factor(x = object$orig.ident, levels = c('A', 'B', 'C'))
