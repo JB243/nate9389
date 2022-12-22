@@ -55,6 +55,37 @@ def read_txt(txt_dir):
     f.close()
     return l
 
+def two_image_correlation_RG(img1_dir):
+
+    # img1 and img2 should be same in size
+    img1 = cv2.imread(img1_dir) # RGB image
+    img1 = cv2.cvtColor(img1, cv2.COLOR_BGR2RGB)
+
+    l_img1 = []
+    l_img2 = []
+
+    for i in range(img1.shape[0]):
+        for j in range(img1.shape[1]):
+            l_img1.append((
+                img1[i:i+1, j:j+1, 0:1] 
+            ).item())
+
+            l_img2.append((
+                img1[i:i+1, j:j+1, 1:2] 
+            ).item())
+
+    print("brightness of img1")
+    print(np.mean(l_img1))
+    print("brightness of img2")
+    print(np.mean(l_img2))
+
+    print("img1-img2 correlation")
+    print(scipy.stats.pearsonr(l_img1, l_img2) )
+
+    plt.scatter(l_img1, l_img2, alpha = 0.01)
+    plt.xlabel('brightness of img1')
+    plt.ylabel('brightness of img2')
+
 def two_image_correlation(img1_dir, img2_dir):
 
     import cv2
