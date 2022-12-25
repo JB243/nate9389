@@ -1,6 +1,15 @@
 def SUM(a, b):
     return a+b
 
+def is_contain(given_str, partial_str):    
+    s = ''
+    for char in given_str:
+        s = s + char
+        if s.endswith(partial_str):
+            return True
+    
+    return False
+
 def str_omit_forward(_str, n):
     s = ''
     count = 0
