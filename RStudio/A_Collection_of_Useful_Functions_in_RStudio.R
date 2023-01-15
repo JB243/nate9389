@@ -280,6 +280,32 @@ my.MIA.assay.depletion <- function(total, A, B, cross){
   return(out)
 }
 
+gene_starting_with <- function(keyword){
+  human = read.csv("https://blog.kakaocdn.net/dn/29YTj/btrS5iG9QOH/Di6RQKxHOPDii7EjkdHN30/human_genes_36601.tsv?attach=1&knm=tfile.tsv", sep = '\t', header = F)
+  mouse = read.csv("https://blog.kakaocdn.net/dn/wkjwJ/btrS1QSgrpD/VS8ELANCQyeZAA3vL8JQP0/mouse_genes_32285.tsv?attach=1&knm=tfile.tsv", sep = '\t', header = F)
+  ar = array()
+  flag = 0
+
+  if(keyword == toupper(keyword)){ # human genes
+    for(i in 1:dim(human)[1]){
+      if(grepl(keyword, human[i, 2], fixed = TRUE)){
+        flag = flag + 1
+        ar[flag] = human[i, 2]
+      }
+    }   
+  }   
+  else{ # mouse genes
+    for(i in 1:dim(mouse)[1]){
+      if(grepl(keyword, mouse[i, 2], fixed = TRUE)){
+        flag = flag + 1
+        ar[flag] = mouse[i, 2]
+      }
+    }   
+  }
+  
+  return(ar)
+}
+
 ensembl_to_gene <- function(ensembl_list){
   ar = array(dim = length(ensembl_list))
 
