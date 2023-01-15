@@ -1,5 +1,5 @@
 ### sum(1,2) = 3
-sum <- function(a, b){
+SUM <- function(a, b){
     return (a + b)
 }
 
@@ -42,7 +42,6 @@ ignore_na <- function(vector){
   return (ar)
 }
 
-
 replace_in_vector <- function(v, from_element, to_element){
   ar <- array(dim = length(v))
 
@@ -56,7 +55,6 @@ replace_in_vector <- function(v, from_element, to_element){
 
   return(ar)
 }
-
 
 corner <- function(x, num = 10){
   return(x[1:min(  num, dim(x)[1]  ), 
@@ -360,6 +358,64 @@ mouse_to_human <- function(mouse_gene){
   return(human_gene)
 }
 
+ChromosomePosition_to_hgnc_symbol <- function(chromosome, start, end){
+  # reference : https://support.bioconductor.org/p/127035/
+
+	library(biomaRt)
+	positions <- data.frame(chromosome = chromosome,
+	                        start = start,
+	                        end = end)
+	
+	ensembl = useEnsembl(biomart='ensembl', 
+	                     dataset="hsapiens_gene_ensembl") 
+	
+	results <- getBM(attributes = c("hgnc_symbol", "chromosome_name", "start_position", "end_position"), 
+	                 filters = c("chromosome_name", "start", "end"),
+	                 values = list(positions[,1], positions[,2], positions[,3]),
+	                 mart = ensembl)
+	
+	print(results)
+
+	postions_combined <- apply(as.matrix(positions), 1, paste, collapse = ":")
+
+	results2 <- getBM(attributes = c("hgnc_symbol", "chromosome_name", "start_position", "end_position"), 
+	                 filters = c("chromosomal_region"),
+	                 values = postions_combined,
+	                 mart = ensembl)
+
+  print(results2)
+}
+
+gene_to_chromosome_position <- function(gene_list){
+  # gene_list : list of mouse genes
+
+  result = array()
+  
+  data = read.csv("https://blog.kakaocdn.net/dn/clSwT7/btrWcrWmS41/mNLCUuBlQxfJFhG1U2JQNk/mouse%20gene%20annotation.csv?attach=1&knm=tfile.csv")
+  for(i in 1:length(gene_list)){
+    idx = match(gene_list[i], data[, 1])
+    note = paste('Gene.ID: ', gene_list[i],', chromosome: ', data[idx, 'chromosome'],
+                 ', start: ', data[idx, 'start'],
+                 ', end: ', data[idx, 'end'])
+    result[i] = note
+  }
+  
+  return(result)
+}
+
+gene_to_bioType <- function(gene_list){
+  # gene_list : list of mouse genes
+
+  result = array()
+  
+  data = read.csv("https://blog.kakaocdn.net/dn/clSwT7/btrWcrWmS41/mNLCUuBlQxfJFhG1U2JQNk/mouse%20gene%20annotation.csv?attach=1&knm=tfile.csv")
+  for(i in 1:length(gene_list)){
+    idx = match(gene_list[i], data[, 1])
+    result[i] = data[idx, 'bioType']
+  }
+  
+  return(result)
+}
 
 # RenameGenesSeurat  ------------------------------------------------------------------------------------
 RenameGenesSeurat <- function(obj = ls.Seurat[[i]], newnames = HGNC.updated[[i]]$Suggested.Symbol) { # Replace gene names in different slots of a Seurat object. Run this before integration. Run this before integration. It only changes obj@assays$RNA@counts, @data and @scale.data.
