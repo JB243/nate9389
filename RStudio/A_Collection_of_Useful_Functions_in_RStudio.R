@@ -413,17 +413,52 @@ ChromosomePosition_to_hgnc_symbol <- function(chromosome, start, end){
 }
 
 gene_to_chromosome_position <- function(gene_list){
-  # gene_list : list of mouse genes
+  # gene_list : list of genes
+
+  human <- read.csv("https://blog.kakaocdn.net/dn/lTbKq/btrWjlmGho8/eWwWHbfLOlVGKAVeuDMKt1/human%20gene%20annotation.csv?attach=1&knm=tfile.csv")
+  mouse = read.csv("https://blog.kakaocdn.net/dn/clSwT7/btrWcrWmS41/mNLCUuBlQxfJFhG1U2JQNk/mouse%20gene%20annotation.csv?attach=1&knm=tfile.csv")
 
   result = array()
   
-  data = read.csv("https://blog.kakaocdn.net/dn/clSwT7/btrWcrWmS41/mNLCUuBlQxfJFhG1U2JQNk/mouse%20gene%20annotation.csv?attach=1&knm=tfile.csv")
   for(i in 1:length(gene_list)){
-    idx = match(gene_list[i], data[, 1])
-    note = paste('Gene.ID: ', gene_list[i],', chromosome: ', data[idx, 'chromosome'],
-                 ', start: ', data[idx, 'start'],
-                 ', end: ', data[idx, 'end'])
-    result[i] = note
+    if(gene_list[i] == toupper(gene_list[i])){ # human gene
+      idx = match(gene_list[i], human[, 1])
+      note = paste('Gene.ID: ', gene_list[i],
+                   ', chromosome: ', human[idx, 'chromosome'],
+                   ', start: ', human[idx, 'start'],
+                   ', end: ', human[idx, 'end'])
+      result[i] = note
+    }
+    else{ # mouse gene
+      idx = match(gene_list[i], mouse[, 1])
+      note = paste('Gene.ID: ', gene_list[i],
+                   ', chromosome: ', mouse[idx, 'chromosome'],
+                   ', start: ', mouse[idx, 'start'],
+                   ', end: ', mouse[idx, 'end'])
+      result[i] = note
+    }
+  }
+  
+  return(result)
+}
+
+gene_to_description <- function(gene_list){
+  # gene_list : list of mouse genes
+
+  human <- read.csv("https://blog.kakaocdn.net/dn/lTbKq/btrWjlmGho8/eWwWHbfLOlVGKAVeuDMKt1/human%20gene%20annotation.csv?attach=1&knm=tfile.csv")
+  mouse = read.csv("https://blog.kakaocdn.net/dn/clSwT7/btrWcrWmS41/mNLCUuBlQxfJFhG1U2JQNk/mouse%20gene%20annotation.csv?attach=1&knm=tfile.csv")
+
+  result = array()
+  
+  for(i in 1:length(gene_list)){
+    if(gene_list[i] == toupper(gene_list[i])){ #human
+      idx = match(gene_list[i], human[, 1])
+      result[i] = human[idx, 'Description']
+    }
+    else{ #mouse 
+      idx = match(gene_list[i], mouse[, 1])
+      result[i] = mouse[idx, 'Description']
+    }    
   }
   
   return(result)
@@ -432,12 +467,20 @@ gene_to_chromosome_position <- function(gene_list){
 gene_to_bioType <- function(gene_list){
   # gene_list : list of mouse genes
 
+  human <- read.csv("https://blog.kakaocdn.net/dn/lTbKq/btrWjlmGho8/eWwWHbfLOlVGKAVeuDMKt1/human%20gene%20annotation.csv?attach=1&knm=tfile.csv")
+  mouse = read.csv("https://blog.kakaocdn.net/dn/clSwT7/btrWcrWmS41/mNLCUuBlQxfJFhG1U2JQNk/mouse%20gene%20annotation.csv?attach=1&knm=tfile.csv")
+
   result = array()
   
-  data = read.csv("https://blog.kakaocdn.net/dn/clSwT7/btrWcrWmS41/mNLCUuBlQxfJFhG1U2JQNk/mouse%20gene%20annotation.csv?attach=1&knm=tfile.csv")
   for(i in 1:length(gene_list)){
-    idx = match(gene_list[i], data[, 1])
-    result[i] = data[idx, 'bioType']
+    if(gene_list[i] == toupper(gene_list[i])){ # human
+      idx = match(gene_list[i], human[, 1])
+      result[i] = human[idx, 'bioType']
+    }
+    else { # mouse
+      idx = match(gene_list[i], mouse[, 1])
+      result[i] = mouse[idx, 'bioType']
+    }
   }
   
   return(result)
