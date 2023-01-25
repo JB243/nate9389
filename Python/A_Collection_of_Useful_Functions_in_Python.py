@@ -159,3 +159,22 @@ def recolor(img, pre, post):
             if img[i:i+1, j:j+1] == pre:
                 img[i:i+1, j:j+1] = post
     return(img)
+
+def features_512D_from_image_by_CNN (img):
+    # Image Patch
+    img_re = cv2.resize(img, dsize = (32, 32))
+    tspatches = []
+    tspatches.append(img_re)
+    tspatches.append(img_re) # intentional duplicate
+    tspatches = np.asarray(tspatches)    
+    
+    # Pretrained model
+    pretrained_model = vgg16.VGG16(weights='imagenet', include_top = False, pooling='avg', input_shape = (32,32,3))
+    X_in = tspatches.copy()
+    X_in = vgg16.preprocess_input(X_in)
+    pretrained_model.trainable = False
+    pretrained_model.summary()
+    
+    ts_features = pretrained_model.predict(X_in)
+    
+    return ts_features[0]
