@@ -160,6 +160,50 @@ def recolor(img, pre, post):
                 img[i:i+1, j:j+1] = post
     return(img)
 
+def KNN_predict(Xtr_rows, Ytr, Xte_rows, dist_metric='L2'):
+    import numpy as np
+    
+    class NearestNeighbor(object):
+        def __init__(self):
+            pass
+
+        def train(self, X, Y):
+            self.Xtr = X
+            self.Ytr = Y
+
+        def predict(self, X, dist_metric=dist_metric):
+            num_test = X.shape[0]
+            Ypred = np.zeros(num_test, dtype = self.Ytr.dtype)
+        
+            for i in range(num_test):
+                if dist_metric=='L1': ## L1 distance
+                    distances = np.sum(np.abs(self.Xtr - X[i, :]), axis = 1) 
+                elif dist_metric=='L2': ## L2 distance
+                    distances = np.sum(np.square(self.Xtr - X[i, :]), axis = 1) 
+                elif dist_metric=='dot': ## dot distance
+                    distances = np.dot(self.Xtr, X[i, :])
+            
+                min_index = np.argmin(distances)
+                Ypred[i] = self.Ytr[min_index]
+            
+                if i%100 == 0:
+                    print(i)
+            return Ypred
+        
+    nn = NearestNeighbor()
+    nn.train(Xtr_rows, Ytr)
+    
+    Yte_predict = nn.predict(Xte_rows, dist_metric)
+    return Yte_predict
+
+
+def KNN_evaluate(Xtr_rows, Ytr, Xte_rows, Yte, dist_metric='L2'):
+    Yte_predict = KNN_predict(Xtr_rows, Ytr, Xte_rows, dist_metric)
+    print ('accuracy: %f' + str(np.mean(Yte_predict == Yte)) )
+    # L1 : accuracy = 47.29%
+    # L2 : accuracy = 27.24%
+    # dot : accuracy = 9.9%
+
 def features_512D_from_image_by_CNN (img):
     # Image Patch
     img_re = cv2.resize(img, dsize = (32, 32))
