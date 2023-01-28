@@ -64,6 +64,63 @@ def read_txt(txt_dir):
     f.close()
     return l
 
+def counting_island(world: list)->int:
+    class Node():
+        def __init__(self, i, j): 
+            self.i = i
+            self.j = j
+    
+    class undirected_graph():     
+        def __init__(self, V:list, E:list)->None:
+            self.V = V[:]
+            self.neighbor = {}
+            for v in V:
+                self.neighbor[v] = []
+            for (v,w) in E:
+                self.neighbor[v].append(w)
+
+        def DFT_preorder(self)->int:
+            count = 0
+            if self.V:
+                visited = {}
+                for v in self.V:
+                    visited[v]=False
+                for v in self.V:
+                    if not visited[v]: 
+                        count += 1
+                        self.__DFT__preorderHelp(visited, v)
+            return count
+                        
+        def __DFT__preorderHelp(self, visited: list, v: int)->None:
+            if not visited[v]:
+                visited[v] = True
+                for w in self.neighbor[v]:
+                    self.__DFT__preorderHelp(visited, w)
+
+    
+    V = []
+    E = []
+    
+    for i in range(len(world)):
+        for j in range(len(world[0])):
+            if world[i][j] == 1:
+                V.append(Node(i, j))
+
+    for v in V:
+        for w in V:
+            if w.i == v.i and w.j == v.j - 1:
+                E.append((v,w))
+            if w.i == v.i and w.j == v.j + 1:
+                E.append((v,w))
+            if w.i == v.i - 1 and w.j == v.j:
+                E.append((v,w))
+            if w.i == v.i + 1 and w.j == v.j:
+                E.append((v,w))
+    
+    g = undirected_graph(V, E)
+    
+    return g.DFT_preorder()
+
 def two_image_correlation_RG(img1_dir):
 
     # img1 and img2 should be same in size
