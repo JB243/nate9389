@@ -253,13 +253,48 @@ def KNN_predict(Xtr_rows, Ytr, Xte_rows, dist_metric='L2'):
     Yte_predict = nn.predict(Xte_rows, dist_metric)
     return Yte_predict
 
-
 def KNN_evaluate(Xtr_rows, Ytr, Xte_rows, Yte, dist_metric='L2'):
     Yte_predict = KNN_predict(Xtr_rows, Ytr, Xte_rows, dist_metric)
     print ('accuracy: %f' + str(np.mean(Yte_predict == Yte)) )
     # L1 : accuracy = 47.29%
     # L2 : accuracy = 27.24%
     # dot : accuracy = 9.9%
+
+def binary_predict_by_1D_CNN (Xtr_rows, Ytr, Xte_rows, Yte):
+    from tensorflow.keras.models import Sequential
+    from tensorflow.keras.layers import Embedding, Dropout, Conv1D, GlobalMaxPooling1D, Dense
+    from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
+    from tensorflow.keras.models import load_model
+    
+    vocab_size = 10000
+    embedding_dim = 256 # 임베딩 벡터의 차원
+    dropout_ratio = 0.3 # 드롭아웃 비율
+    num_filters = 256 # 커널의 수
+    kernel_size = 3 # 커널의 크기
+    hidden_units = 128 # 뉴런의 수
+
+    model = Sequential()
+    model.add(Embedding(vocab_size, embedding_dim))
+    model.add(Dropout(dropout_ratio))
+    model.add(Conv1D(num_filters, kernel_size, padding='valid', activation='relu'))
+    model.add(GlobalMaxPooling1D())
+    model.add(Dense(hidden_units, activation='relu'))
+    model.add(Dropout(dropout_ratio))
+    model.add(Dense(1, activation='sigmoid'))
+    
+    model.summary()
+    
+    es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=3)
+    mc = ModelCheckpoint('best_model.h5', monitor='val_acc', mode='max', verbose=1, save_best_only=True)
+
+    model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['acc'])
+    history = model.fit(Xtr_rows, Ytr, epochs=20, validation_data=(Xte_rows, Yte), callbacks=[es, mc])    
+
+def binary_evaluate_by_1D_CNN(Xtr_rows, Ytr, Xte_rows, Yte):
+    from tensorflow.keras.models import load_model
+    binary_predict_by_1D_CNN(Xtr_rows, Ytr, Xte_rows, Yte)
+    loaded_model = load_model('best_model.h5')
+    print("\n 테스트 정확도: %.4f" % (loaded_model.evaluate(Xte_rows, Yte)[1]))
 
 def features_512D_from_image_by_CNN (img):
     # Image Patch
