@@ -594,11 +594,7 @@ GO <- function(gene){
     # ont = "ALL", "BP", "CC", "MF"
     # showCategory is not mandatory
 
-    gene <- gsub("GRCh38", "", gene) # human 데이터 가공시의 reference 이름 제거
-    gene <- gsub("mm10", "", gene) # mouse 데이터 가공시의 reference 이름 제거
-    for(i in 1:10){
-  	  gene <- gsub("-", "", gene) # 불필요한 앞부분의 - 제거
-    }
+    gene <- gsub('.*-', '', gene) # -와 그 앞에 있는 것들을 제거 (예 : "GRCh38-")
     gene <- gsub('\\ .*$', '', gene) # 'KLK2 ENSG00000167751' 같은 것을 해결 
     
     if (gene[1] == toupper(gene[1])){ ## Human gene
@@ -625,11 +621,7 @@ GO.plot <- function(gene){
     # ont = "ALL", "BP", "CC", "MF"
     # showCategory is not mandatory
 
-    gene <- gsub("GRCh38", "", gene) # human 데이터 가공시의 reference 이름 제거
-    gene <- gsub("mm10", "", gene) # mouse 데이터 가공시의 reference 이름 제거
-    for(i in 1:10){
-  	  gene <- gsub("-", "", gene) # 불필요한 앞부분의 - 제거
-    }
+    gene <- gsub('.*-', '', gene) # -와 그 앞에 있는 것들을 제거 (예 : "GRCh38-")
     gene <- gsub('\\ .*$', '', gene) # 'KLK2 ENSG00000167751' 같은 것을 해결 
     
     if (gene[1] == toupper(gene[1])){ ## Human gene
