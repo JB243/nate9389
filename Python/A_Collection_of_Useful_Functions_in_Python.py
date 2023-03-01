@@ -123,12 +123,9 @@ def counting_island(world: list)->int:
 
 def two_image_correlation_RG(img1_dir):
 
-    # img1 and img2 should be same in size
     img1 = cv2.imread(img1_dir) # RGB image
     img1 = cv2.cvtColor(img1, cv2.COLOR_BGR2RGB)
-
     l_img1 = []
-    l_img2 = []
 
     for i in range(img1.shape[0]):
         for j in range(img1.shape[1]):
