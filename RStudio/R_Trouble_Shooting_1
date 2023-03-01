@@ -98,3 +98,7 @@ object$orig.ident <- factor(x = object$orig.ident, levels = c('A', 'B', 'C'))
 Error in tmp["CD34", ]: invalid or not-yet-implemented 'Matrix' subsetting
 
 tmp = as.matrix(tmp)
+
+
+# ---
+Error in file(file, "rt") : invalid 'description' argument
