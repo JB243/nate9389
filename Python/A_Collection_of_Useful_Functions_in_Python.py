@@ -250,6 +250,15 @@ def recolor(img, pre, post):
                 img[i:i+1, j:j+1] = post
     return(img)
 
+def spatial_featuremap(img, x, y, c):
+    tsimg = np.zeros(img.shape[:2])    
+    tsimg_row = y # np.array형 변수
+    tsimg_col = x # np.array형 변수
+    for rr, cc, t in zip(tsimg_row, tsimg_col, c):
+        r, c = draw.circle(rr, cc, radius = 2.5) 
+        tsimg[r,c]= t
+    return tsimg
+
 def KNN_predict(Xtr_rows, Ytr, Xte_rows, dist_metric='L2'):
     import numpy as np
     
