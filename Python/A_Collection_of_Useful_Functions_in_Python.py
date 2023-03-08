@@ -121,6 +121,27 @@ def counting_island(world: list)->int:
     
     return g.DFT_preorder()
 
+def RGBtoGray(img):
+    import numpy as np
+
+    out = np.empty((img.shape[0], img.shape[1]))
+
+    for i in range(img.shape[0]):
+        for j in range(img.shape[1]):
+            out[i:i+1, j:j+1] = ( 0.2989*img[i:i+1, j:j+1, 0:1] + 
+                                  0.5870*img[i:i+1, j:j+1, 1:2] + 
+                                  0.1140*img[i:i+1, j:j+1, 2:3]
+                                ).item()
+      
+    return out
+    
+def recolor(img, pre, post): 
+    for i in range(img.shape[0]):
+        for j in range(img.shape[1]):
+            if img[i:i+1, j:j+1] == pre:
+                img[i:i+1, j:j+1] = post
+    return(img)
+
 def two_image_correlation_RG(img1_dir):
 
     img1 = cv2.imread(img1_dir) # RGB image
@@ -228,27 +249,39 @@ def two_image_correlation_RG_3D(my_dir):
     plt.scatter(l_img1, l_img2, alpha = 0.01)
     plt.xlabel('brightness of img1')
     plt.ylabel('brightness of img2')
-	
-def RGBtoGray(img):
+
+def SSIM(x, y):
+    # assumption : img1 and img2 are grayscale images with the same dimension
+
     import numpy as np
-
-    out = np.empty((img.shape[0], img.shape[1]))
-
-    for i in range(img.shape[0]):
-        for j in range(img.shape[1]):
-            out[i:i+1, j:j+1] = ( 0.2989*img[i:i+1, j:j+1, 0:1] + 
-                                  0.5870*img[i:i+1, j:j+1, 1:2] + 
-                                  0.1140*img[i:i+1, j:j+1, 2:3]
-                                ).item()
-      
-    return out
     
-def recolor(img, pre, post): 
-    for i in range(img.shape[0]):
-        for j in range(img.shape[1]):
-            if img[i:i+1, j:j+1] == pre:
-                img[i:i+1, j:j+1] = post
-    return(img)
+    def mean(img):
+        return np.mean(img)
+        
+    def sigma(img):
+        return np.std(img)
+    
+    def cov(img1, img2):
+        img1_ = np.array(img1[:,:], dtype=np.float64)
+        img2_ = np.array(img2[:,:], dtype=np.float64)
+                        
+        return np.mean(img1_ * img2_) - mean(img1) * mean(img2)
+    
+    K1 = 0.01
+    K2 = 0.03
+    L = 256 # when each pixel spans 0 to 255
+   
+    C1 = K1 * K1 * L * L
+    C2 = K2 * K2 * L * L
+    C3 = C2 / 2
+        
+    l = (2 * mean(x) * mean(y) + C1) / (mean(x)**2 + mean(y)**2 + C1)
+    c = (2 * sigma(x) * sigma(y) + C2) / (sigma(x)**2 + sigma(y)**2 + C2)
+    s = (cov(x, y) + C3) / (sigma(x) * sigma(y) + C3)
+    
+    print(s)
+    
+    return l * c * s
 
 def spatial_featuremap(img, x, y, c):
     tsimg = np.zeros(img.shape[:2])    
