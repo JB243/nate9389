@@ -251,7 +251,7 @@ def two_image_correlation_RG_3D(my_dir):
     plt.ylabel('brightness of img2')
 
 def SSIM(x, y):
-    # assumption : img1 and img2 are grayscale images with the same dimension
+    # assumption : x and y are grayscale images with the same dimension
 
     import numpy as np
     
@@ -278,9 +278,7 @@ def SSIM(x, y):
     l = (2 * mean(x) * mean(y) + C1) / (mean(x)**2 + mean(y)**2 + C1)
     c = (2 * sigma(x) * sigma(y) + C2) / (sigma(x)**2 + sigma(y)**2 + C2)
     s = (cov(x, y) + C3) / (sigma(x) * sigma(y) + C3)
-    
-    print(s)
-    
+        
     return l * c * s
 
 def spatial_featuremap(img, x, y, c):
