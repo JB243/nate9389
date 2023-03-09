@@ -281,6 +281,31 @@ def SSIM(x, y):
         
     return l * c * s
 
+def mutual_information(img1, img2):
+    import numpy as np
+    import cv2
+    import matplotlib.pyplot as plt
+    
+    # img1 and img2 are 3-channel color images
+    
+    a = img1[:,:,0:1].reshape(img1.shape[0], img1.shape[1])
+    b = img2[:,:,0:1].reshape(img2.shape[0], img2.shape[1])
+    
+    hgram, x_edges, y_edges = np.histogram2d(
+     a.ravel(),
+     b.ravel(),
+     bins=20
+    )
+
+    pxy = hgram / float(np.sum(hgram))
+    px = np.sum(pxy, axis=1) # marginal for x over y
+    py = np.sum(pxy, axis=0) # marginal for y over x
+    px_py = px[:, None] * py[None, :] # Broadcast to multiply marginals
+
+    nzs = pxy > 0 # Only non-zero pxy values contribute to the sum
+    
+    return np.sum(pxy[nzs] * np.log(pxy[nzs] / px_py[nzs]))
+
 def spatial_featuremap(img, x, y, c):
     tsimg = np.zeros(img.shape[:2])    
     tsimg_row = y # np.array형 변수
