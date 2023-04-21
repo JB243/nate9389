@@ -348,6 +348,20 @@ gene_to_ensembl <- function(gene_list){
   return(ar)
 }
 
+ensembl_transcript_to_gene <- function(transcript_ids){
+  # reference : https://support.bioconductor.org/p/106253/#106256
+
+  res <- getBM(attributes = c('ensembl_transcript_id_version', 
+                              'ensembl_gene_id', 
+                              'external_transcript_name',
+                              'external_gene_name'),
+               filters = 'ensembl_transcript_id_version', 
+               values = transcript_ids,
+               mart = mart)
+
+  return(res[, 'external_gene_name'])
+}
+
 human_to_mouse <- function(human_gene){
   hom <- read.csv("https://blog.kakaocdn.net/dn/OCkAZ/btrL4AnnDXH/YJ0CrvSIchlGTnqvKphemK/HOM_MouseHumanSequence.csv?attach=1&knm=tfile.csv")
 
