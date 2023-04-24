@@ -412,3 +412,160 @@ def features_512D_from_image_by_CNN (img):
     ts_features = pretrained_model.predict(X_in)
     
     return ts_features[0]
+
+def GO(markers, max_terms = 6):
+    # Reference
+    ## https://github.com/mousepixels/sanbomics_scripts/blob/main/GO_in_python.ipynb
+    ## https://snyk.io/advisor/python/goatools/functions/goatools.anno.genetogo_reader.Gene2GoReader
+	
+    # type(markers) = numpy.ndarray
+    # dtype = object
+    
+    if len(markers) == 0:
+        return
+    
+    from genes_ncbi_mus_musculus_proteincoding import GENEID2NT as GeneID2nt_mus
+    from genes_ncbi_homo_sapiens_proteincoding import GENEID2NT as GeneID2nt_homo
+    
+    from goatools.base import download_go_basic_obo
+    from goatools.base import download_ncbi_associations
+    from goatools.obo_parser import GODag
+    from goatools.anno.genetogo_reader import Gene2GoReader
+    from goatools.goea.go_enrichment_ns import GOEnrichmentStudyNS
+    
+    obo_fname = download_go_basic_obo()
+    fin_gene2go = download_ncbi_associations()
+    obodag = GODag("go-basic.obo")
+    
+    #run one time to initialize
+    mapper = {}
+    
+    if markers[0] == markers[0].upper(): # Homo sapiens
+        for key in GeneID2nt_homo:
+            mapper[GeneID2nt_homo[key].Symbol] = GeneID2nt_homo[key].GeneID
+    else:  # Mus musculus
+        for key in GeneID2nt_mus:
+            mapper[GeneID2nt_mus[key].Symbol] = GeneID2nt_mus[key].GeneID
+        
+    inv_map = {v: k for k, v in mapper.items()}
+        
+    if markers[0] == markers[0].upper():
+        objanno = Gene2GoReader(fin_gene2go, taxids=[9606])
+    else:
+        objanno = Gene2GoReader(fin_gene2go, taxids=[10090])
+    
+    ns2assoc = objanno.get_ns2assc()
+
+    goeaobj = ''
+    if markers[0] == markers[0].upper():
+        goeaobj = GOEnrichmentStudyNS(
+            GeneID2nt_homo.keys(), # List of human protein-coding genes
+            ns2assoc, # geneid/GO associations
+            obodag, # Ontologies
+            propagate_counts = False,
+            alpha = 0.05, # default significance cut-off
+            methods = ['fdr_bh']) # defult multipletest correction method
+    else:
+        goeaobj = GOEnrichmentStudyNS(
+            GeneID2nt_mus.keys(), # List of mouse protein-coding genes
+            ns2assoc, # geneid/GO associations
+            obodag, # Ontologies
+            propagate_counts = False,
+            alpha = 0.05, # default significance cut-off
+            methods = ['fdr_bh']) # defult multipletest correction method        
+        
+    GO_items = []
+
+    temp = goeaobj.ns2objgoea['BP'].assoc
+    for item in temp:
+        GO_items += temp[item]
+    
+    temp = goeaobj.ns2objgoea['CC'].assoc
+    for item in temp:
+        GO_items += temp[item]
+    
+    temp = goeaobj.ns2objgoea['MF'].assoc
+    for item in temp:
+        GO_items += temp[item]
+            
+    def go_it(test_genes):
+        print(f'input genes: {len(test_genes)}')
+    
+        mapped_genes = []
+        for gene in test_genes:
+            try:
+                mapped_genes.append(mapper[gene])
+            except:
+                pass
+        print(f'mapped genes: {len(mapped_genes)}')
+        
+        goea_results_all = goeaobj.run_study(mapped_genes)                
+        goea_results_sig = [r for r in goea_results_all if r.p_fdr_bh < 0.05]
+                
+        GO = pd.DataFrame(list(map(lambda x: [x.GO, x.goterm.name, x.goterm.namespace, x.p_uncorrected, x.p_fdr_bh,\
+                       x.ratio_in_study[0], x.ratio_in_study[1], GO_items.count(x.GO), list(map(lambda y: inv_map[y], x.study_items)),\
+                       ], goea_results_sig)), columns = ['GO', 'term', 'class', 'p', 'p_corr', 'n_genes',\
+                                                        'n_study', 'n_go', 'study_genes'])
+
+        GO = GO[GO.n_genes > 1]        
+        return GO
+        
+    df = go_it(markers)    
+    df['per'] = df.n_genes/df.n_go
+    
+    if df.shape[0] > 0:
+        df = df.sort_values(by=['p_corr'], axis=0, ascending=True)
+        
+        if df.shape[0] > max_terms:
+            df = df[0:max_terms]
+
+        import matplotlib.pyplot as plt
+        import matplotlib as mpl
+        from matplotlib import cm
+        import seaborn as sns
+        import textwrap
+    
+        fig, ax = plt.subplots(figsize = (0.5, 2.75))
+        cmap = mpl.cm.bwr_r
+        norm = mpl.colors.Normalize(vmin = df.p_corr.min(), vmax = df.p_corr.max())
+        mapper = cm.ScalarMappable(norm = norm, cmap = cm.bwr_r)
+        cbl = mpl.colorbar.ColorbarBase(ax, cmap = cmap, norm = norm, orientation = 'vertical')
+    
+        plt.figure(figsize = (2,4))
+        ax = sns.barplot(data = df, x = 'per', y = 'term', palette = mapper.to_rgba(df.p_corr.values))
+        ax.set_yticklabels([textwrap.fill(e, 22) for e in df['term']])
+        plt.show()
+
+def GO_(gene_list):
+    # reference : https://gseapy.readthedocs.io/en/latest/gseapy_example.html
+    
+    import gseapy
+    from gseapy import barplot, dotplot
+    
+    if gene_list[0] == gene_list[0].upper():
+        enr = gseapy.enrichr(gene_list=gene_list, # or "./tests/data/gene_list.txt",
+                     gene_sets=['GO_Biological_Process_2018','GO_Cellular_Component_2018', 'GO_Molecular_Function_2018'],
+                     organism='human', # don't forget to set organism to the one you desired! e.g. Yeast
+                     outdir=None, # don't write to disk
+                    )
+    else:
+        enr = gseapy.enrichr(gene_list=gene_list, # or "./tests/data/gene_list.txt",
+             gene_sets=['GO_Biological_Process_2018','GO_Cellular_Component_2018', 'GO_Molecular_Function_2018'],
+             organism='mouse', # don't forget to set organism to the one you desired! e.g. Yeast
+             outdir=None, # don't write to disk
+            )
+
+    try:
+        ax = dotplot(enr.results,
+                      column="Adjusted P-value",
+                      x='Gene_set', # set x axis, so you could do a multi-sample/library comparsion
+                      size=10,
+                      top_term=5,
+                      figsize=(3,5),
+                      title = "GO plot",
+                      xticklabels_rot=45, # rotate xtick labels
+                      show_ring=True, # set to False to revmove outer ring
+                      marker='o',
+                     )
+    except:
+        print("ValueError: Warning: No enrich terms when cutoff = 0.05")
