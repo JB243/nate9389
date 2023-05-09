@@ -240,6 +240,43 @@ one_way_5_factor_anova <- function(v1, v2, v3, v4, v5){
   print(summary(anova_residuals))
 }
 
+one_way_6_factor_anova <- function(v1, v2, v3, v4, v5, v6){
+  dat <- matrix(0, nrow = ( length(v1) + length(v2) + length(v3) + length(v4) + length(v5) + length(v6) ), ncol = 2 )
+  for(i in 1 : length(v1) ){
+    dat[i, 1] <- v1[i]
+    dat[i, 2] <- 'v1'
+  }
+  for(i in 1 : length(v2) ){
+    dat[i + length(v1), 1] <- v2[i]
+    dat[i + length(v1), 2] <- 'v2'
+  }
+  for(i in 1 : length(v3) ){
+    dat[i + length(v1) + length(v2), 1] <- v3[i]
+    dat[i + length(v1) + length(v2), 2] <- 'v3'
+  }
+  for(i in 1 : length(v4) ){
+    dat[i + length(v1) + length(v2) + length(v3), 1] <- v4[i]
+    dat[i + length(v1) + length(v2) + length(v3), 2] <- 'v4'
+  }
+  for(i in 1 : length(v5) ){
+    dat[i + length(v1) + length(v2) + length(v3) + length(v4), 1] <- v5[i]
+    dat[i + length(v1) + length(v2) + length(v3) + length(v4), 2] <- 'v5'
+  }
+  for(i in 1 : length(v6) ){
+    dat[i + length(v1) + length(v2) + length(v3) + length(v4) + length(v5), 1] <- v6[i]
+    dat[i + length(v1) + length(v2) + length(v3) + length(v4) + length(v5), 2] <- 'v6'
+  }
+  dat <- as.data.frame(dat)
+  
+  colnames(dat) <- c('val', 'factor')
+
+  anova_IS <- aov(val ~ factor, data = dat)
+  print(summary(anova_IS))
+
+  anova_residuals <- anova_IS$residuals
+  print(summary(anova_residuals))
+}
+
 comparison_of_two_vectors <- function(v1, v2, paired = FALSE){
   p.val = t.test(v1, v2, paired = paired)
   print(p.val)
