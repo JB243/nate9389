@@ -568,6 +568,25 @@ update_cluster_in_seurat_obj <- function(seurat_obj, barcode, cluster){
   return (seurat_obj)
 }
 
+PCA <- function(dt, dt_group, scale=T){
+  # rownames(dt) : our interest
+  # colnames(dt) : the dimensional space of each sample
+  
+  pca_dt <- prcomp(dt,
+                   center = T,
+                   scale. = scale)
+  
+  ggbiplot(pca_dt,
+                choices = c(1, 2),
+                obs.scale = 1,
+                var.scale = 1,
+                groups = dt_group,
+                circle = TRUE,
+					  		varname.size=0,
+					  		var.axes = F)
+  
+}
+
 scatter_plot <- function(x, y, xlab = "x", ylab = "y", point_size = 2, lab_size = 4, png=TRUE){
   library(ggplot2)
 
