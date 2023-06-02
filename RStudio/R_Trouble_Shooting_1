@@ -102,3 +102,16 @@ tmp = as.matrix(tmp)
 
 # ---
 Error in file(file, "rt") : invalid 'description' argument
+
+
+# ---
+Warning message:
+In read.table(file = file, header = header, sep = sep, quote = quote,  :
+  incomplete final line found by readTableHeader on 'my_data.csv' 
+  
+# Before
+df <- read.csv('my_data.csv')
+
+# After
+df <- suppressWarnings(read.csv('my_data.csv'))
+ 
