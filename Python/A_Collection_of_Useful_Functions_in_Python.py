@@ -569,3 +569,69 @@ def GO_(gene_list):
                      )
     except:
         print("ValueError: Warning: No enrich terms when cutoff = 0.05")
+
+def ensembl_to_gene(ensembl_list):
+    ar = []
+
+    human = pd.read_csv("https://blog.kakaocdn.net/dn/29YTj/btrS5iG9QOH/Di6RQKxHOPDii7EjkdHN30/human_genes_36601.tsv?attach=1&knm=tfile.tsv", sep = '\t', header = None)
+    mouse = pd.read_csv("https://blog.kakaocdn.net/dn/wkjwJ/btrS1QSgrpD/VS8ELANCQyeZAA3vL8JQP0/mouse_genes_32285.tsv?attach=1&knm=tfile.tsv", sep = '\t', header = None)
+
+    for i in range(len(ensembl_list)):
+        if 'ENSG' in ensembl_list[i]:  # human gene
+            index = human[0].tolist().index(ensembl_list[i])
+            ar.append(human[1][index])
+        elif 'ENSMUSG' in ensembl_list[i]:  # mouse gene
+            index = mouse[0].tolist().index(ensembl_list[i])
+            ar.append(mouse[1][index])
+
+    return(ar)
+
+def gene_to_ensembl(gene_list):
+    ar = []
+
+    human = pd.read_csv("https://blog.kakaocdn.net/dn/29YTj/btrS5iG9QOH/Di6RQKxHOPDii7EjkdHN30/human_genes_36601.tsv?attach=1&knm=tfile.tsv", sep = '\t', header = None)
+    mouse = pd.read_csv("https://blog.kakaocdn.net/dn/wkjwJ/btrS1QSgrpD/VS8ELANCQyeZAA3vL8JQP0/mouse_genes_32285.tsv?attach=1&knm=tfile.tsv", sep = '\t', header = None)
+
+    for i in range(len(gene_list)):
+        if gene_list[i] == gene_list[i].upper():  # human gene
+            index = human[1].tolist().index(gene_list[i])
+            ar.append(human[0][index])
+        else:  # mouse gene
+            index = mouse[1].tolist().index(gene_list[i])
+            ar.append(mouse[0][index])
+
+    return(ar)
+
+def find_idx(my_list, e):
+    for i in range(len(my_list)):
+        if my_list[i] == e:
+            return i
+    return -1
+
+def human_to_mouse(human_gene:list):
+    hom = pd.read_csv("https://blog.kakaocdn.net/dn/cVeqsA/btrS1JMnxyX/HtVhPmqtxdgt7LQlGkeql0/HOM_MouseHumanSequence.csv?attach=1&knm=tfile.csv")
+
+    mouse_gene = []
+
+    for i in range(len(human_gene)):
+        index = find_idx(hom['Symbol'], human_gene[i])
+        DB_Class_Key = hom['DB Class Key'][index]
+        hom_ = hom[hom['DB Class Key'] == DB_Class_Key]
+        hom__ = hom_[hom_['Common Organism Name'] == 'mouse, laboratory']
+        mouse_gene.append(np.array(hom__['Symbol'])[0])
+
+    return mouse_gene
+
+def mouse_to_human(mouse_gene:list):
+    hom <- read.csv("https://blog.kakaocdn.net/dn/cVeqsA/btrS1JMnxyX/HtVhPmqtxdgt7LQlGkeql0/HOM_MouseHumanSequence.csv?attach=1&knm=tfile.csv")
+
+    human_gene = []
+
+    for i in range(len(mouse_gene)):
+        index = find_idx(hom['Symbol'], mouse_gene[i])
+        DB_Class_Key = hom['DB Class Key'][index]
+        hom_ = hom[hom['DB Class Key'] == DB_Class_Key]
+        hom__ = hom_[hom_['Common Organism Name'] == 'human']
+        mouse_gene.append(np.array(hom__['Symbol'])[0])
+
+    return human_gene
