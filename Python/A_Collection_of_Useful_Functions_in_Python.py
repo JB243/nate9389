@@ -635,3 +635,92 @@ def mouse_to_human(mouse_gene:list):
         mouse_gene.append(np.array(hom__['Symbol'])[0])
 
     return human_gene
+
+def to_spatial(adata, path, library_id = 'TNBC1'):
+    
+    adata.uns["spatial"][library_id] = dict()
+    path = Path(path)
+    
+    files = dict(
+        tissue_positions_file=path / 'spatial/tissue_positions_list.csv',
+        scalefactors_json_file=path /  'spatial/scalefactors_json.json',
+        hires_image=path / 'spatial/tissue_hires_image.png',
+        lowres_image=path / 'spatial/tissue_lowres_image.png',
+    )
+
+    # check if files exists, continue if images are missing
+    for f in files.values():
+        if not f.exists():
+            if any(x in str(f) for x in ["hires_image", "lowres_image"]):
+                logg.warning(
+                    f"You seem to be missing an image file.\n"
+                    f"Could not find '{f}'."
+                )
+            else:
+                raise OSError(f"Could not find '{f}'")
+
+    adata.uns["spatial"][library_id]['images'] = dict()
+    for res in ['hires', 'lowres']:
+        try:
+            adata.uns["spatial"][library_id]['images'][res] = imread(
+                str(files[f'{res}_image'])
+            )
+        except Exception:
+            raise OSError(f"Could not find '{res}_image'")
+
+    # read json scalefactors
+    adata.uns["spatial"][library_id]['scalefactors'] = json.loads(
+        files['scalefactors_json_file'].read_bytes()
+    )
+
+    #adata.uns["spatial"][library_id]["metadata"] = {
+    #    k: (str(attrs[k], "utf-8") if isinstance(attrs[k], bytes) else attrs[k])
+    #    for k in ("chemistry_description", "software_version")
+    #    if k in attrs
+    #}
+
+    # read coordinates
+    positions = pd.read_csv(files['tissue_positions_file'], header=None)
+    positions.columns = [
+        'barcode',
+        'in_tissue',
+        'array_row',
+        'array_col',
+        'pxl_col_in_fullres',
+        'pxl_row_in_fullres',
+    ]
+    positions.index = positions['barcode']
+
+    adata.obs = adata.obs.join(positions, how="left")
+    
+    adata.obsm['spatial'] = adata.obs[
+        ['pxl_row_in_fullres', 'pxl_col_in_fullres']
+    ].to_numpy()
+    
+    adata.obs.drop(
+        columns=['barcode', 'pxl_row_in_fullres', 'pxl_col_in_fullres'],
+        inplace=True,
+    )
+
+    return adata
+
+
+def load_adata(tissue_dir):
+    adata1 = sc.read_mtx(tissue_dir + 'matrix.mtx') 
+    adata1 = adata1.transpose() 
+    cellname = pd.read_csv(tissue_dir + 'barcodes.tsv', sep="\t", header=None, index_col=1, names=['idx', 'barcode']) 
+    cellname.index = cellname['idx']
+    featurename = pd.read_csv(tissue_dir + 'features.tsv', sep='\t', header=None, index_col=1, names=['gene_ids', 'feature_types'])
+    adata1.var = featurename
+    adata1.obs = cellname
+    adata1.uns["spatial"] = dict()
+    adata1 = to_spatial(adata1, tissue_dir, library_id='Library_1')
+    adata1 = adata1[adata1.obs.in_tissue == 1,:]
+    adata1.var_names_make_unique()
+    adata1.obs['unnormalized_counts'] = adata1.X.sum(axis=1).A1
+    sc.pp.normalize_total(adata1, inplace=True)
+    adata1.obs['normalized_counts'] = adata1.X.sum(axis=1).A1
+    sc.pp.log1p(adata1)
+    sc.pp.highly_variable_genes(adata1, flavor="seurat", n_top_genes=2000)
+
+    return adata1
