@@ -3,6 +3,25 @@ SUM <- function(a, b){
     return (a + b)
 }
 
+## Create folder
+destination.folder <- file.path(destination.folder, "Filtered_bams")
+tryCatch({
+    if (!file.exists(file.path(destination.folder))) {
+        dir.create(file.path(destination.folder),
+                   recursive = TRUE)
+    } else {
+        stop(.wrap("The folder",
+                   sQuote(file.path(destination.folder, "Filtered_bams")),
+                   "already exists. Please remove it, or (in case you",
+                   "still need it), rename it to prevent files from being",
+                   "overwritten."))
+    }
+}, warning = function(e) {
+    stop(.wrap("You do not have write permissions in the destination",
+               "folder. Stopping execution of the remaining part of the",
+               "script..."))
+})
+
 has_string_arr <- function(str, arr){
     flag <- 0
     ar <- array()
@@ -101,8 +120,107 @@ eliminate_backward <- function(str){
     return(gsub('x.*$', '', str))
 }
 
+eliminate_backward2 <- function(str){
+    return(gsub('*.[0-9]*$', '', str))
+}
+
 eliminate_forward <- function(str){
     return(gsub('.*x', '', str))
+}
+
+str_substitute <- function(given_str, start, end){
+    library(stringr)
+    library(stringi)
+  
+    result = paste0(
+        str_sub(given_str, 1, start-1),    
+        stri_dup("x", (end-start+1) ),
+        str_sub(given_str, end+1, str_length(given_str))
+    )
+
+    return(result)
+}
+
+number_after_pattern_in_str <- function(given_str, pattern){
+    # reference : https://cran.r-project.org/web/packages/stringr/vignettes/stringr.html
+
+    library(stringr)
+
+    phone1 <- paste0(pattern, '([1-9]{1})')
+    phone2 <- paste0(pattern, '([1-9][0-9]{1})')
+    phone3 <- paste0(pattern, '([1-9][0-9]{2})')
+    phone4 <- paste0(pattern, '([1-9][0-9]{3})')
+
+    arr <- array()
+    flag = 0
+
+    for(i in 1 : dim(str_locate_all(given_str, phone4)[[1]])[1] ){
+        if (dim(str_locate_all(given_str, phone4)[[1]])[1] > 0){
+            flag <- flag + 1
+            arr[flag] = str_sub(
+                given_str, 
+                str_locate_all(given_str, phone4)[[1]][1, 1], #start
+                str_locate_all(given_str, phone4)[[1]][1, 2]  #end
+            )
+            given_str = str_substitute(
+                given_str, 
+                str_locate_all(given_str, phone4)[[1]][1, 1], #start
+                str_locate_all(given_str, phone4)[[1]][1, 2]  #end
+            )
+        }
+    }
+
+    for(i in 1 : dim(str_locate_all(given_str, phone3)[[1]])[1] ){
+        if (dim(str_locate_all(given_str, phone3)[[1]])[1] > 0){
+            flag <- flag + 1
+            arr[flag] = str_sub(
+                given_str, 
+                str_locate_all(given_str, phone3)[[1]][1, 1], #start
+                str_locate_all(given_str, phone3)[[1]][1, 2]  #end
+            )
+            given_str = str_substitute(
+                given_str, 
+                str_locate_all(given_str, phone3)[[1]][1, 1], #start
+                str_locate_all(given_str, phone3)[[1]][1, 2]  #end
+            )
+        }
+    }
+
+    for(i in 1 : dim(str_locate_all(given_str, phone2)[[1]])[1] ){
+        if (dim(str_locate_all(given_str, phone2)[[1]])[1] > 0){
+            flag <- flag + 1
+            arr[flag] = str_sub(
+                given_str, 
+                str_locate_all(given_str, phone2)[[1]][1, 1], #start
+                str_locate_all(given_str, phone2)[[1]][1, 2]  #end
+            )
+            given_str = str_substitute(
+                given_str, 
+                str_locate_all(given_str, phone2)[[1]][1, 1], #start
+                str_locate_all(given_str, phone2)[[1]][1, 2]  #end
+            )
+        }
+    }
+
+    for(i in 1 : dim(str_locate_all(given_str, phone1)[[1]])[1] ){
+        if (dim(str_locate_all(given_str, phone1)[[1]])[1] > 0){
+            flag <- flag + 1
+            arr[flag] = str_sub(
+                given_str, 
+                str_locate_all(given_str, phone1)[[1]][1, 1], #start
+                str_locate_all(given_str, phone1)[[1]][1, 2]  #end
+            )
+            given_str = str_substitute(
+                given_str, 
+                str_locate_all(given_str, phone1)[[1]][1, 1], #start
+                str_locate_all(given_str, phone1)[[1]][1, 2]  #end
+            )
+        }
+    }	
+
+    arr <- str_sub(arr, str_length(pattern)+1, str_length(arr))
+    arr <- as.numeric(arr)
+    return(arr)
 }
 
 log10_factorial <- function(n){
@@ -397,6 +515,58 @@ ensembl_transcript_to_gene <- function(transcript_ids){
                mart = mart)
 
   return(res[, 'external_gene_name'])
+}
+
+mouse_gene_to_MGI <- function(mouse_gene_list){
+  ar = array(dim = length(mouse_gene_list))
+
+	dat <- read.csv("https://blog.kakaocdn.net/dn/cVeqsA/btrS1JMnxyX/HtVhPmqtxdgt7LQlGkeql0/HOM_MouseHumanSequence.csv?attach=1&knm=tfile.csv")
+
+  for(i in 1:length(mouse_gene_list)){
+	  index = match(mouse_gene_list[i], dat[,'Symbol'])
+    ar[i] = dat[index, 'Mouse.MGI.ID']
+  }
+
+  return(ar)
+}
+
+MGI_to_mouse_gene <- function(MGI_list){
+  ar = array(dim = length(MGI_list))
+
+	dat <- read.csv("https://blog.kakaocdn.net/dn/cVeqsA/btrS1JMnxyX/HtVhPmqtxdgt7LQlGkeql0/HOM_MouseHumanSequence.csv?attach=1&knm=tfile.csv")
+
+  for(i in 1:length(MGI_list)){
+	  index = match(MGI_list[i], dat[,'Mouse.MGI.ID'])
+    ar[i] = dat[index, 'Symbol']
+  }
+
+  return(ar)
+}
+
+human_gene_to_HGNC <- function(human_gene_list){
+  ar = array(dim = length(human_gene_list))
+
+	dat <- read.csv("https://blog.kakaocdn.net/dn/cVeqsA/btrS1JMnxyX/HtVhPmqtxdgt7LQlGkeql0/HOM_MouseHumanSequence.csv?attach=1&knm=tfile.csv")
+
+  for(i in 1:length(human_gene_list)){
+	  index = match(human_gene_list[i], dat[,'Symbol'])
+    ar[i] = dat[index, 'HGNC.ID']
+  }
+
+  return(ar)
+}
+
+HGNC_to_human_gene <- function(HGNC_list){
+  ar = array(dim = length(HGNC_list))
+
+	dat <- read.csv("https://blog.kakaocdn.net/dn/cVeqsA/btrS1JMnxyX/HtVhPmqtxdgt7LQlGkeql0/HOM_MouseHumanSequence.csv?attach=1&knm=tfile.csv")
+
+  for(i in 1:length(HGNC_list)){
+	  index = match(HGNC_list[i], dat[,'HGNC.ID'])
+    ar[i] = dat[index, 'Symbol']
+  }
+
+  return(ar)
 }
 
 human_to_mouse <- function(human_gene){
