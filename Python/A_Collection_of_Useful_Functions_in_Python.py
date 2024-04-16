@@ -394,7 +394,7 @@ def binary_evaluate_by_1D_CNN(Xtr_rows, Ytr, Xte_rows, Yte):
     loaded_model = load_model('best_model.h5')
     print("\n 테스트 정확도: %.4f" % (loaded_model.evaluate(Xte_rows, Yte)[1]))
 
-def features_512D_from_image_by_CNN (img):
+def features_512D_from_image_by_CNN (img, model_name = 'VGG16'):
     # Image Patch
     img_re = cv2.resize(img, dsize = (32, 32))
     tspatches = []
@@ -403,12 +403,24 @@ def features_512D_from_image_by_CNN (img):
     tspatches = np.asarray(tspatches)    
     
     # Pretrained model
-    pretrained_model = vgg16.VGG16(weights='imagenet', include_top = False, pooling='avg', input_shape = (32,32,3))
-    X_in = tspatches.copy()
-    X_in = vgg16.preprocess_input(X_in)
-    pretrained_model.trainable = False
-    pretrained_model.summary()
+    if model_name == 'VGG16':
+        pretrained_model = vgg16.VGG16(weights='imagenet', include_top = False, pooling='avg', input_shape = (32,32,3))
+        X_in = tspatches.copy()
+        X_in = vgg16.preprocess_input(X_in)
+	elif model_name == 'ResNet50':
+    	pretrained_model = resnet50.ResNet50(weights='imagenet', include_top = False, pooling='avg', input_shape = (32,32,3))
+        X_in = tspatches.copy()
+        X_in = resnet50.preprocess_input(X_in)
+    elif model_name == 'InceptionV3':
+    	pretrained_model = inception_v3.InceptionV3(weights='imagenet', include_top = False, pooling='avg', input_shape = (32,32,3))
+        X_in = tspatches.copy()
+        X_in = inception_v3.preprocess_input(X_in)
     
+    pretrained_model.trainable = False
+	pretrained_model.summary()
+    
+    
+    # Get the features
     ts_features = pretrained_model.predict(X_in)
     
     return ts_features[0]
