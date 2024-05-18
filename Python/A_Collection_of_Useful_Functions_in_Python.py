@@ -11,13 +11,7 @@ def is_contain(given_str, partial_str):
     return False
 
 def str_omit_forward(_str, n):
-    s = ''
-    count = 0
-    for char in _str:
-        count = count + 1
-        if count > n:
-            s = s + char
-    return s
+    return _str[n:]
 
 def str_omit_backward(_str, n):
     return _str[:-n]
