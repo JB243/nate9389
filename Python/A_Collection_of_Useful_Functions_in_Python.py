@@ -20,13 +20,7 @@ def str_omit_forward(_str, n):
     return s
 
 def str_omit_backward(_str, n):
-    s = ''
-    count = 0
-    for char in _str:
-        count = count + 1
-        if count <= len(_str) - n:
-            s = s + char
-    return s
+    return _str[:-n]
 
 def is_element_in_list(e, l):
     for i in range(len(l)):
