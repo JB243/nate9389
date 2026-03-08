@@ -1,0 +1,152 @@
+[
+    {
+        "idx": "202",
+        "problem": "Suppose the government has established the following basic policy regarding whether to proceed with four national projects, A, B, C, and D: If A is carried out, B will also be carried out. If C is carried out, D will also be carried out. At least one of A or C will be carried out. From these conditions, write down all cases in which knowing whether one policy will be carried out or not allows us to determine whether another policy will be carried out or not.",
+        "solution": ["A to B", "~A to C", "~A to D", "~B to ~A", "~B to C", "~B to D", "C to D", "~C to A", "~C to B", "~D to A", "~D to B", "~D to ~C"],
+        "difficulty": "easy",
+        "note": "ChatGPT5.4 Thinking is correct."
+    },
+    {
+        "idx": "203",
+        "problem": "Officers A, B, C, D, and E will attend the meeting subject to the following conditions. If A attends the meeting, B also attends. If A attends, E also attends, and if C attends, E also attends. If D attends, B also attends. If C does not attend, B does not attend. Based on this, list all cases in which whether one person proceeds or not allows us to determine whether another person proceeds or not.",
+        "solution": ["A to B", "A to C", "A to E", "B to C", "B to E", "~B to ~A", "~B to ~D", "C to E", "~C to ~A", "~C to ~B", "~C to ~D", "D to B", "D to C", "D to E", "~E to ~A", "~E to ~B", "~E to ~C", "~E to ~D"],
+        "difficulty": "easy",
+        "note": "ChatGPT5.4 Thinking is correct."
+    },
+    {
+        "idx": "204",
+        "problem": "In a certain country, there are seven administrative regions, A, B, C, D, E, F, and G. A is adjacent to every region except C. B is adjacent only to A, C, E, and G. C is adjacent only to B and E. D is adjacent only to A and G. E is adjacent only to A, B, and C. F is adjacent only to A. G is adjacent only to A, B, and D. Each region can implement only one of the four policies, a, b, c, and d, and each policy must be implemented at least once. In addition, the following conditions must be satisfied: Adjacent regions must not implement the same policy. A, B, and C implement policies a, b, and c, respectively. Investigate all true statements of the form: A/B/C/D/E/F/G = ?  →  A/B/C/D/E/F/G (different region) = ?",
+        "solution": ["D=c to G=d", "D=d to G=c"],
+        "difficulty": "medium",
+        "note": "ChatGPT5.4 Thinking is correct."
+    },
+    {
+        "idx": "205",
+        "problem": "One of A, B, C, and D works in Seoul. A, B, C, and D each work in a different city. For each of Gap, Eul, and Byeong, one of their two statements is true and the other is false. Gap said, “A works in Gwangju.” and “D works in Seoul.” Eul said, “B works in Gwangju.” and “C works in Sejong.” Byeong said, “C works in Gwangju.” and “D works in Busan.” Investigate all tru statements of the form: A/B/C/D works in _.",
+        "solution": ["A works in Gwangju.", "B works in Seoul", "C works in Sejong", "D works in Busan"],
+        "difficulty": "easy"
+    },
+    {
+        "idx": "208",
+        "problem": "Translate this into English: For this year’s civil service recruitment, the qualities required by Ministry A are commitment to the values of liberal democracy, a sound sense of nationhood, recognition of constitutional values, and love for the country. The applicants are Gap, Eul, Byeong, and Jeong. These four people were evaluated in terms of the qualities they possess, and the following information was given: At least two of the qualities possessed by Gap and Jeong are the same. Recognition of constitutional values is a quality possessed only by Byeong. If an applicant possesses the quality of a sound sense of nationhood, then he also possesses the quality of recognition of constitutional values. There is only one applicant who possesses the quality of a sound sense of nationhood. Gap, Byeong, and Jeong possess the quality of commitment to the values of liberal democracy. State all propositions of the form “Gap/Eul/Byeong/Jeong possesses the quality of ___.”",
+        "solution": ["Gap possesses commitment to the values of liberal democracy", "Gap possesses love for the country", "Byeong possesses commitment to the values of liberal democracy", "Byeong possesses a sound sense of nationhood", "Byeong possesses recognition of constitutional values", "Jeong possesses the values of liberal democracy", "Jeong possesses love for the country"],
+        "difficulty": "easy"
+    },
+    {
+        "idx": "214",
+        "problem": "Officers Gap, Eul, Byeong, Jeong, and Mu work in the Policy Coordination Department. This department has drawn up a plan to send officers on business trips to four local regions in order to coordinate work with local governments. To ensure smooth operations, every trip is made by a team consisting of either two or three of the above officers. Four teams are formed, and one team is assigned to each of the four regions. The dates of the four regional trips are all different, and every officer participates in at least one trip. Only one officer is in charge of overseeing all of these trips, and that officer participates in the trips to all four regions. In addition, taking work experience into account, only a newly appointed officer may participate in exactly one regional trip. There is only one newly appointed officer in the Policy Coordination Department. Under these conditions, the trip plan was established with the following results: Eul does not go on any trip other than the one trip he takes alone with Gap, and Byeong and Jeong go on a business trip together on only one occasion. Also, among the four regions, two are metropolitan cities, and exactly two officers go on trips to both of those metropolitan cities. Collect all true propositions that can be derived from this information, excluding the information explicitly given.",
+        "solution": [
+            "Gap is the supervising officer in charge of all the trips.",
+            "Eul is the newly appointed officer.",
+            "Eul does not go on a business trip to either of the metropolitan cities.",
+            "Byeong goes on business trips to a total of two regions.",
+            "Jeong goes on business trips to a total of two regions.",
+            "Mu goes on business trips to a total of two regions.",
+            "Byeong and Mu go on a business trip together on only one occasion.",
+            "Jeong and Mu go on a business trip together on only one occasion."
+        ],
+        "difficulty": "hard"
+    },
+    {
+        "idx": "215",
+        "problem": "A, B, and C were identified as suspects in a violent incident. During the investigation, A, B, and C made the following statements: A: Exactly one of the three of us is lying. B: Exactly two of the three of us are lying. C: Exactly one of A and B is lying. It was later revealed that the perpetrator always tells only lies, while those who are not the perpetrator always tell only the truth. Based on this, list all propositions that can be derived.",
+        "solution": ["It is certain that B is the perpetrator."],
+        "difficulty": "easy"
+    },
+    {
+        "idx": "217",
+        "problem": "As part of a policy to promote traditional culture, several cities are to be selected and designated as special cultural tourism zones. After applications for designation were received, four cities—A, B, C, and D—applied. The following facts were revealed regarding the selection: If A is selected, then B is also selected. B and C are not both selected. At least one of B and D is selected. If C is not selected, then B is not selected. If we gather all the propositions that can be concluded to be true, what are they?",
+        "solution": ["A is not selected.", "B is not selected.", "D is selected."],
+        "difficulty": "easy"
+    },
+    {
+        "idx": "218",
+        "problem": "There are four considerations the Air Force must take into account when introducing its next fighter aircraft: that the aircraft must have a long flight time, that it must require a short maintenance time, that it must have a large bomb load, and that it must have high air-to-air combat capability. Each of these four conditions is binary: either it is the case or the opposite is the case, with no middle ground. If a fighter aircraft either has a large bomb load or has high air-to-air combat capability, then its maintenance time is long. On the other hand, if its flight time is long, then its air-to-air combat capability is low. The Air Force must select a model that satisfies at least two of the four considerations. However, the Air Force’s position is that, among these considerations, the requirement that maintenance time be short is one condition it can never give up. Therefore, having a short maintenance time is a necessary condition for being selected as the next fighter aircraft. Meanwhile, Company A, one of the bidders in this fighter acquisition project, proposed a model with a long flight time and a large bomb load. The media predicted that Company A’s model would be selected. Later, the Air Force introduced a fighter aircraft that satisfied the selection criteria by meeting at least two of the four considerations, but it is still not known whether that aircraft was Company A’s model. Collect all true propositions that can be derived from this information.",
+        "solution": ["The maintenance time must be short.", "The bomb load must be low.", "The air-to-air combat capability must be low.", "The flight time must be long.", "A is not selected in the bidding."],
+        "difficulty": "easy"
+    },
+    {
+        "idx": "222",
+        "problem": "A, B, C, D, and E each want to watch one event out of five: skiing, bobsleigh, curling, short track, and ice hockey. Skiing and bobsleigh are held in the mountain region, while the other events are held in the coastal region. The conditions regarding the events they will watch are as follows. A, B, C, D, and E all watch different events. A and B watch events held in different regions. C watches skiing. If B watches short track, then D watches bobsleigh. If E watches short track or ice hockey, then A watches bobsleigh. Collect all the true statements that can be derived in the form “A/B/C/D/E watches / does not watch ___.",
+        "solution": ["B does not watch short track.", "C watches skiing.", "D does not watch bobsleigh.", "E does not watch bobsleigh."],
+        "difficulty": "easy"
+    },
+    {
+        "idx": "225",
+        "problem": "Three newly hired junior officials in the general administration track—Gapjin, Eulhyeon, and Byeongcheon—were to be assigned, one each, to the Ministry of the Interior and Safety, the Ministry of Employment and Labor, and the Ministry of Health and Welfare. Alice, Bob, Charlie, and David were curious about the assignment results and made the following predictions. It was later revealed that only one of them was wrong. **Alice:** Eulhyeon will be assigned to the Ministry of the Interior and Safety, and Byeongcheon will be assigned to the Ministry of Health and Welfare. **Bob:** If Eulhyeon is assigned to the Ministry of the Interior and Safety, then Gapjin will be assigned to the Ministry of Employment and Labor. **Charlie:** If Eulhyeon is not assigned to the Ministry of the Interior and Safety, then Byeongcheon will be assigned to the Ministry of the Interior and Safety. **David:** Gapjin will be assigned to the Ministry of Employment and Labor, and Byeongcheon will be assigned to the Ministry of the Interior and Safety. Find all true statements of the form “Gapjin / Eulhyeon / Byeongcheon is assigned to ___.”",
+        "solution": ["Gapjin is assigned to the Ministry of Employment and Labor."],
+        "difficulty": "easy"
+    },
+    {
+        "idx": "227",
+        "problem": "Over the past two weeks, employees have been preparing for the annual policy briefing scheduled for next week. What is known about the content and proceedings of the briefing is as follows. If a draft proposal concerning changes to the way personal health information is managed is included in the policy proposal, then a draft proposal concerning the public management of health information will also be included in the policy proposal. In addition, if the National Health 2025 team, which had been formed for the policy proposal, is reorganized, then both of the two draft proposals mentioned above will be included in the policy proposal. If the draft proposal concerning changes to the way personal health information is managed is included in the policy proposal and Team Leader Choi, the leader of the National Health 2025 team, oversees next week’s policy briefing, then the presentation will be handled by Mr. Son Gongjeong, a member of the National Health 2025 team. However, if the draft proposal concerning the public management of health information is included in the policy proposal, then either the National Health 2025 team will be reorganized or the press release prepared for next week’s policy briefing will be substantially revised. Meanwhile, among the employees, it had been said that if Team Leader Choi oversaw next week’s policy briefing, then team member Son Gongjeong would be in charge of the presentation, but that statement was later proven false. State all true propositions that can be derived.",
+        "solution": ["Team Leader Choi will oversee next week’s policy briefing.", "Mr. Son Gongjeong will not be in charge of the presentation.", "The draft proposal concerning changes to the way personal health information is managed will not be included in the policy proposal.", "The National Health 2025 team will not be reorganized."],
+        "difficulty": "easy"
+    },
+    {
+        "idx": "230",
+        "problem": "Professor Lee of the Department of Biochemical Engineering at Institute A and Dr. Kim of Research Institute B are leading a joint research team that is developing ten types of screening technology algorithms capable of rapidly identifying promising therapeutic compounds when a novel coronavirus emerges. At present, the time required for each screening algorithm developed by the team to find therapeutic compounds differs. While the researchers were away, someone stole confidential materials containing the core algorithms of the screening technology. After an investigation, the police identified Saebyeok, Gihoon, Sangwoo, and Ilnam as suspects and questioned them about what had happened at the institute that day. They gave the following statements about the ten screening technology algorithms being developed at the institute and about the culprit. **Saebyeok:** For each algorithm, there is another algorithm that identified a candidate therapeutic compound later than it did. Gihoon is the culprit. **Gihoon:** Some algorithms identified candidate therapeutic compounds later than all the other algorithms. Sangwoo is not the culprit. **Sangwoo:** Some algorithms identified candidate therapeutic compounds faster than some other algorithms. The culprit is either Ilnam or Saebyeok. **Ilnam:** There was an algorithm that identified candidate therapeutic compounds faster than all the other algorithms. Saebyeok is not the culprit. The investigation revealed that each of them either told only the truth or only lied. It was also determined that exactly one of the four was the culprit. State all propositions that can be concluded to be true.",
+        "solution": ["Saebyeok is lying.", "Gihoon is telling the truth.", "Sangwoo is telling the truth.", "Ilnam is telling the truth.", "Ilnam is the culprit."],
+        "difficulty": "easy"
+    },
+    {
+        "idx": "237",
+        "problem": "The following information is known about the newly hired experienced employees at a certain company: All lawyers or accountants are business administration majors. Among the business administration majors, all men are lawyers. Among the business administration majors, no women are accountants. There is at least one person who is both an accountant and a lawyer. State all true propositions that can be derived from this information.",
+        "solution": ["There are no female accountants.", "All accountants are lawyers.", "Everyone who is both an accountant and a lawyer is male."],
+        "difficulty": "medium"
+    },
+    {
+        "idx": "238",
+        "problem": "At least one of Gaeul, Nari, and Dasom is the culprit behind the incident last night. Of Gaeul’s following three statements, two are true and one is false: “Nari and I were at the PC room all night last night. It is false that Nari was drinking with Dasom at a club last night. If Dasom was the culprit behind the incident last night, then Dasom was drinking at a club last night.” Of Nari’s following three statements, two are true and one is false: “I was drinking with Dasom at a club last night. If Dasom and I were drinking together at a club last night, then Dasom is not the culprit behind the incident last night. Dasom is not the culprit behind the incident last night.” From this, state all propositions that can be concluded to be true.",
+        "solution": ["Nari did not drink with Dasom at a club last night.", "Nari’s first statement is false.", "Dasom is not the culprit."],
+        "difficulty": "medium"
+    },
+    {
+        "idx": "108",
+        "problem": "There are four teachers, each working at one of four schools: A, B, C, and D. Their surnames are Kim, Lee, Park, and Choi. Each of them teaches exactly one subject, and the four subjects are Korean, English, Mathematics, and Music. Mr./Ms. Kim and the Korean teacher are married. The teacher at School A and the Mathematics teacher met and got married through Mr./Ms. Lee’s introduction. Mr./Ms. Park is the wife of the teacher at School B. The teacher at School D does not teach English. Mr./Ms. Lee and Mr./Ms. Choi served in the military together. Mr./Ms. Choi’s wife teaches Music. Based on this information, write four true statements in the form: “The teacher at School _ has the surname _, and teaches _.”",
+        "solution": ["The teacher at School A is Mr./Ms. Park and teaches Music.", "The teacher at School B is Mr./Ms. Choi and teaches Mathematics.", "The teacher at School C is Mr./Ms. Kim and teaches English.", "The teacher at School D is Mr./Ms. Lee and teaches Korean."],
+        "difficulty": "hard"
+    },
+    {
+        "idx": "109",
+        "problem": "Six women live in our neighborhood. Among them, three each keep a dog, and the dogs are white, black, and brown, respectively. The other three each keep a cat, and the cats are also white, black, and brown, respectively. One day, the six women made the following statements. The statements made by the three women who keep dogs are all true, while the statements made by the three women who keep cats are all false. Yuna: Myeongsuk keeps a cat. Minhee: Jihyun keeps a dog. Jihyun: My pet and Yuna’s pet are the same color. Myeongsuk: Sujeong’s pet and Minhee’s pet are the same color. Hyegyo: Minhee’s pet is black. Sujeong: Jihyun’s pet is black. Describe exactly who keeps which animal (no need to describe the color).",
+        "solution": ["Yuna keeps a cat.", "Minhee keeps a dog.", "Jihyun keeps a dog.", "Myeongsuk keeps a dog.", "Hyegyo keeps a cat.", "Sujeong keeps a cat."],
+        "difficulty": "hard"
+    },
+    {
+        "idx": "110",
+        "problem": "Which correctly matches each child with their score? Each of the three is making exactly one false statement. Eungyu: “I got 180 points... Jinseok, you scored 40 points less than I did. Jonghyeok, you still scored 20 points more than I did.” Jinseok: “At least I didn’t get the lowest score, but Jonghyeok, your score differs from mine by as much as 60 points. Jonghyeok, you got 240 points.” Jonghyeok: “I scored lower than Eungyu. Eungyu, you got 200 points. Jinseok scored 60 points more than Eungyu.” At this time, state it in the form of propositions such as: “Each person’s score is as follows.”",
+        "solution": ["Eungyu scored 200 points.", "Jinseok scored 240 points.", "Jonghyeok scored 180 points."],
+        "difficulty": "medium"
+    },
+    {
+        "idx": "113",
+        "problem": "Myeongsuk, Seonhee, Jeongeun, and Jieun ran a 100-meter race, and in the order of their finishing times from fastest to slowest, they were allowed to choose the hat they wanted from among a white, blue, yellow, and black hat. Seonhee is slower than Myeongsuk. Jeongeun is faster than Myeongsuk and likes the blue hat. Jieun is faster than Myeongsuk, but she is not the fastest. Jieun does not like the white hat. After three of them had chosen their hats, the hat that remained was yellow. Describe, in the form of propositions, who gets which hat.",
+        "solution": ["Myeongsuk takes the white hat.", "Seonhee takes the yellow hat.", "Jeongeun takes the blue hat.", "Jieun takes the black hat."],
+        "difficulty": "easy"
+    },
+    {
+        "idx": "120",
+        "problem": "Given the following situation: There are five houses, each painted a different color. In each house lives a person of a different nationality. Each homeowner drinks a different kind of beverage. Each homeowner smokes a different kind of cigarette. Each homeowner keeps a different kind of pet. The Brit lives in the red house. The Swede keeps dogs. The Dane drinks tea. The green house is located to the left of the white house. The person in the green house drinks coffee. The person who smokes Pall Mall keeps birds. The person in the yellow house smokes Dunhill. The person living in the center house drinks milk. The Norwegian lives in the first house. The person who smokes Blend lives next to the person who keeps cats. The person who keeps horses lives next to the person who smokes Dunhill. The person who smokes Blue Master drinks beer. The German smokes Prince. The Norwegian lives next to the blue house. The person who smokes Blend lives next to the person who drinks water. There is one who keeps goldfish. Under these conditions, describe in detail which nationality keeps which animal, one by one.",
+        "solution": ["The Brit keeps birds.", "The Swede keeps dogs.", "The Dane keeps horses.", "The Norwegian keeps cats.", "The German keeps goldfish."],
+        "difficulty": "hard"
+    },
+    {
+        "idx": "121",
+        "problem": "A, B, C, D, E, F, G, and H are employees of a company. Each of them works in one of the company’s three departments: Human Resources, Administration, or Marketing. (Assume that no department has four or more of the eight employees.) They each have a different hobby: American football, cricket, volleyball, badminton, tennis, basketball, hockey, and table tennis. (However, this does not mean that A through F have these hobbies in that order.) D works in the Administration Department and does not like American football or cricket. F works in the Human Resources Department together with A, who likes table tennis. E and H do not work in the same department as D. C likes hockey and does not work in the Marketing Department. G does not work in the Administration Department and does not like cricket or badminton. One person in the Administration Department likes American football. The person who likes volleyball works in the Human Resources Department. No one in the Administration Department likes badminton or tennis. H does not like cricket. Write down, one by one, which sport each person likes.",
+        "solution": ["A likes table tennis.", "B likes American football.", "C likes hockey.", "D likes basketball.", "E likes cricket.", "F likes volleyball.", "G likes tennis.", "H likes badminton."],
+        "difficulty": "hard"
+    },
+    {
+        "idx": "127",
+        "problem": "A company has three employees: a president, a department manager, and a section chief. Their surnames are Kim, Lee, and Park, but it is not yet known who has which surname. One day, three visitors also came to the company, and their surnames were likewise Kim, Lee, and Park. Based on the following conditions, determine the surnames of the president, department manager, and section chief. 1. Visitor Park lives in Daejeon. 2. The section chief lives in Suwon. 3. Visitor Lee’s salary is 3,356,511 won. 4. The visitor who lives in Suwon, like the section chief, earns exactly twice the section chief’s salary. (Assume there is no amount less than 1 won in any salary.) 5. The visitor who has the same surname as the section chief lives in Seoul. 6. The department manager’s surname is not Kim.",
+        "solution": ["The president is Mr. Kim.", "The department manager is Mr. Park.", "The section chief is Mr. Lee."],
+        "difficulty": "hard"
+    },
+    {
+        "idx": "142",
+        "problem": "Translate into English: An employee performance evaluation was conducted for five employees—Gap, Eul, Byeong, Jeong, and Mu—across four areas, A, B, C, and D. In each area, every employee was classified as either Excellent, Good, or Average. The results were as follows: There is an employee who received an Average rating in all areas. There is an area in which all employees received an Average rating. Every employee who received a Good rating in area D also received a Good rating in area A. Gap received an Average rating only in area C. Only Eul received an Average rating in area D. Byeong and Jeong received Excellent ratings in both areas A and B, and no other employees received an Excellent rating in either A or B. Mu received an Excellent rating in only one area. There is at least one employee who received a Good rating in area D. Based on this information, state one by one what rating each of Gap, Eul, Byeong, Jeong, and Mu received in areas A, B, C, and D, in that order.",
+        "solution": ["Gap: Good, Good, Average, Good", "Eul: Average, Average, Average, Average", "Byeong: Excellent, Excellent, Average, Excellent", "Jeong: Excellent, Excellent, Average, Excellent", "Mu: Not Excellent, Not Excellent, Average, Excellent"],
+        "difficulty": "medium"
+    }
+]
